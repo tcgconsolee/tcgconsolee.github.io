@@ -1,0 +1,179 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consolee Games - Snake Game</title>
+    <link rel="icon" type="image/x-icon" href="/images/logo.png">
+    <style>
+        body {
+            margin: 0px;
+            border-top: 80px double #555;
+            border-left: 120px solid #555;
+            border-top-left-radius: 132px;
+            padding: 27px;
+            background-color: black;
+            font-size: 21px;
+            text-align: center;
+            font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            color:whitesmoke;
+        }
+        .screen {
+            background-color: #555;
+            font-size: 25px;
+            text-align: center;
+            font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            color:whitesmoke;
+            height: 475px;
+            width:1000px;
+            border-radius: 25px;
+            margin: 32px;
+            display: inline-block;
+            z-index:-5;
+        }
+        a {
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        img {
+            z-index:5;
+            position:absolute;
+        }
+        .grid {
+            grid-template-columns: repeat(27, 32px);
+            grid-template-rows: repeat(12, 32px);
+            display: grid;
+            z-index: 5;
+            width: 896px;
+            height: 384px;
+            margin-left: 50px;
+            margin-top: 37px;
+            color: #555;
+            background-color: whitesmoke; 
+                }
+        .head {
+            grid-column: var(--column)/28;
+            grid-row: var(--row)/12;
+            height: 32px;
+            width: 32px;
+            margin-left: 0px;
+            margin-top: 0px;
+            background-image: url(/images/snake_head.png);
+            -webkit-transform:rotate(var(--deg));
+           -moz-transform: rotate(var(--deg));
+           -ms-transform: rotate(var(--deg));
+           -o-transform: rotate(var(--deg));
+           transform: rotate(var(--deg));
+        }
+        .apple {
+            background-color: red;
+            grid-column: var(--column)/27;
+            grid-row: var(--row)/12;
+            height: 32px;
+            width: 32px;
+            margin-left: 0px;
+            margin-top: 0px;
+            z-index: 100
+        }
+        .tail {
+            background-color: rgb(9, 82, 9);
+            grid-column: var(--column)/27;
+            grid-row: var(--row)/12;
+            height: 32px;
+            width: 32px;
+            margin-left: 0px;
+            margin-top: 0px;
+        }
+        </style>
+</head>
+<body>
+    <h1>Snake Game</h1>
+    <div class = "screen">
+        <div class = "grid" id ="grid">
+        <div class = head style="--column:1;--row:1;" id = "head"></div>
+        <div class = apple style = "--column:7;--row:3;" id = "apple"></div>
+        <div class = tail style = "display:none;" id = "tail"></div>
+        <script type = "text/javascript">//slither
+        let tails = 0;
+        let tail = {}
+        function slither(dirblo) {
+                var dir = ['left', 'right', 'up', 'down'] [dirblo]
+                var gridline = ['column', 'column', 'row', 'row'] [dirblo]
+                var pom = ['-', '+', '-', '+'] [dirblo]
+                var moveline = [Number(head.style.getPropertyValue('--column')), Number(head.style.getPropertyValue('--column')), Number(head.style.getPropertyValue('--row')), Number(head.style.getPropertyValue('--row'))]
+                var velocity = moveline[dirblo]
+                var v = {
+                    'left': velocity - 1,
+                    'right': velocity + 1,
+                    'up': velocity - 1,
+                    'down': velocity + 1
+                }
+                velocity = v[dir]    
+                head.style.setProperty(`--${gridline}`, velocity)
+                function Tail(col, row, i) {
+                    if(gridline === 'column') {
+                        if(pom === '+') {
+                    this.column = Number(col) - 1
+                    this.row = Number(row)
+                        } else {
+                    this.column = Number(col) + 1
+                    this.row = Number(row)
+                        }
+                    } else {
+                        if(pom === '+') {
+                    this.column = Number(col)
+                    this.row = Number(row) - 1
+                        } else {
+                    this.column = Number(col)
+                    this.row = Number(row) + 1
+                        }
+                    }
+                    this.element = document.getElementById('tail')
+                    this.element.style.width = i * 32
+                    this.element.style.setProperty('--column', this.column)
+                    this.element.style.setProperty('--row', this.row)
+                    this.element.style.display = head.style.display
+                }
+                if(head.style.getPropertyValue('--column') === apple.style.getPropertyValue('--column') && head.style.getPropertyValue('--row') === apple.style.getPropertyValue('--row')) {
+                    setTimeout(() => {
+                        if(head.style.getPropertyValue('--column') === apple.style.getPropertyValue('--column') && head.style.getPropertyValue('--row') === apple.style.getPropertyValue('--row')) {
+                tails++;
+                        }
+            }, 50)
+                }
+                for (let i = 0; i < tails; i++) {
+                    tail[tails] = new Tail(head.style.getPropertyValue('--column'), head.style.getPropertyValue('--row'), tails);
+                }
+            }
+        </script>
+        <script type ="text/javascript">//apple spawning
+            function aSpawn() {
+                apple.style.setProperty('--column', Math.floor(Math.random() * 27) + 1)
+                apple.style.setProperty('--row', Math.floor(Math.random() * 12) + 1)
+            }
+        </script>
+<script type = "text/javascript">//main
+        const grid = document.getElementById('grid');
+        const head = document.getElementById('head');
+        const apple = document.getElementById('apple');
+        let dirblo;
+
+                document.addEventListener('keypress', function(e) {                    
+                    dirblo = [97,100,119,115].indexOf(e.keyCode)
+                })
+
+                setInterval(() => {slither(dirblo)}, 250)
+                setInterval(() => {
+                if(head.style.getPropertyValue('--column') === apple.style.getPropertyValue('--column') && head.style.getPropertyValue('--row') === apple.style.getPropertyValue('--row')) {
+                    if(head.style.getPropertyValue('--column') === apple.style.getPropertyValue('--column') && head.style.getPropertyValue('--row') === apple.style.getPropertyValue('--row')) {
+                tails++;
+            }
+                    aSpawn()
+                }
+                })
+</script>
+    </div>
+</body>
+</html>

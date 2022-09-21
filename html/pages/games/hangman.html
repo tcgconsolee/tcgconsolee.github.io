@@ -1,0 +1,167 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consolee Games - Hangman</title>
+    <link rel="icon" type="image/x-icon" href="/images/logo.png">
+    <style>
+        body {
+            margin: 0px;
+            border-top: 80px double #555;
+            border-left: 120px solid #555;
+            border-top-left-radius: 150px;
+            padding: 27px;
+            background-color: black;
+            font-size: 21px;
+            text-align: center;
+            font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            color:whitesmoke;
+        }
+        div {
+            background-color: #555;
+            font-size: 25px;
+            text-align: center;
+            font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            color:whitesmoke;
+            height:500px;
+            width:1000px;
+            border-radius: 25px;
+            margin: 20px;
+            display: inline-block;
+            z-index:-5;
+        }
+        a {
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        img {
+            height: 150px;
+            width: 250px;
+            z-index:5;
+        }
+    </style>
+</head>
+<body>
+    <h1>Hangman</h1>
+    <a href = "/" style="color:whitesmoke;top:20%;left:50%;margin-left:-610px;position:fixed;font-size:xx-large;">Home</a>
+    <div class = "circle" id = "hangmansq">Guess the word! <br> <br> <br> 
+        <script type = "text/javascript">
+            function generateHGMgame() {
+                const button = document.getElementById('clickerF')
+                const div = document.getElementById('hangmansq')
+                button.style = "display:none;"
+                const wList = [
+                    'caffeine',
+                    'deer',
+                    'lion',
+                    'rabbit',
+                    'wind',
+                    'fire',
+                    'html',
+                    'css'
+                ]
+                const hList = [
+                    'energy source',
+                    'animal who is always being chased by a lion',
+                    'animal who is always chasing a deer',
+                    'animal whose home is a burrow',
+                    "naruto's change in chakra nature",
+                    "sasuke's change in chakra nature",
+                    'the coding language which is used to build websites',
+                    'the coding language which is used for styling'
+                ]
+                var rNo = Math.floor(Math.random() * wList.length)
+                var rword = wList[rNo]
+                var hword = hList[rNo]
+                const hint = document.createElement('h2')
+                hint.innerText=hword
+                div.appendChild(hint)
+                var lettersAMT = rword.length
+                const form = document.createElement('form')
+                form.autocomplete="off"
+                for (let i = 0; i < lettersAMT; i++) {
+                    const Tinput = document.createElement('input')
+                    Tinput.type='text'
+                    Tinput.maxLength=1
+                    Tinput.style="width: 20px;background-color: black;color: whitesmoke;"
+                    Tinput.value=""
+                    Tinput.id=`letter${i}`
+                    form.appendChild(Tinput)
+                }
+                const br = document.createElement('br')
+                form.appendChild(br)
+                const submit = document.createElement('input')
+                submit.type = "submit"
+                submit.style = "width: 100px;background-color: black;color: whitesmoke; font-size: 20px;"
+                form.appendChild(submit)
+                div.appendChild(form)
+                const img = document.createElement('img')
+                var atmpts=6
+                img.src = "/images/hangman_head.png"
+                img.alt = "Hangman"
+                var iList = {
+                    6: '/images/hangman_head.png',
+                    5: '/images/hangman_headstick.png',
+                    4: '/images/hangman_hand1.png',
+                    3: '/images/hangman_hand2.png',
+                    2: '/images/hangman_leg1.png',
+                    1: '/images/hangman_leg2.png',
+                    0: '/images/hangman_ded.png'
+                }
+                div.appendChild(img)
+                form.addEventListener('submit', function() {
+                let l = {}
+                let word = '' 
+                for (let i2 = 0; i2 < lettersAMT; i2++) {
+                    l[`letter${i2}`] = document.getElementById(`letter${i2}`).value
+                    word = word + l[`letter${i2}`]
+                }
+                if(word === rword) {
+                    const h2 = document.createElement('h2')
+                    h2.innerText='You Passed The Hangman Game!'
+                    div.appendChild(h2)
+                    setTimeout(() => {
+                        window.location.href='../games'
+                    }, 5000)
+                } else {
+                if(atmpts>0) {
+                    const h2 = document.createElement('h2')
+                    h2.innerText='Try Again!'
+                    atmpts = atmpts - 1
+                    div.appendChild(h2)
+                    div.removeChild(img)
+                    img.src=iList[atmpts]
+                    div.appendChild(img)
+                    for (let i3 = 0; i3 < lettersAMT; i3++) {
+                       const Tinput = document.getElementById(`letter${i3}`)
+                       Tinput.value=''
+                    }
+                    setTimeout(() => {
+                        div.removeChild(h2)
+                }, 1000)
+                } else {
+                    const h2 = document.createElement('h2')
+                    h2.innerText='You failed!'
+                    div.appendChild(h2)
+                    div.removeChild(img)
+                    img.src=iList[atmpts]
+                    div.appendChild(img)
+                    for (let i3 = 0; i3 < lettersAMT; i3++) {
+                       const Tinput = document.getElementById(`letter${i3}`)
+                       Tinput.value=''
+                    }
+                    setTimeout(() => {
+                        window.location.href="../games"
+                }, 5000)
+                }  
+                }
+                })
+               }
+        </script>
+    <button type = "button" id = "clickerF" onclick = "generateHGMgame()" style = "background-color: black;color: whitesmoke;font-size: x-large;font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Start Game</button><br>
+   </div>
+</body>
+</html>
