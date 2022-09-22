@@ -86,18 +86,41 @@
             margin-left: 0px;
             margin-top: 0px;
         }
+        ::-webkit-scrollbar {
+            width: 15px;
+        }
+
+        ::-webkit-scrollbar-track {
+            box-shadow: inset 0 0 10px crimson;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background:crimson;
+            border-radius: 15px;
+        }
         </style>
 </head>
 <body>
     <h1>Snake Game</h1>
+    <script type = "text/javascript">
+        window.addEventListener("keydown", function(e) {
+    if(["Space","ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].indexOf(e.code) > -1) {
+        e.preventDefault();
+    }
+}, false);
+    </script>
     <div class = "screen">
         <div class = "grid" id ="grid">
         <div class = head style="--column:1;--row:1;" id = "head"></div>
         <div class = apple style = "--column:7;--row:3;" id = "apple"></div>
         <div class = tail style = "display:none;" id = "tail"></div>
         <script type = "text/javascript">//slither
+        let appended = false;
         let tails = 0;
         let tail = {}
+        let toappend = 0;
+        const tailDiv = document.getElementById('tail')
         function slither(dirblo) {
                 var dir = ['left', 'right', 'up', 'down'] [dirblo]
                 var gridline = ['column', 'column', 'row', 'row'] [dirblo]
@@ -112,34 +135,14 @@
                 }
                 velocity = v[dir]    
                 head.style.setProperty(`--${gridline}`, velocity)
-                if(gridline === 'column') {
-                    if(pom === '+') {
-                    
-                    }
-                }
                 function Tail(col, row, i) {
-                    if(gridline === 'column') {
-                        if(pom === '+') {
-                    this.column = Number(col) - 1
-                    this.row = Number(row)
-                        } else {
-                    this.column = Number(col) + 1
-                    this.row = Number(row)
-                        }
-                    } else {
-                        if(pom === '+') {
-                    this.column = Number(col)
-                    this.row = Number(row) - 1
-                        } else {
-                    this.column = Number(col)
-                    this.row = Number(row) + 1
-                        }
-                    }
-                    this.element = document.getElementById('tail')
-                    this.element.style.width = i * 32
-                    this.element.style.setProperty('--column', this.column)
-                    this.element.style.setProperty('--row', this.row)
+                    this.element = tailDiv.cloneNode()
                     this.element.style.display = head.style.display
+                    this.element.id = `${i}`
+                    if(appended === false) {
+                        grid.appendChild(this.element)
+                        appended = true
+                    }
                 }
                 if(head.style.getPropertyValue('--column') === apple.style.getPropertyValue('--column') && head.style.getPropertyValue('--row') === apple.style.getPropertyValue('--row')) {
                     setTimeout(() => {
@@ -150,7 +153,12 @@
                 }
                 for (let i = 0; i < tails; i++) {
                     tail[tails] = new Tail(head.style.getPropertyValue('--column'), head.style.getPropertyValue('--row'), tails);
+                    if(toappend===tails) {} else {
+                        appended=false  
+                    }
+                    toappend=tails
                 }
+                return [tail, tails]
             }
         </script>
         <script type ="text/javascript">//apple spawning
@@ -158,6 +166,41 @@
                 apple.style.setProperty('--column', Math.floor(Math.random() * 27) + 1)
                 apple.style.setProperty('--row', Math.floor(Math.random() * 12) + 1)
             }
+        </script>
+        <script type = "text/javascript">//tail positioning
+        function tailPos(tailArray, dirblo, no) {
+        var tail = tailArray[no].element
+        var dir = ['left', 'right', 'up', 'down'] [dirblo]
+        var headpos = {
+            x: Number(head.style.getPropertyValue('--column')),
+            y: Number(head.style.getPropertyValue('--row'))
+        }
+        var tailpos = {
+            x: Number(tail.style.getPropertyValue('--column')),
+            y: Number(tail.style.getPropertyValue('--row'))
+        }
+        if(dir === 'right') {
+            tailpos.x = headpos.x - no
+            tailpos.y = headpos.y
+        }
+        if(dir === 'left') {
+            tailpos.x = headpos.x + no
+            tailpos.y = headpos.y
+        }
+        if(dir === 'up') {
+            tailpos.y = headpos.y + no
+            tailpos.x = headpos.x
+        }
+        if(dir === 'down') {
+            tailpos.y = headpos.y - no
+            tailpos.x = headpos.x
+        }
+        tail.style.setProperty('--column', tailpos.x)
+        tail.style.setProperty('--row', tailpos.y)
+        if(grid.children[6+no]) {
+        grid.replaceChild(tail, grid.children[6+no])   
+        }    
+        }
         </script>
 <script type = "text/javascript">//main
         const grid = document.getElementById('grid');
@@ -169,7 +212,14 @@
                     dirblo = [97,100,119,115].indexOf(e.keyCode)
                 })
 
-                setInterval(() => {slither(dirblo)}, 250)
+                setInterval(() => {
+                    var arrayedTail = slither(dirblo)
+                    var tail = arrayedTail[0]
+                    var tails = arrayedTail[1]
+                    for(let i = 1; i<tails+1;i++) {
+                    tailPos(tail, dirblo, i)
+                    }
+                    }, 250)
                 setInterval(() => {
                 if(head.style.getPropertyValue('--column') === apple.style.getPropertyValue('--column') && head.style.getPropertyValue('--row') === apple.style.getPropertyValue('--row')) {
                     if(head.style.getPropertyValue('--column') === apple.style.getPropertyValue('--column') && head.style.getPropertyValue('--row') === apple.style.getPropertyValue('--row')) {
@@ -180,6 +230,5 @@
                 })
 </script>
     </div>
-        <a href = "/home" style="color:whitesmoke;top:20%;left:50%;margin-left:-610px;position:fixed;font-size:xx-large;">Home</a>
 </body>
 </html>
