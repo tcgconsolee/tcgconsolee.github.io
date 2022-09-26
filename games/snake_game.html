@@ -19,7 +19,7 @@
             color:whitesmoke;
   }
   canvas {
-    background-color: #555;
+    background-color: white;
   }
         ::-webkit-scrollbar {
             width: 15px;
@@ -41,7 +41,7 @@
 </head>
 <body>
     <h1>Snake Game</h1>
-        <canvas width="992" height="480" id="game"></canvas>
+        <canvas width="992" height="384" id="game"></canvas>
         <script>
             let slithering = 0;
             window.addEventListener("keydown", function(e) {
@@ -50,6 +50,7 @@
     }
 }, false)
 </script>
+<h1 style="margin-left:680px;margin-top:-440px" id ="cells">Apples Eaten: 0</h1>
 <script>
         var canvas = document.getElementById('game');
         var context = canvas.getContext('2d');
@@ -120,7 +121,7 @@
               snake.maxCells++;
         
               apple.x = getRandomInt(0, 31) * grid;
-              apple.y = getRandomInt(0, 15) * grid;
+              apple.y = getRandomInt(0, 12) * grid;
             }
 
             for (var i = index + 1; i < snake.cells.length; i++) {
@@ -162,6 +163,11 @@
             snake.dx = 0;
           }
           slithering = 0
+          if(snake.cells.length<4) {
+            document.getElementById('cells').innerText='Apples Eaten: ' + 0
+          } else {
+          document.getElementById('cells').innerText='Apples Eaten: ' + (snake.cells.length-4)
+          }
         });
         
         requestAnimationFrame(loop);
