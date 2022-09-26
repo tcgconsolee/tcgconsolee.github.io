@@ -17,75 +17,10 @@
             text-align: center;
             font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
             color:whitesmoke;
-        }
-        .screen {
-            background-color: #555;
-            font-size: 25px;
-            text-align: center;
-            font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-            color:whitesmoke;
-            height: 475px;
-            width:1000px;
-            border-radius: 25px;
-            margin: 32px;
-            display: inline-block;
-            z-index:-5;
-        }
-        a {
-            text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-        img {
-            z-index:5;
-            position:absolute;
-        }
-        .grid {
-            grid-template-columns: repeat(27, 32px);
-            grid-template-rows: repeat(12, 32px);
-            display: grid;
-            z-index: 5;
-            width: 896px;
-            height: 384px;
-            margin-left: 50px;
-            margin-top: 37px;
-            color: #555;
-            background-color: whitesmoke; 
-                }
-        .head {
-            grid-column: var(--column)/28;
-            grid-row: var(--row)/12;
-            height: 32px;
-            width: 32px;
-            margin-left: 0px;
-            margin-top: 0px;
-            background-image: url(/images/snake_head.png);
-            -webkit-transform:rotate(var(--deg));
-           -moz-transform: rotate(var(--deg));
-           -ms-transform: rotate(var(--deg));
-           -o-transform: rotate(var(--deg));
-           transform: rotate(var(--deg));
-        }
-        .apple {
-            background-color: red;
-            grid-column: var(--column)/27;
-            grid-row: var(--row)/12;
-            height: 32px;
-            width: 32px;
-            margin-left: 0px;
-            margin-top: 0px;
-            z-index: 100
-        }
-        .tail {
-            background-color: rgb(9, 82, 9);
-            grid-column: var(--column)/27;
-            grid-row: var(--row)/12;
-            height: 32px;
-            width: 32px;
-            margin-left: 0px;
-            margin-top: 0px;
-        }
+  }
+  canvas {
+    background-color: #555;
+  }
         ::-webkit-scrollbar {
             width: 15px;
         }
@@ -99,139 +34,138 @@
             background:crimson;
             border-radius: 15px;
         }
-         ::-webkit-scrollbar-thumb:hover {
-            background:darkred;
+        ::-webkit-scrollbar-thumb:hover {
+            background: darkred;
         }
         </style>
 </head>
 <body>
     <h1>Snake Game</h1>
-    <script type = "text/javascript">
-        window.addEventListener("keydown", function(e) {
-    if(["Space","ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].indexOf(e.code) > -1) {
+        <canvas width="992" height="480" id="game"></canvas>
+        <script>
+            let slithering = 0;
+            window.addEventListener("keydown", function(e) {
+    if(["Space","ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].indexOf(e.code) > -1 && slithering < 1) {
         e.preventDefault();
     }
-}, false);
-    </script>
-    <div class = "screen">
-        <div class = "grid" id ="grid">
-        <div class = head style="--column:1;--row:1;" id = "head"></div>
-        <div class = apple style = "--column:7;--row:3;" id = "apple"></div>
-        <div class = tail style = "display:none;" id = "tail"></div>
-        <script type = "text/javascript">//slither
-        let appended = false;
-        let tails = 0;
-        let tail = {}
-        let toappend = 0;
-        const tailDiv = document.getElementById('tail')
-        function slither(dirblo) {
-                var dir = ['left', 'right', 'up', 'down'] [dirblo]
-                var gridline = ['column', 'column', 'row', 'row'] [dirblo]
-                var pom = ['-', '+', '-', '+'] [dirblo]
-                var moveline = [Number(head.style.getPropertyValue('--column')), Number(head.style.getPropertyValue('--column')), Number(head.style.getPropertyValue('--row')), Number(head.style.getPropertyValue('--row'))]
-                var velocity = moveline[dirblo]
-                var v = {
-                    'left': velocity - 1,
-                    'right': velocity + 1,
-                    'up': velocity - 1,
-                    'down': velocity + 1
-                }
-                velocity = v[dir]    
-                head.style.setProperty(`--${gridline}`, velocity)
-                function Tail(col, row, i) {
-                    this.element = tailDiv.cloneNode()
-                    this.element.style.display = head.style.display
-                    this.element.id = `${i}`
-                    if(appended === false) {
-                        grid.appendChild(this.element)
-                        appended = true
-                    }
-                }
-                if(head.style.getPropertyValue('--column') === apple.style.getPropertyValue('--column') && head.style.getPropertyValue('--row') === apple.style.getPropertyValue('--row')) {
-                    setTimeout(() => {
-                        if(head.style.getPropertyValue('--column') === apple.style.getPropertyValue('--column') && head.style.getPropertyValue('--row') === apple.style.getPropertyValue('--row')) {
-                tails++;
-                        }
-            }, 50)
-                }
-                for (let i = 0; i < tails; i++) {
-                    tail[tails] = new Tail(head.style.getPropertyValue('--column'), head.style.getPropertyValue('--row'), tails);
-                    if(toappend===tails) {} else {
-                        appended=false  
-                    }
-                    toappend=tails
-                }
-                return [tail, tails]
-            }
-        </script>
-        <script type ="text/javascript">//apple spawning
-            function aSpawn() {
-                apple.style.setProperty('--column', Math.floor(Math.random() * 27) + 1)
-                apple.style.setProperty('--row', Math.floor(Math.random() * 12) + 1)
-            }
-        </script>
-        <script type = "text/javascript">//tail positioning
-        function tailPos(tailArray, dirblo, no) {
-        var tail = tailArray[no].element
-        var dir = ['left', 'right', 'up', 'down'] [dirblo]
-        var headpos = {
-            x: Number(head.style.getPropertyValue('--column')),
-            y: Number(head.style.getPropertyValue('--row'))
-        }
-        var tailpos = {
-            x: Number(tail.style.getPropertyValue('--column')),
-            y: Number(tail.style.getPropertyValue('--row'))
-        }
-        if(dir === 'right') {
-            tailpos.x = headpos.x - no
-            tailpos.y = headpos.y
-        }
-        if(dir === 'left') {
-            tailpos.x = headpos.x + no
-            tailpos.y = headpos.y
-        }
-        if(dir === 'up') {
-            tailpos.y = headpos.y + no
-            tailpos.x = headpos.x
-        }
-        if(dir === 'down') {
-            tailpos.y = headpos.y - no
-            tailpos.x = headpos.x
-        }
-        tail.style.setProperty('--column', tailpos.x)
-        tail.style.setProperty('--row', tailpos.y)
-        if(grid.children[6+no]) {
-        grid.replaceChild(tail, grid.children[6+no])   
-        }    
-        }
-        </script>
-<script type = "text/javascript">//main
-        const grid = document.getElementById('grid');
-        const head = document.getElementById('head');
-        const apple = document.getElementById('apple');
-        let dirblo;
-
-                document.addEventListener('keypress', function(e) {                    
-                    dirblo = [97,100,119,115].indexOf(e.keyCode)
-                })
-
-                setInterval(() => {
-                    var arrayedTail = slither(dirblo)
-                    var tail = arrayedTail[0]
-                    var tails = arrayedTail[1]
-                    for(let i = 1; i<tails+1;i++) {
-                    tailPos(tail, dirblo, i)
-                    }
-                    }, 250)
-                setInterval(() => {
-                if(head.style.getPropertyValue('--column') === apple.style.getPropertyValue('--column') && head.style.getPropertyValue('--row') === apple.style.getPropertyValue('--row')) {
-                    if(head.style.getPropertyValue('--column') === apple.style.getPropertyValue('--column') && head.style.getPropertyValue('--row') === apple.style.getPropertyValue('--row')) {
-                tails++;
-            }
-                    aSpawn()
-                }
-                })
+}, false)
 </script>
-    </div>
-</body>
+<script>
+        var canvas = document.getElementById('game');
+        var context = canvas.getContext('2d');
+        
+        var grid = 32;
+        var count = 0;
+        
+        var snake = {
+          x: 160,
+          y: 160,
+          dx: grid,
+          dy: 0,
+          cells: [],
+          maxCells: 4
+        };
+        var apple = {
+          x: 320,
+          y: 320
+        };
+        
+        function getRandomInt(min, max) {
+          return Math.floor(Math.random() * (max - min)) + min;
+        }
+        
+        function loop() {
+          requestAnimationFrame(loop);
+
+          if (++count < 6) {
+            return;
+          }
+        
+          count = 0;
+          context.clearRect(0,0,canvas.width,canvas.height);
+        
+          snake.x += snake.dx;
+          snake.y += snake.dy;
+        
+          if (snake.x < 0) {
+            snake.x = canvas.width - grid;
+          }
+          else if (snake.x >= canvas.width) {
+            snake.x = 0;
+          }
+        
+          if (snake.y < 0) {
+            snake.y = canvas.height - grid;
+          }
+          else if (snake.y >= canvas.height) {
+            snake.y = 0;
+          }
+        
+          snake.cells.unshift({x: snake.x, y: snake.y});
+        
+          if (snake.cells.length > snake.maxCells) {
+            snake.cells.pop();
+          }
+        
+          context.fillStyle = 'red';
+          context.fillRect(apple.x, apple.y, grid-1, grid-1);
+        
+          context.createPattern(head, 'repeat')
+          context.fillStyle='green'
+          snake.cells.forEach(function(cell, index) {
+        
+            context.fillRect(cell.x, cell.y, grid-1, grid-1);
+            console.log(cell)
+        
+            if (cell.x === apple.x && cell.y === apple.y) {
+              snake.maxCells++;
+        
+              apple.x = getRandomInt(0, 31) * grid;
+              apple.y = getRandomInt(0, 15) * grid;
+            }
+
+            for (var i = index + 1; i < snake.cells.length; i++) {
+        
+              if (cell.x === snake.cells[i].x && cell.y === snake.cells[i].y) {
+                snake.x = 160;
+                snake.y = 160;
+                snake.cells = [];
+                snake.maxCells = 4;
+                snake.dx = grid;
+                snake.dy = 0;
+        
+                apple.x = getRandomInt(0, 25) * grid;
+                apple.y = getRandomInt(0, 25) * grid;
+              }
+            }
+          });
+        }
+        
+        document.addEventListener('keydown', function(e) {
+            slithering = 1
+          if (e.which === 37 && snake.dx === 0) {
+            snake.dx = -grid;
+            snake.dy = 0;
+          }
+
+          else if (e.which === 38 && snake.dy === 0) {
+            snake.dy = -grid;
+            snake.dx = 0;
+          }
+
+          else if (e.which === 39 && snake.dx === 0) {
+            snake.dx = grid;
+            snake.dy = 0;
+          }
+
+          else if (e.which === 40 && snake.dy === 0) {
+            snake.dy = grid;
+            snake.dx = 0;
+          }
+          slithering = 0
+        });
+        
+        requestAnimationFrame(loop);
+        </script>
+        </body>
 </html>
