@@ -1,0 +1,447 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consolee Games - Blob Fight</title>
+    <link rel="icon" type="image/x-icon" href="/images/logo.png">
+    <style>
+        body {
+            margin: 0px;
+            border-top: 80px double #555;
+            border-left: 120px solid #555;
+            border-top-left-radius: 150px;
+            padding: 27px;
+            background-color: black;
+            font-size: 21px;
+            text-align: center;
+            font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            color:whitesmoke;
+        }
+        ::-webkit-scrollbar {
+            width: 15px;
+        }
+        a {
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration:underline;
+        }
+
+        ::-webkit-scrollbar-track {
+            box-shadow: inset 0 0 10px crimson;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background:crimson;
+            border-radius: 15px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: darkred;
+            border-radius: 15px;
+        }
+        .player {
+            width: 48px;
+            height: 48px;
+            margin-top: 200px;
+            background-color: black;
+            display: inline-flex;
+            z-index: 55;
+        }
+        .eye-left {
+            width: 10px;
+            height: 10px;
+            margin-bottom: 30px;
+            margin-left: -45px;
+            background-color: orangered;
+            display: inline-flex;
+            z-index: 60;
+        }
+        .eye-right {
+            width: 10px;
+            height: 10px;
+            margin-bottom: 30px;
+            margin-left: 10px;
+            background-color: orangered;
+            display: inline-flex;
+            z-index: 60;
+        }
+
+        .enemy {
+            width: 100px;
+            height: 100px;
+        }
+
+        .screen {
+            width:1000px;
+            height:500px;
+            background-color: teal;
+            border-radius: 50px;
+            display: inline-block;
+            z-index: -10;
+        }
+        .platform {
+            width: 1000px;
+            height: 10px;
+            background-color: black;
+            position: absolute;
+            margin-top: 250px;
+            top: 50%;
+            margin-left: 45.5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Blob Fight</h1>
+    <script type = "text/javascript">
+        let moving = 0
+        window.addEventListener("keydown", function(e) {
+    if(["Space","ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].indexOf(e.code) > -1 && moving < 1) {
+        e.preventDefault();
+    }
+}, false);
+    </script>
+    <div class = "screen" id = "screen">
+    <div class="player"id="player" health = "100"><img id = "sword" style = "display:none;-webkit-transform:rotate(var(--deg));-moz-transform: rotate(var(--deg));-ms-transform: rotate(var(--deg));-o-transform: rotate(var(--deg));transform: rotate(var(--deg));">
+    </div>
+    <div class = "eye-left"></div><div class = "eye-right"></div></div> 
+    <div class = "platform" id = "platform"></div>
+    <canvas id = "enemyPlane" width ="1000" height="500" style="margin-top:-500px;"></canvas>
+    <img src = "/images/zombie.png" id = "zombie" style="display:none;">
+    <img src = "/images/goblin.png" id = "goblin" style="display:none;">
+    <img src = "/images/big_goblin.png" id = "big_goblin" style="display:none;">
+    <script type = "text/javascript">
+        alert('F Key to Use Sword')
+        let canvas = document.getElementById('enemyPlane')
+        let ctx = canvas.getContext('2d')
+        class HealthBar {
+                    constructor(x,y,w,h,maxHealth,color) {
+                        this.x = x;
+                        this.y = y;
+                        this.w = w;
+                        this.h = h;
+                        this.maxHealth = maxHealth;
+                        this.maxWidth = w;
+                        this.health = maxHealth;
+                        this.color = color;
+                        ctx.lineWidth=4;
+                        ctx.strokeStyle='#333';
+                        ctx.fillStyle=this.color
+                        ctx.fillRect(this.x,this.y,this.w,this.h)
+                        ctx.strokeRect(this.x,this.y,this.maxWidth,this.h)
+                    }
+
+                    dmg(val) {
+                        this.health = val;
+                        ctx.clearRect(this.x,this.y,this.maxWidth+10,this.h+10)
+                        this.w = (this.health/this.maxHealth) * this.maxWidth
+                        ctx.fillStyle=this.color
+                        ctx.fillRect(this.x,this.y,this.w,this.h)
+                        ctx.strokeRect(this.x,this.y,this.maxWidth,this.h)
+                    }
+
+                    pos(x,y) {
+                        ctx.clearRect(this.x-12,this.y-12,this.maxWidth+30,this.h+30)
+                        this.x = x;
+                        this.y = y;
+                        ctx.fillStyle=this.color
+                        ctx.fillRect(this.x,this.y,this.w,this.h)
+                        ctx.strokeRect(this.x,this.y,this.maxWidth,this.h)
+                    }
+                    dead() {
+                        ctx.clearRect(this.x-12,this.y-12,this.maxWidth+30,this.h+30)
+                    }                    
+                }
+        var playerHealth = new HealthBar(24,24,120,20,100,'red')
+        const vision = document.getElementById('screen')
+        const plane = document.getElementById('platform')
+        const spritePlayer = document.getElementById('player')
+        let spawntime = 0
+        let gridlock = 48
+        let hit = false
+        let enemyspawn = 400
+        let jumping = 0
+        let player = {
+            x: -768,
+            y: 96,
+            dx: gridlock*0,
+            dy: gridlock*0,
+            sx: 0,
+            sy: 0
+        }
+        class Sword {
+            constructor(x,y,style) {
+                this.x = x;
+                this.y = y;
+                this.style = style;
+                this.sword = document.getElementById('sword')
+                this.sword.src = `/images/${this.style}.png`
+                this.sword.style.display = ''
+                this.sword.style.setProperty('--deg', '180deg')
+                this.manage()
+            }
+
+            manage() {
+                var deg = 180
+                deg += this.tilt
+                this.sword.style.setProperty('--deg', `${deg}deg`)
+                setTimeout(()=>{this.manage()},1)
+            }
+            tilt = 1;
+            styleset() {
+                this.sword.src = `/images/${this.style}.png`
+            }
+        }
+        let sword = new Sword(100, 100, 'sword')
+        document.addEventListener('keydown', function(e) {
+            moving++
+            if(e.keyCode === 37) {
+                player.sx -= gridlock/3
+            }
+            else if(e.keyCode === 39) {
+                player.sx += gridlock/3
+            }
+            else if(e.keyCode === 38 && hit === false) {
+                jumping = 1
+                player.sy -= gridlock/3
+                jumping = 0
+            }
+            moving = 0
+        })
+        let enemyHealth = 100
+        function loop() {
+            requestAnimationFrame(loop)
+
+            if(collision(spritePlayer, plane, jumping)<1) {
+            hit = false
+            player.sy++
+            }
+
+            if(++enemyspawn > spawntime) {
+                enemyHealth = spawnEnemy()
+                enemyspawn = 0;
+                spawntime = Math.floor(Math.random() * 200) + 200
+            }
+
+            player.dx = player.sx * (1/3)
+            player.dy = player.sy * (1/3)
+            player.x += player.dx
+            player.y += player.dy
+        spritePlayer.style.marginTop=String(player.y) + 'px'
+        spritePlayer.style.marginLeft=String(player.x) + 'px'
+        if(moving<1) {
+            if(player.sx > 0) {
+            player.sx=player.sx-0.5
+            } 
+            else if (player.sx < 0) {
+                player.sx=player.sx+0.5
+            }
+            if(player.sy > 0) {
+                jumping = 1
+                player.sy=player.sy-0.5
+                jumping = 0
+            }
+            else if (player.sy < 0) {
+                player.sy=player.sy+0.5
+            }
+        }
+        if(player.sx > 48) {
+            player.sx = 48
+        }
+        if(player.sx < -48) {
+            player.sx = -48
+        }
+        if(player.sy > 12) {
+            player.sy = 12
+        }
+        if(player.sy < -48) {
+            player.sy = -48
+        }
+        if(player.x>960) {
+            player.x = -968
+        }
+        if(player.x<-968) {
+            player.x = 960
+        }
+        if(player.y>306.1) {
+            player.y = 306.1
+        }
+        if(player.y<-5.2) {
+            player.y = -5.2
+            hit = true
+            player.sy = 96
+        }
+    }
+    requestAnimationFrame(loop)
+        </script>
+        <script type = "text/javascript">
+            function collision(p, b, j) {
+                let standing = 0;
+                let al = false;
+
+                let pw = Number((getComputedStyle(p).width).split("px")[0])/2;
+                let ph = Number((getComputedStyle(p).height).split("px")[0])/2;
+                let bw = Number((getComputedStyle(b).width).split("px")[0])/2;
+                let bh = Number((getComputedStyle(b).height).split("px")[0])/2;
+
+                let px = Number((getComputedStyle(p).marginLeft).split("px")[0]);
+                let py = Number((getComputedStyle(p).marginTop).split("px")[0]) -60;
+                let bx = Number((getComputedStyle(b).marginLeft).split("px")[0]);
+                let by = Number((getComputedStyle(b).marginTop).split("px")[0]) + 5;
+
+                let lcol = px + pw > bx - bw
+                let rcol = px - pw < bx + bw
+                let tcol = py + ph > by - bh
+                let bcol = py - ph < by + bh
+
+                if(lcol && rcol && tcol && bcol) {
+                    colliding = 1
+                } else {
+                    if(j < 1) {
+                    colliding = 0
+                    }
+                }
+                return colliding;
+            }
+        </script>
+        <script type = "text/javascript">
+                        let count = 0;
+                        function full_charge() {
+                            
+                            ctx.fillStyle = '#555'
+                            ctx.fillRect(this.playerX,this.playerY,10,10)
+                            ctx.fillRect(0,0,canvas.width,100)
+                            ctx.fillRect(0,canvas.height-100,canvas.width,100)
+                            player.sx = 100 
+                            setTimeout(() => {
+                            ctx.clearRect(0,0,canvas.width,canvas.height)
+                            }, 2000)                            
+                        }
+
+            class Enemy {
+                    constructor(type, healthbar) {
+                        this.type = type
+                        this.playerX = (player.x+860)/2-23
+                        this.playerY = player.y + 3
+                        this.healthbar = healthbar;
+                        this.slashing = false;
+                        this.stancePower = 1;
+                    }
+                    stats = {
+                        'zombie': {
+                            dmg: 0.25,
+                            sx: 2,
+                            resistance: 5,
+                            width: 150,
+                            height: 150,
+                            y_level: 0,
+                            health: 100
+                        },
+                        'goblin': {
+                            dmg: 0.6,
+                            sx: 0.6,
+                            resistance: 9,
+                            width: 200,
+                            height: 200,
+                            y_level: -30,
+                            health: 100
+                        },
+                        'big_goblin': {
+                            dmg: 1,
+                            sx: 0.3,
+                            resistance: 16,
+                            width: 250,
+                            height: 250,
+                            y_level: -70,
+                            health: 100                   
+                        }
+                    }
+                    create(x) {
+                        ctx.fillStyle= "#006600";
+                        var enemies = {
+                           'zombie': document.getElementById('zombie'),
+                           'goblin': document.getElementById('goblin'),
+                           'big_goblin': document.getElementById('big_goblin')
+                        }
+                        ctx.drawImage(enemies[this.type], x, 200, 150, 150)
+                        this.x = x;
+                        this.enemy = enemies[this.type]                         
+                    }
+                    move() {
+                        ctx.clearRect(this.x,200+this.stats[this.type].y_level,this.stats[this.type].width,this.stats[this.type].height)
+                        ctx.drawImage(this.enemy,this.x,200+this.stats[this.type].y_level,this.stats[this.type].width,this.stats[this.type].height)
+                        this.y = 200+this.stats[this.type].y_level
+                        this.x -= this.stats[this.type].sx
+                        if(this.playerX>(this.x + this.stats[this.type].sx) + 24) {
+                            this.stats[this.type].sx = -Math.abs(this.stats[this.type].sx)
+                        } else if (this.playerX<this.x - 24) {
+                            this.stats[this.type].sx = Math.abs(this.stats[this.type].sx)
+                        } else {
+                            if(this.slashing === true) {
+                            this.stats[this.type].health -= (50/this.stats[this.type].resistance) * this.stancePower
+                            this.slashing = false
+                            } else {
+                                playerHealth.dmg(playerHealth.health - this.stats[this.type].dmg)
+                                if(playerHealth.health<1) {
+                                    alert('You failed! Will return to /games  when you click OK')
+                                    window.location.href='../games'
+                                }
+                            }
+                        }
+                        this.playerX = Math.round((player.x+860)/2-23)
+                        this.playerY = Math.round(player.y + 3)
+                        if(this.stats[this.type].health < 1) {
+                            console.log(`${this.type} killed!`)
+                            ctx.clearRect(this.x,200+this.stats[this.type].y_level,this.stats[this.type].width,this.stats[this.type].height)
+                            this.stancePower=1
+                            sword.tilt = 1
+                            this.healthbar.dead()
+                            return;
+                        }
+                        document.onkeydown = (e) => {
+                            if(e.code === 'KeyF') {
+                                this.slash()
+                            }
+                        }
+                        this.manageHealth()
+                setTimeout(() => {this.move()},1)
+                    }
+
+                    manageHealth() {
+                        this.healthbar.pos(this.x-(this.stats[this.type].y_level-40),this.y-30)
+                        this.healthbar.dmg(this.stats[this.type].health)
+                    }
+
+                    slash() {
+                        this.slashing = true;
+                        if(this.playerX>(this.x + this.stats[this.type].sx) + 24 || this.playerX<this.x - 24) {
+                            this.stancePower+= 0.25
+                            if(this.stancePower>35) {
+                                ctx.fillStyle='#555'
+                                this.stancePower=35
+                                sword.style='sword_full'
+                                sword.styleset()
+                                full_charge()
+                            } else {
+                                sword.style='sword'
+                                sword.styleset()
+                            }
+                            sword.tilt = this.stancePower
+                    }
+                }
+            }
+                let i = 0
+            function spawnEnemy() {
+                var typelist = ['zombie','zombie','zombie','zombie','zombie', 'goblin','goblin','goblin', 'big_goblin','big_goblin']
+                var ranint = Math.floor(Math.random() * (typelist.length - 1))
+                var type = typelist [ranint]
+                var enemyHealth = new HealthBar(875, 300, 60, 10, 100, 'green')
+                var enemy = new Enemy(type, enemyHealth)
+                enemy.create(875)
+                enemy.move()                
+            }
+        </script>         
+    <a href = "/home" style="color:whitesmoke;top:20%;left:50%;margin-left:-620px;position:fixed;font-size:xx-large;">Home</a>
+</body>
+</html>
