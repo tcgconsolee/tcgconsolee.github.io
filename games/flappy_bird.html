@@ -82,7 +82,8 @@
     }
 }, false);
     </script><br><br>
-    <div class = 'circle' id = 'div'>
+    <div class = 'screen' id = 'div'>
+       <div class="bg" id="bg"></div> 
     <img src = "/images/flappy_bird.png" alt = "flappy bird" class = "rotation" style = "--deg: 0deg;margin-top:0px;width:90px;height:63px;" id = "bird">
     <img src = "/images/flappy_pillar.png" alt = "flappy bird pillar" class = "rotation" style =    "--deg: 0deg;margin-top:0px;margin-left:0px;width: 143px;height:300px;display:none;"id = "pillar">
     <h2 style="left:50%;top:50%;margin-left:925px;margin-top:0px;" id="timer">0</h2>
@@ -94,7 +95,7 @@
             pClone.style.height = `${randimen}px`
             pClone.style.marginTop=`${270 - (randimen - 200)}px`
             pClone.style.marginLeft=`${430 - (randimen - 200)}px`
-        let i = 430 - (randimen - 200)
+        let i = 470 - (randimen - 200)
         var pDir = [180,0][Math.round(Math.random())]
         pClone.style.setProperty('--deg', `${pDir}deg`)
         if(pDir === 180) {
@@ -123,11 +124,13 @@
         }
            </script>
            <script type = "text/javascript">//gravity
+           const bg = document.getElementById('bg')
 function gravity(pr) {
             if(pr===true) {
             div.removeChild(bird)
             margin = margin + 2
             if(margin<-40 || margin>400) {
+                bg.style.animationPlayState="paused"
                 setTimeout(() => {
                 if(al===false) {
                     alert('You failed! Will return to /games when you click OK.')
@@ -183,6 +186,7 @@ function gravity(pr) {
                 let bcol = py - ph < by + bh
 
                 if(lcol && rcol && tcol && bcol) {
+                    bg.style.animationPlayState="paused"
                     setTimeout(() => {
                     if(al === false) {
                         al = true
@@ -207,10 +211,13 @@ let timed = false
         let tKEYcode = 0
         const pillar = document.getElementById('pillar')
         div.removeChild(pillar)
-        document.body.addEventListener("keyup", function(p) {
-            if(p.keyCode === 32 || p.keyCode === 37) {
+        document.body.addEventListener("keydown", function(p) {
+            if(p.keyCode === 32 || p.keyCode === 38) {
                 jump()
                 start++;
+                if(start<2) {
+                bg.style.animationPlayState="running"
+                }
             }
         })
         setInterval(() => {
