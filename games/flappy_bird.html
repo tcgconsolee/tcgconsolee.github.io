@@ -6,7 +6,7 @@
     <title>Consolee Games - Flappy Bird</title>
     <link rel="icon" type="image/x-icon" href="/images/logo.png">
     <style>
-                body {
+        body {
             margin: 0px;
             border-top: 80px double #555;
             border-left: 120px solid #555;
@@ -18,8 +18,7 @@
             font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
             color:whitesmoke;
         }
-        div {
-            background-image:url(/images/background.png);
+        .screen {
             background-color: #555;
             font-size: 25px;
             text-align: center;
@@ -31,6 +30,22 @@
             margin: 20px;
             display: inline-block;
             z-index:-5;
+            overflow: hidden;
+        }
+        .bg {
+            height: 500px;
+            width: 15904.1283px;
+            background: url(/images/background.png) repeat-x;
+            animation: slide 100s linear infinite;
+            animation-play-state: paused;
+        }
+        @keyframes slide {
+            0%{
+                transform: translate3d(0,0,0)
+            }
+            100% {
+                transform: translate3d(-15904.1283px,0,0)
+            }
         }
         a {
             text-decoration: none;
@@ -68,8 +83,8 @@
             background:crimson;
             border-radius: 15px;
         }
-         ::-webkit-scrollbar-thumb:hover {
-            background:darkred;
+        ::-webkit-scrollbar-thumb:hover {
+            background: darkred;
         }
     </style>
 </head>
