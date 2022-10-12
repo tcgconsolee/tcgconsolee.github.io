@@ -17,8 +17,13 @@
             text-align: center;
             font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
             color:whitesmoke;
+            cursor: none;   
         }
-        div {
+        ::selection {
+            background: none;
+            text-decoration: underline;
+        }
+        .circle {
             background-color: #555;
             font-size: 21px;
             text-align: center;
@@ -29,6 +34,20 @@
             border-radius: 25px;
             margin: 20px;
             display: inline-block;
+        }
+        .mouse {
+            color: black;
+            height: 20px;
+            width: 20px;
+            border-radius: 100%;
+            background-color: whitesmoke;
+            position: fixed;
+            left: 180px;
+            top: 180px;
+            cursor: none;
+            z-index: 10;
+            mix-blend-mode:difference;
+            pointer-events: none;
         }
         ::-webkit-scrollbar {
             width: 15px;
@@ -43,24 +62,105 @@
             background:crimson;
             border-radius: 15px;
         }
-         ::-webkit-scrollbar-thumb:hover {
-            background:darkred;
+        ::-webkit-scrollbar-thumb:hover {
+            background: darkred;
         }
         a {
             text-decoration: none;
+            cursor: none;
+            position: relative
         }
-        a:hover {
-            text-decoration: underline;
+        a:after {
+          content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  display: block;
+  margin-top: 0px;
+  left: 0%;
+  background: whitesmoke;
+  transition: width .3s ease;
+        }
+        a:hover:after {
+            width: 100%;
+  left: 0%;
+  background: whitesmoke;
         }
     </style>
 </head>
 <body>
     <h1>Games List:</h1>
-    <div class = "circle"><a href = './games/hangman' style="color:whitesmoke">Hangman</a> <br> <br> Play the famous hangman game! Guess the letters before the man gets hanged!</div>
-    <div class = "circle"><a href = './games/flappy_bird' style="color:whitesmoke">Flappy Bird</a> <br> <br> Play the famous flappy bird game! Avoid the pillars and fly to the end!</div>
-    <div class = "circle"><a href = './games/snake_game' style="color:whitesmoke">Snake Game</a> <br> <br> Play the famous snake game! Eat the apples to make your tail bigger! But don't accidentally eat your own tail!</div>
-        <div class = "circle"><a href = './games/blob_fight' style="color:whitesmoke">Blob Fight</a> <br> <br> Play the custom blob fight game! Hit your opponents and keep winning matches with a blob-like figure! But if you die instead you lose!</div>
-
-    <a href = "/home" style="color:whitesmoke;top:20%;left:50%;margin-left:-620px;position:fixed;font-size: xx-large;">Home</a>
+    <div class = "circle"><a href = './games/hangman' style="color:whitesmoke"class = "interactable">Hangman</a> <br> <br> Play the famous hangman game! Guess the letters before the man gets hanged!</div>
+    <div class = "circle"><a href = './games/flappy_bird' style="color:whitesmoke"class = "interactable">Flappy Bird</a> <br> <br> Play the famous flappy bird game! Avoid the pillars and fly to the end!</div>
+    <div class = "circle"><a href = './games/snake_game' style="color:whitesmoke"class = "interactable">Snake Game</a> <br> <br> Play the famous snake game! Eat the apples to make your tail bigger! But don't accidentally eat your own tail!</div>
+    <div class = "circle"><a href = './games/blob_fight' style="color:whitesmoke" class = "interactable">Blob Fight</a> <br> <br> Play the custom blob fight game! Hit your opponents and keep winning matches with a blob-like figure! But if you die instead you lose!</div>
+    <div class="mouse" id="mouse"></div>
+    <a href = "/home" style="position:fixed;color:whitesmoke;top:20%;left:50%;margin-left:-610px;position:fixed;font-size: xx-large;" class = "interactable">Home</a>
+    <script type = "text/javascript">
+        const mouse = document.getElementById('mouse')
+        const interactables = document.getElementsByClassName('interactable')
+        const mouse_duration = {
+            duration: 150,
+            iterations: 1
+        }
+        const mousedown = [
+            {
+                transform: "scale(1) rotate(0deg)"
+            },
+            {
+                transform: "scale(2) rotate(45deg)"
+            }
+        ]
+        const mouseup = [
+            {
+                transform: "scale(2) rotate(45deg)"
+            },
+            {
+                transform: "scale(1) rotate(0deg)"
+            }
+        ]
+        window.addEventListener('mousedown', (e) => {
+            mouse.animate(mousedown, mouse_duration)
+            mouse.style.transform = "scale(2) rotate(45deg)"
+            mouse.style.borderRadius = "30%"
+        })
+        window.addEventListener('mouseup', (e) => {
+            mouse.animate(mouseup, mouse_duration)
+            mouse.style.transform = "scale(1) rotate(0deg)"
+            mouse.style.borderRadius = "100%"
+        })
+        window.addEventListener('mousemove', (e) => {
+            mouse.style.left = ((e.clientX) - 10) + "px"; 
+            mouse.style.top = ((e.clientY) - 10) + "px";
+        })
+        const mouseenter = [
+            {
+                transform: "scale(1)"
+            },
+            {
+                transform: "scale(2)"
+            }
+        ]
+        const mouseleave = [
+            {
+                transform: "scale(2)"
+            },
+            {
+                transform: "scale(1)"
+            }
+        ]
+        for(let i = 0; i< interactables.length; i++) {
+        interactables[i].addEventListener('mouseenter', (e) => {
+            mouse.style.borderRadius = "30%"
+            mouse.animate(mouseenter, mouse_duration)
+            mouse.style.transform = "scale(2)"
+        })
+        interactables[i].addEventListener('mouseleave', (e) => {
+            mouse.style.borderRadius = "100%"
+            mouse.animate(mouseleave, mouse_duration)
+            mouse.style.transform = "scale(1)"
+        })
+    }
+    </script>
 </body>
 </html>
