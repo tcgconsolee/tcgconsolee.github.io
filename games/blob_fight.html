@@ -17,15 +17,45 @@
             text-align: center;
             font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
             color:whitesmoke;
+            cursor: none;
+        }
+        .mouse {
+            color: black;
+            height: 20px;
+            width: 20px;
+            border-radius: 100%;
+            background-color: whitesmoke;
+            position: fixed;
+            left: 180px;
+            top: 180px;
+            cursor: none;
+            z-index: 10;
+            mix-blend-mode:difference;
+            pointer-events: none;
         }
         ::-webkit-scrollbar {
             width: 15px;
         }
         a {
             text-decoration: none;
+            cursor: none;
+            position: relative
         }
-        a:hover {
-            text-decoration:underline;
+        a:after {
+          content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  display: block;
+  margin-top: 0px;
+  left: 0%;
+  background: whitesmoke;
+  transition: width .3s ease;
+        }
+        a:hover:after {
+            width: 100%;
+  left: 0%;
+  background: whitesmoke;
         }
 
         ::-webkit-scrollbar-track {
@@ -39,7 +69,6 @@
         }
         ::-webkit-scrollbar-thumb:hover {
             background: darkred;
-            border-radius: 15px;
         }
         .player {
             width: 48px;
@@ -72,6 +101,10 @@
             width: 100px;
             height: 100px;
         }
+        ::selection {
+            background: none;
+            text-decoration: underline;
+        }
 
         .screen {
             width:1000px;
@@ -90,9 +123,24 @@
             top: 50%;
             margin-left: 45.5px;
         }
+        .mouse {
+            color: black;
+            height: 20px;
+            width: 20px;
+            border-radius: 100%;
+            background-color: whitesmoke;
+            position: fixed;
+            left: 180px;
+            top: 180px;
+            cursor: none;
+            z-index: 10;
+            mix-blend-mode:difference;
+            pointer-events: none;
+        }
     </style>
 </head>
 <body>
+    <div class="mouse" id="mouse"></div>
     <h1>Blob Fight</h1>
     <script type = "text/javascript">
         let moving = 0
@@ -442,6 +490,72 @@
                 enemy.move()                
             }
         </script>         
-    <a href = "/home" style="color:whitesmoke;top:20%;left:50%;margin-left:-620px;position:fixed;font-size:xx-large;">Home</a>
+    <a href = "/home" style="position:fixed;color:whitesmoke;top:20%;left:50%;margin-left:-610px;position:fixed;font-size: xx-large;" class = "interactable">Home</a>
+    <script type = "text/javascript">
+        const mouse = document.getElementById('mouse')
+        const interactables = document.getElementsByClassName('interactable')
+        const mouse_duration = {
+            duration: 150,
+            iterations: 1
+        }
+        const mousedown = [
+            {
+                transform: "scale(1) rotate(0deg)"
+            },
+            {
+                transform: "scale(2) rotate(45deg)"
+            }
+        ]
+        const mouseup = [
+            {
+                transform: "scale(2) rotate(45deg)"
+            },
+            {
+                transform: "scale(1) rotate(0deg)"
+            }
+        ]
+        window.addEventListener('mousedown', (e) => {
+            mouse.animate(mousedown, mouse_duration)
+            mouse.style.transform = "scale(2) rotate(45deg)"
+            mouse.style.borderRadius = "30%"
+        })
+        window.addEventListener('mouseup', (e) => {
+            mouse.animate(mouseup, mouse_duration)
+            mouse.style.transform = "scale(1) rotate(0deg)"
+            mouse.style.borderRadius = "100%"
+        })
+        window.addEventListener('mousemove', (e) => {
+            mouse.style.left = ((e.clientX) - 10) + "px"; 
+            mouse.style.top = ((e.clientY) - 10) + "px";
+        })
+        const mouseenter = [
+            {
+                transform: "scale(1)"
+            },
+            {
+                transform: "scale(2)"
+            }
+        ]
+        const mouseleave = [
+            {
+                transform: "scale(2)"
+            },
+            {
+                transform: "scale(1)"
+            }
+        ]
+        for(let i = 0; i< interactables.length; i++) {
+        interactables[i].addEventListener('mouseenter', (e) => {
+            mouse.style.borderRadius = "30%"
+            mouse.animate(mouseenter, mouse_duration)
+            mouse.style.transform = "scale(2)"
+        })
+        interactables[i].addEventListener('mouseleave', (e) => {
+            mouse.style.borderRadius = "100%"
+            mouse.animate(mouseleave, mouse_duration)
+            mouse.style.transform = "scale(1)"
+        })
+    }
+    </script>
 </body>
 </html>
