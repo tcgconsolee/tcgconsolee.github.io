@@ -10,17 +10,57 @@
             margin: 0px;
             border-top: 80px double #555;
             border-left: 120px solid #555;
-            border-top-left-radius: 132px;
+            border-top-left-radius: 150px;
             padding: 27px;
             background-color: black;
             font-size: 21px;
             text-align: center;
             font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
             color:whitesmoke;
+            cursor: none;
   }
+  ::selection {
+            background: none;
+            text-decoration: underline;
+        }
   canvas {
     background-color: white;
   }
+  .mouse {
+            color: black;
+            height: 20px;
+            width: 20px;
+            border-radius: 100%;
+            background-color: whitesmoke;
+            position: fixed;
+            left: 180px;
+            top: 180px;
+            cursor: none;
+            z-index: 10;
+            mix-blend-mode:difference;
+            pointer-events: none;
+        }
+        a {
+            text-decoration: none;
+            cursor: none;
+            position: relative
+        }
+        a:after {
+          content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  display: block;
+  margin-top: 0px;
+  left: 0%;
+  background: whitesmoke;
+  transition: width .3s ease;
+        }
+        a:hover:after {
+            width: 100%;
+  left: 0%;
+  background: whitesmoke;
+        }
         ::-webkit-scrollbar {
             width: 15px;
         }
@@ -40,6 +80,7 @@
         </style>
 </head>
 <body>
+  <div class="mouse" id="mouse"></div>
     <h1>Snake Game</h1>
         <canvas width="992" height="384" id="game"></canvas>
         <script>
@@ -115,7 +156,6 @@
           snake.cells.forEach(function(cell, index) {
         
             context.fillRect(cell.x, cell.y, grid-1, grid-1);
-            console.log(cell)
         
             if (cell.x === apple.x && cell.y === apple.y) {
               snake.maxCells++;
@@ -172,5 +212,72 @@
         
         requestAnimationFrame(loop);
         </script>
+        <a href = "/home" style="position:fixed;color:whitesmoke;top:20%;left:50%;margin-left:-617px;position:fixed;font-size: xx-large;" class = "interactable">Home</a>
+        <script type = "text/javascript">
+          const mouse = document.getElementById('mouse')
+          const interactables = document.getElementsByClassName('interactable')
+          const mouse_duration = {
+              duration: 150,
+              iterations: 1
+          }
+          const mousedown = [
+              {
+                  transform: "scale(1) rotate(0deg)"
+              },
+              {
+                  transform: "scale(2) rotate(45deg)"
+              }
+          ]
+          const mouseup = [
+              {
+                  transform: "scale(2) rotate(45deg)"
+              },
+              {
+                  transform: "scale(1) rotate(0deg)"
+              }
+          ]
+          window.addEventListener('mousedown', (e) => {
+              mouse.animate(mousedown, mouse_duration)
+              mouse.style.transform = "scale(2) rotate(45deg)"
+              mouse.style.borderRadius = "30%"
+          })
+          window.addEventListener('mouseup', (e) => {
+              mouse.animate(mouseup, mouse_duration)
+              mouse.style.transform = "scale(1) rotate(0deg)"
+              mouse.style.borderRadius = "100%"
+          })
+          window.addEventListener('mousemove', (e) => {
+              mouse.style.left = ((e.clientX) - 10) + "px"; 
+              mouse.style.top = ((e.clientY) - 10) + "px";
+          })
+          const mouseenter = [
+              {
+                  transform: "scale(1)"
+              },
+              {
+                  transform: "scale(2)"
+              }
+          ]
+          const mouseleave = [
+              {
+                  transform: "scale(2)"
+              },
+              {
+                  transform: "scale(1)"
+              }
+          ]
+          for(let i = 0; i< interactables.length; i++) {
+          interactables[i].addEventListener('mouseenter', (e) => {
+              mouse.style.borderRadius = "30%"
+              mouse.animate(mouseenter, mouse_duration)
+              mouse.style.transform = "scale(2)"
+          })
+          interactables[i].addEventListener('mouseleave', (e) => {
+              mouse.style.borderRadius = "100%"
+              mouse.animate(mouseleave, mouse_duration)
+              mouse.style.transform = "scale(1)"
+          })
+      }
+      </script>
         </body>
 </html>
