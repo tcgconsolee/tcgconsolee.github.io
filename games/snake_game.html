@@ -8,8 +8,6 @@
     <style>
         body {
             margin: 0px;
-            border-top: 80px double #555;
-            border-left: 120px solid #555;
             border-top-left-radius: 150px;
             padding: 27px;
             background-color: black;
@@ -40,10 +38,33 @@
             mix-blend-mode:difference;
             pointer-events: none;
         }
+        .menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 1275px;
+            height: 75px;
+            background: white;
+            border-bottom: solid crimson 5px;
+            border-bottom-left-radius: 25%;
+            border-bottom-right-radius: 25%;
+    }
         a {
+            position: relative;
+            z-index: 5;
+            margin-top: 18;
+            font-size: 23px;
             text-decoration: none;
             cursor: none;
-            position: relative
+            font-style: italic;
+            font-family:'Times New Roman', Times, serif;
+        }
+        .menu a {
+            width: 200px;
+            margin-top: 18;
+            color: black;
+            float: left;
+            font-size: 27px;
         }
         a:after {
           content: '';
@@ -56,10 +77,28 @@
   background: whitesmoke;
   transition: width .3s ease;
         }
+        .menu a:after {
+            background: black;
+        }
         a:hover:after {
             width: 100%;
   left: 0%;
   background: whitesmoke;
+        }
+        .menu a:hover:after {
+            background: black
+        }
+        .menu .author {
+            font-family:'Brush Script MT', Brush, cursive;
+            font-size: 39px;
+            color: black;
+            margin-top: 10;
+            float: right;
+            margin-right: 20;
+        }
+        h1, h2 {
+            font-family:'Courier New', Courier, monospace;
+            font-variant:small-caps;
         }
         ::-webkit-scrollbar {
             width: 15px;
@@ -81,7 +120,12 @@
 </head>
 <body>
   <div class="mouse" id="mouse"></div>
-    <h1>Snake Game</h1>
+  <div class = "menu">
+    <a href = "/home" class = "interactable">Home</a>
+    <a href="../games" class = "interactable">Games</a>
+    <div class = "author">Consolee</div>
+    </div>
+    <h1><br>Snake Game</h1>
         <canvas width="992" height="384" id="game"></canvas>
         <script>
             let slithering = 0;
@@ -142,8 +186,10 @@
           else if (snake.y >= canvas.height) {
             snake.y = 0;
           }
-        
-          snake.cells.unshift({x: snake.x, y: snake.y});
+      
+          var snakehead = new Image(32, 32)
+          snakehead.src = "/images/snake_head.png"
+          snake.cells.unshift({x: snake.x, y: snake.y, img: snakehead});
         
           if (snake.cells.length > snake.maxCells) {
             snake.cells.pop();
@@ -152,11 +198,15 @@
           context.fillStyle = 'red';
           context.fillRect(apple.x, apple.y, grid-1, grid-1);
         
-          context.fillStyle='green'
+          context.fillStyle='rgb(0, 77, 0)'
           snake.cells.forEach(function(cell, index) {
         
-            context.fillRect(cell.x, cell.y, grid-1, grid-1);
-        
+            if(index===0) {
+            context.drawImage(cell.img,cell.x, cell.y, grid, grid);
+            } else {
+              context.fillRect(cell.x, cell.y, grid, grid)
+            }
+
             if (cell.x === apple.x && cell.y === apple.y) {
               snake.maxCells++;
         
@@ -174,8 +224,8 @@
                 snake.dx = grid;
                 snake.dy = 0;
         
-                apple.x = getRandomInt(0, 25) * grid;
-                apple.y = getRandomInt(0, 25) * grid;
+                apple.x = 320;
+                apple.y = 320;
               }
             }
           });
@@ -212,7 +262,6 @@
         
         requestAnimationFrame(loop);
         </script>
-        <a href = "/home" style="position:fixed;color:whitesmoke;top:20%;left:50%;margin-left:-617px;position:fixed;font-size: xx-large;" class = "interactable">Home</a>
         <script type = "text/javascript">
           const mouse = document.getElementById('mouse')
           const interactables = document.getElementsByClassName('interactable')
