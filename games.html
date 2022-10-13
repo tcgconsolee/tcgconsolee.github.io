@@ -8,9 +8,6 @@
     <style>
         body {
             margin: 0px;
-            border-top: 80px double #555;
-            border-left: 120px solid #555;
-            border-top-left-radius: 150px;
             padding: 27px;
             background-color: black;
             font-size: 21px;
@@ -35,6 +32,64 @@
             margin: 20px;
             display: inline-block;
         }
+        .menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 1275px;
+            height: 75px;
+            background: white;
+            border-bottom: solid crimson 5px;
+            border-bottom-left-radius: 25%;
+            border-bottom-right-radius: 25%;
+    }
+        a {
+            position: relative;
+            z-index: 5;
+            margin-top: 18;
+            font-size: 23px;
+            text-decoration: none;
+            cursor: none;
+            font-style: italic;
+            font-family:'Times New Roman', Times, serif;
+        }
+        .menu a {
+            width: 200px;
+            margin-top: 18;
+            color: black;
+            float: left;
+            font-size: 27px;
+        }
+        a:after {
+          content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  display: block;
+  margin-top: 0px;
+  left: 0%;
+  background: whitesmoke;
+  transition: width .3s ease;
+        }
+        .menu a:after {
+            background: black;
+        }
+        a:hover:after {
+            width: 100%;
+  left: 0%;
+  background: whitesmoke;
+        }
+        .menu a:hover:after {
+            background: black
+        }
+        .menu .author {
+            font-family:'Brush Script MT', Brush, cursive;
+            font-size: 39px;
+            color: black;
+            margin-top: 10;
+            float: right;
+            margin-right: 20;
+        }
         .mouse {
             color: black;
             height: 20px;
@@ -48,6 +103,10 @@
             z-index: 10;
             mix-blend-mode:difference;
             pointer-events: none;
+        }
+        h1, h2 {
+            font-family:'Courier New', Courier, monospace;
+            font-variant:small-caps;
         }
         ::-webkit-scrollbar {
             width: 15px;
@@ -65,37 +124,19 @@
         ::-webkit-scrollbar-thumb:hover {
             background: darkred;
         }
-        a {
-            text-decoration: none;
-            cursor: none;
-            position: relative
-        }
-        a:after {
-          content: '';
-  position: absolute;
-  width: 0;
-  height: 2px;
-  display: block;
-  margin-top: 0px;
-  left: 0%;
-  background: whitesmoke;
-  transition: width .3s ease;
-        }
-        a:hover:after {
-            width: 100%;
-  left: 0%;
-  background: whitesmoke;
-        }
     </style>
 </head>
 <body>
-    <h1>Games List:</h1>
+    <h1><br>Games List</h1>
     <div class = "circle"><a href = './games/hangman' style="color:whitesmoke"class = "interactable">Hangman</a> <br> <br> Play the famous hangman game! Guess the letters before the man gets hanged!</div>
     <div class = "circle"><a href = './games/flappy_bird' style="color:whitesmoke"class = "interactable">Flappy Bird</a> <br> <br> Play the famous flappy bird game! Avoid the pillars and fly to the end!</div>
     <div class = "circle"><a href = './games/snake_game' style="color:whitesmoke"class = "interactable">Snake Game</a> <br> <br> Play the famous snake game! Eat the apples to make your tail bigger! But don't accidentally eat your own tail!</div>
     <div class = "circle"><a href = './games/blob_fight' style="color:whitesmoke" class = "interactable">Blob Fight</a> <br> <br> Play the custom blob fight game! Hit your opponents and keep winning matches with a blob-like figure! But if you die instead you lose!</div>
     <div class="mouse" id="mouse"></div>
-    <a href = "/home" style="position:fixed;color:whitesmoke;top:20%;left:50%;margin-left:-610px;position:fixed;font-size: xx-large;" class = "interactable">Home</a>
+    <div class = "menu">
+        <a href = "/home" class = "interactable">Home</a>
+        <div class = "author">Consolee</div>
+        </div>
     <script type = "text/javascript">
         const mouse = document.getElementById('mouse')
         const interactables = document.getElementsByClassName('interactable')
