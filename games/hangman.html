@@ -8,14 +8,10 @@
     <style>
         body {
             margin: 0px;
-            border-top: 80px double #555;
-            border-left: 120px solid #555;
-            border-top-left-radius: 150px;
             padding: 27px;
             background-color: black;
             font-size: 21px;
             text-align: center;
-            font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
             color:whitesmoke;
             cursor: none;
         }
@@ -23,7 +19,7 @@
             background: none;
             text-decoration: underline;
         }
-        div {
+        .circle {
             background-color:peru;
             font-size: 25px;
             text-align: center;
@@ -36,10 +32,33 @@
             display: inline-block;
             z-index:-5;
         }
+        .menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 1275px;
+            height: 75px;
+            background: white;
+            border-bottom: solid crimson 5px;
+            border-bottom-left-radius: 25%;
+            border-bottom-right-radius: 25%;
+    }
         a {
+            position: relative;
+            z-index: 5;
+            margin-top: 18;
+            font-size: 23px;
             text-decoration: none;
             cursor: none;
-            position: relative
+            font-style: italic;
+            font-family:'Times New Roman', Times, serif;
+        }
+        .menu a {
+            width: 200px;
+            margin-top: 18;
+            color: black;
+            float: left;
+            font-size: 27px;
         }
         a:after {
           content: '';
@@ -52,10 +71,28 @@
   background: whitesmoke;
   transition: width .3s ease;
         }
+        .menu a:after {
+            background: black;
+        }
         a:hover:after {
             width: 100%;
   left: 0%;
   background: whitesmoke;
+        }
+        .menu a:hover:after {
+            background: black
+        }
+        .menu .author {
+            font-family:'Brush Script MT', Brush, cursive;
+            font-size: 39px;
+            color: black;
+            margin-top: 10;
+            float: right;
+            margin-right: 20;
+        }
+        h1, h2 {
+            font-family:'Courier New', Courier, monospace;
+            font-variant:small-caps;
         }
         img {
             height: 150px;
@@ -96,7 +133,12 @@
 </head>
 <body>
     <div class="mouse" id="mouse"></div>
-    <h1>Hangman</h1>
+    <div class = "menu">
+        <a href = "/home" class = "interactable">Home</a>
+        <a href="../games" class = "interactable">Games</a>
+        <div class = "author">Consolee</div>
+        </div>
+    <h1><br>Hangman</h1>
     <script type = "text/javascript">
         window.addEventListener("keydown", function(e) {
     if(["Space","ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].indexOf(e.code) > -1) {
@@ -106,7 +148,6 @@
     </script>
     <div class = "circle" id = "hangmansq">Guess the word! <br> <br> <br> 
         <button type = "button" id = "clickerF" class = "interactable"onclick = "generateHGMgame()" style = "background-color: black;color: whitesmoke;font-size: x-large;font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;cursor: none;">Start Game</button><br>
-        <a href = "/home" style="position:fixed;color:whitesmoke;top:20%;left:50%;margin-left:-610px;position:fixed;font-size: xx-large;" class = "interactable">Home</a>
         <script type = "text/javascript">
             const mouse = document.getElementById('mouse')
             const interactables = document.getElementsByClassName('interactable')
@@ -141,8 +182,8 @@
                 mouse.style.borderRadius = "100%"
             })
             window.addEventListener('mousemove', (e) => {
-                mouse.style.left = ((e.clientX) - 25) + "px"; 
-                mouse.style.top = ((e.clientY) - 25) + "px";
+                mouse.style.left = ((e.clientX)) + "px"; 
+                mouse.style.top = ((e.clientY)) + "px";
             })
             const mouseenter = [
                 {
