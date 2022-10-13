@@ -157,9 +157,9 @@
             height: 10px;
             background-color: black;
             position: absolute;
-            margin-top: 250px;
+            margin-top: 222px;
             top: 50%;
-            margin-left: 45.5px;
+            margin-left: 105px;
         }
         .mouse {
             color: black;
@@ -426,7 +426,7 @@
                             resistance: 5,
                             width: 150,
                             height: 150,
-                            y_level: 0,
+                            y_level: 10,
                             health: 100
                         },
                         'goblin': {
@@ -435,7 +435,7 @@
                             resistance: 9,
                             width: 200,
                             height: 200,
-                            y_level: -30,
+                            y_level: -20,
                             health: 100
                         },
                         'big_goblin': {
@@ -460,7 +460,7 @@
                         this.enemy = enemies[this.type]                         
                     }
                     move() {
-                        ctx.clearRect(this.x,200+this.stats[this.type].y_level,this.stats[this.type].width,this.stats[this.type].height)
+                        ctx.clearRect(this.x,200+this.stats[this.type].y_level-10,this.stats[this.type].width,this.stats[this.type].height+10)
                         ctx.drawImage(this.enemy,this.x,200+this.stats[this.type].y_level,this.stats[this.type].width,this.stats[this.type].height)
                         this.y = 200+this.stats[this.type].y_level
                         this.x -= this.stats[this.type].sx
