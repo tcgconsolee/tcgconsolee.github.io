@@ -48,7 +48,7 @@
         .bg {
             height: 500px;
             width: 15904.1283px;
-            background: url(/images/backgroundnew.png) repeat-x;
+            background: url(/images/background.png) repeat-x;
             animation: slide 100s linear infinite;
             animation-play-state: paused;
         }
@@ -202,13 +202,13 @@
         let randimen = Math.floor(Math.random() * 100) + 200
             pClone.style.width = `${randimen * 0.30530973451}px`
             pClone.style.height = `${randimen}px`
-            pClone.style.marginTop=`${270 - (randimen - 200)}px`
-            pClone.style.marginLeft=`${430 - (randimen - 200)}px`
+            pClone.style.marginTop=`${233 - (randimen - 200)}px`
+            pClone.style.marginLeft=`${470 - (randimen - 200)}px`
         let i = 470 - (randimen - 200)
         var pDir = [180,0][Math.round(Math.random())]
         pClone.style.setProperty('--deg', `${pDir}deg`)
         if(pDir === 180) {
-        pClone.style.marginTop=`-33px`
+        pClone.style.marginTop=`-68px`
     }
             pClone.style.display = bird.style.display
             div.appendChild(pClone)
