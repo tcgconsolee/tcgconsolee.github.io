@@ -4,12 +4,129 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Redirecting...</title>
+    <link rel="icon" type="image/x-icon" href="/images/logo.png">
+    <style>
+        body {
+            background: black;
+            cursor: none;
+        }
+        .icon {
+            width: 100px;
+            height: 100px;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            margin-left: -50px;
+            margin-top: -50px;
+            animation: appear 1s ease
+        }
+        .particles {
+            width: 100px;
+            height: 50px;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            margin-left: -45px;
+            margin-top: -65px;
+            opacity: 0;
+            animation-duration: 1500ms;
+        }
+        @keyframes appear {
+            0% {
+		opacity: 0;
+		-webkit-transform: translate3d(0, 100%, 0);
+		transform: translate3d(0, 100%, 0);
+	}
+
+	to {
+		opacity: 1;
+		-webkit-transform: translateZ(0);
+		transform: translateZ(0);
+	}    
+}
+@keyframes pop-left {
+    0%{
+        margin-top: -85px;
+        margin-left: -75px;
+        transform: rotate(0deg);
+        opacity: 0
+    }
+    60% {
+        margin-top: -85px;
+        margin-left: -75px;
+        transform: rotate(0deg);
+        opacity: 0
+    }
+    61% {
+        opacity: 1
+    }
+    100% {
+        margin-top: -150px;
+        margin-left: -110px;
+        transform: rotate(-45deg);
+    }
+}
+@keyframes pop-right {
+    0%{
+        margin-top: -85px;
+        margin-left: -15px;
+        transform: rotate(0deg);
+        opacity: 0
+    }
+    60% {
+        margin-top: -85px;
+        margin-left: -15px;
+        transform: rotate(0deg);
+        opacity: 0
+    }
+    61% {
+        opacity: 1
+    }
+    100% {
+        margin-top: -150px;
+        margin-left: 30px;
+        transform: rotate(45deg);
+    }
+}
+@keyframes pop-straight {
+    0%{
+        margin-top: -85px;
+        margin-left: -45px;
+        transform: rotate(0deg);
+        opacity: 0
+    }
+    60% {
+        margin-top: -85px;
+        margin-left: -45px;
+        transform: rotate(0deg);
+        opacity: 0
+    }
+    61% {
+        opacity: 1
+    }
+    100% {
+        margin-top: -150px;
+        margin-left: -45px;
+        transform: rotate(45deg);
+    }
+}
+    </style>
 </head>
 <body>
+    <img class = "icon" src = "/images/logo.png" alt = "Logo">
+    <img class = "particles" id = "particles"src = "/images/star.png" alt = "Star">
     <script type = "text/javascript">
-        setTimeout(()=>{
-      window.location.href = "/home"
-        }, 1000)
-  </script>
+        const pleft = document.getElementById('particles')
+        const pright = pleft.cloneNode()
+        const pstraight = pleft.cloneNode()
+        document.body.appendChild(pright)
+        document.body.appendChild(pstraight)
+        pleft.style.animationName = 'pop-left'
+        pright.style.animationName = 'pop-right'
+        pstraight.style.animationName = 'pop-straight'
+        setTimeout(() => {
+            window.location.href="/home"
+        }, 1700)
+    </script>
 </body>
 </html>
