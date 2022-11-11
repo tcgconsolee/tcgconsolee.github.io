@@ -93,11 +93,12 @@
             flex-direction: column;
             content: attr(icon-content);
             justify-content: center;
-            align-items: center;
+            font-size: 15px;
             transition: width .5s ease;
+            overflow: hidden;
         }
         .icon:hover:after {
-            width: 300%;
+            width: 360%;
         }
         .box {
             background-image:linear-gradient(#444, black);
@@ -145,13 +146,16 @@
 </head>
 <body>
     <div class="mouse" id="mouse"></div>
-    <div class = "interactable icon" style="background-image:url(/images/discord.png);width: 100px;height:100px;position:fixed;left:20;top:20;background-position:center;border-radius:100%;" icon-content = "Discord" onclick = "window.open('//discord.com/invite/G7w4WTTKmE')"></div>
-    <div class = "interactable icon" style="background-image:url(/images/youtube.png);width: 100px;height:100px;position:fixed;left:20;top:140;background-position:center;border-radius:100%;" icon-content = "Youtube" onclick = "window.open('//www.youtube.com/channel/UCtrpyOBy-gKGe5M25aDl53Q')"></div>
-    <div class = "interactable icon" style="background-image:url(/images/controller.png);width: 100px;height:100px;position:fixed;left:20;top:260;background-position:center;border-radius:100%;background-size:cover" icon-content = "Games" onclick = "window.location.href = '/games'"></div>
+    <div class = "interactable icon" style="background-image:url(/images/discord.png);width: 50px;height:50px;position:fixed;left:20;top:20;background-position:center 7px;border-radius:100%;background-size:35px;background-color:rgb(18, 98, 227);background-repeat:no-repeat;" icon-content = "Discord" username = "theconsoleguy#1971"onclick = "window.open('//discord.com/invite/G7w4WTTKmE')"></div>
+    <div class = "interactable icon" style="background-image:url(/images/youtube.png);width: 50px;height:50px;position:fixed;left:20;top:90;background-position:center;border-radius:100%;background-size:200px;background-color:red" icon-content = "Youtube" onclick = "window.open('//www.youtube.com/channel/UCtrpyOBy-gKGe5M25aDl53Q')"></div>
+    <div class = "interactable icon" style="background-image:url(/images/playstation.png);width: 50px;height:50px;position:fixed;left:20;top:160;background-position:center;border-radius:100%;background-size:45px;background-repeat:no-repeat;background-color:white;" icon-content = "Playstation" username = "theconsoleguy_yt"  onclick = "window.open('//psnprofiles.com/theconsoleguy_yt')"></div>
+    <div class = "interactable icon" style="background-image:url(/images/github.png);width: 50px;height:50px;position:fixed;left:20;top:230;background-position:bottom;border-radius:100%;background-size:51px;background-repeat:no-repeat;background-color:white;" icon-content = "Github" username = "tcgconsolee" onclick = "window.open('//github.com/tcgconsolee')"></div>
+    <div class = "interactable icon" style="background-image:url(/images/gmail.png);width: 50px;height:50px;position:fixed;left:20;top:300;background-position:center;border-radius:100%;background-size:80px;background-repeat:no-repeat;background-color:white;" icon-content = "Gmail" username = "theconsoleguyyt@gmail.com" onclick = "window.open('//mail.google.com/mail/u/0/#inbox?compose=CrpPbDzHMmCsQRfpDSBgNkwRNkHnlVbGRDhVcflRJKZXXSQdFRBmTWKZgrxKhRTCgDNxQrHnlBJjMLCZxdQV')"></div>
+    <div class = "interactable icon" style="background-image:url(/images/controller.png);width: 50px;height:50px;position:fixed;left:20;top:370;background-position:center;border-radius:100%;background-size:cover" icon-content = "Games" onclick = "window.location.href = '/games'"></div>
     <div class = "box" style="border-radius:100%;width: 250px;height:250px;margin-left:479px;background-image:url(/images/logo.png);background-position:top;"></div>
     <div class = "box" style = "border-radius: 24px; width: 400px; height:50px; margin-left: 400px; font-size: 43px;color:white">I am <span class = "typing-prof"></span></div>
     <div class = "box" style = "border-radius: 24px;width:400px;height:60px;margin-left:400;color:white">I know <span class = "typing-lan"></span></div>
-    <div class = "box" style="border-radius:24px;width:400px;height:500px;position:absolute;left:66%;top:50;color:white"><header style="font-size:10vh;color:white;">HEY!</header>My name is Aakash, and i study in 7th standard. I am 13 years old and i love games, anime, coding, maths and physics.</div>
+    <div class = "box" style="border-radius:24px;width:400px;height:500px;position:absolute;left:65%;top:50;color:white;border:solid 10px white;"><header style="font-size:10vh;color:white;">HEY!</header>My name is Aakash, and i study in 7th standard. I am 13 years old and i love games, anime, coding, maths and physics.</div>
     <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
     <script type = "text/javascript">
         const typing_prof = {
