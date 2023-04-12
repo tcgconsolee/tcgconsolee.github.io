@@ -3,130 +3,583 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Redirecting...</title>
+    <title>Consolee - Portfolio</title>
     <link rel="icon" type="image/x-icon" href="/images/logo.png">
     <style>
-        body {
-            background: black;
+        @import url('https://fonts.googleapis.com/css2?family=Poor+Story&family=Teko:wght@500&display=swap');
+        html, body {
             cursor: none;
+            font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
+        body {
+            margin: 0px;
+            padding: 27px;
+            background-image: url(/images/webpage.png);
+            font-size: 21px;
+            text-align: center;
+        }
+
+        @media (min-width: 576px) {
+            body {width: 20%}
+            .box {margin: 10%}
+        }
+        @media (min-width: 768px) {
+            body {width: 40%}
+            .box {margin: 30%}
+        }
+        @media (min-width: 992px) {
+            body {width: 90%}
+            .box {margin: 100%}
+        }
+
+        ::selection {
+            background: none;
+            -webkit-text-stroke-color: goldenrod;
+            -webkit-text-stroke-width: 1.647px;
+            text-shadow: #FC0 1px 0px 15px;
+        }
+        .spewer {
+            background-image: url(/images/box.png);
+            position: absolute;
+            margin-left: 351px;
+            margin-top: -27px;
+            z-index: 9;
+            height: 500px;
+            width: 500px;
+            background-size: 500px;
+            background-repeat: no-repeat;
+            animation: popup 2s linear 1;
+        }
+        @keyframes popup {
+            0% { margin-top: -100px;}
+            60% { margin-top: -40px;}
+            100% {margin-top: -27px;}
+        }
+        .line {
+            height: 0px;
+            width:  0px;
+            border-bottom: 1px solid white;
+            position: absolute;
+            background: white;
+            animation: linein 3s forwards 1;
+            animation-delay: 2.5s;
+        }
+        .line#one {
+            transform: rotate(135deg);
+            transform-origin: 0;
+            margin-top: 28px;
+            margin-left: 463px;
+        }
+        .line#two {
+            transform: rotate(90deg);
+            transform-origin: 0;
+            margin-top: 28px;
+            margin-left: 600px;
+        }
+        .line#three {
+            transform: rotate(45deg);
+            transform-origin: 0;
+            margin-top: 28px;
+            margin-left: 739px;
+        }
+        @keyframes linein {
+            0% {width: 1px};
+            99.9% {width: 180px;}
+            100% {width: 180px;}
+        }
+        .square {
+            height: 0px;
+            width: 0px;
+            border-bottom: white 1px solid;
+            position: absolute;
+            background: white;
+        }
+        .square#one {
+            animation: outlinein 500ms forwards 1;
+            animation-delay: 5s;
+        }
+        .square.side1#two, .square.side3#two {
+            animation: outlineinv 500ms forwards 1;
+            animation-delay: 5.5s;
+        }
+        .square.side2#two {
+            animation: outlineinvmax 500ms forwards 1;
+            animation-delay: 5.5s;
+        }
+        .square#three {
+            animation: outlineinh 500ms forwards 1;
+            animation-delay: 6s;
+        }
+        .square.side1#four, .square.side3#four {
+            animation: outlineinv 500ms forwards 1;
+            animation-delay: 6.5s;
+        }
+        .square.side2#four {
+            animation: outlineinvmax 500ms forwards 1;
+            animation-delay: 6.5s;
+        }
+        .square#five {
+            animation: outlinein 500ms forwards 1;
+            animation-delay: 7s;
+        }
+        .square.side1#one {
+            margin-left: 337px;
+            margin-top: 156px;
+        }
+        .square.side1#two {
+            margin-left: 487px;
+            margin-top: 156px;
+            transform: rotate(90deg);
+            transform-origin: 0;
+        }
+        .square.side1#three {
+            margin-left: 487px;
+            margin-top: 231px;
+            transform: rotate(180deg);
+            transform-origin: 0;
+        }
+        .square.side1#four {
+            margin-left: 187px;
+            margin-top: 231px;
+            transform: rotate(270deg);
+            transform-origin: 0;
+        }
+        .square.side1#five {
+            margin-left: 187px;
+            margin-top: 156px;
+        }
+        .square.side2#one {
+            margin-left: 600px;
+            margin-top: 208px;
+        }
+        .square.side2#two {
+            margin-left: 750px;
+            margin-top: 208px;
+            transform: rotate(90deg);
+            transform-origin: 0;
+        }
+        .square.side2#three {
+            margin-left: 750px;
+            margin-top: 508;
+            transform: rotate(180deg);
+            transform-origin: 0;
+        }
+        .square.side2#four {
+            margin-left: 450px;
+            margin-top: 508px;
+            transform: rotate(270deg);
+            transform-origin: 0;
+        }
+        .square.side2#five {
+            margin-left: 450px;
+            margin-top: 208px;
+        }
+        .square.side3#one {
+            margin-left: 866px;
+            margin-top: 156px;
+        }
+        .square.side3#two {
+            margin-left: 1016px;
+            margin-top: 156px;
+            transform: rotate(90deg);
+            transform-origin: 0;
+        }
+        .square.side3#three {
+            margin-left: 1016px;
+            margin-top: 231px;
+            transform: rotate(180deg);
+            transform-origin: 0;
+        }
+        .square.side3#four {
+            margin-left: 716px;
+            margin-top: 231px;
+            transform: rotate(270deg);
+            transform-origin: 0;
+        }
+        .square.side3#five {
+            margin-left: 716px;
+            margin-top: 156px;
+        }
+        @keyframes outlinein {
+            0% {
+                width: 0px;
+            }
+            99.9% {
+                width: 150px;
+            }
+            100% {
+                width: 150px;
+            }
+        }
+        @keyframes outlineinh {
+            0% {
+                width: 0px;
+            }
+            99.9% {
+                width: 300px;
+            }
+            100% {
+                width: 300px;
+            }
+        }
+        @keyframes outlineinv {
+            0% {
+                width: 0px;
+            }
+            99.9% {
+                width: 75px;
+            }
+            100% {
+                width: 75px;
+            }
+        }
+        @keyframes outlineinvmax {
+            0% {
+                width: 0px;
+            }
+            99.9% {
+                width: 300px;
+            }
+            100% {
+                width: 300px;
+            }
+        }
+        .squarediv#one, .squarediv#three {
+            height: 75px;
+            width: 302px;
+            margin-top: 156.5px;
+            font-size: 6vh
+        }
+        .squarediv#two {
+            height: 301px;
+            width: 302px;
+            z-index: 3;
+        }
+        .squarediv {
+            position: absolute;
+            animation: fadein 1s forwards 1;
+            animation-delay: 7.5s;
+            background-image:linear-gradient(black, #444);
+            opacity: 0;
+            font-family: 'Poor Story', cursive;
+            color: white;
+            font-size: 5vh;
+        }
+        .squarediv#one {
+            
+            margin-left: 186px;
+        }
+        .squarediv#two {
+            margin-top: 208.5px;
+            margin-left: 449px;
+        }
+        .squarediv#three {
+            margin-left: 715px;
+        }
+        @keyframes fadein {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+        .arrow {
+            position: absolute;
+            background-image: url(/images/arrow.png);
+            background-repeat: no-repeat;
+            background-size: contain;
+            margin-left: 950px;
+            margin-top: -30px;
+            height: 50px;
+            width: 100px;
+            border-radius: 25%;
+            opacity: 0;
+            animation: fadein 1s forwards 1;
+            z-index:4;
+        }
+        .gamesmenu {
+            height: 500px;
+            width: 200px;
+            background-image: linear-gradient(black, #444);
+            position: absolute;
+            margin-left: 895px;
+            margin-top: -530px;
+            z-index:4;
+            font-family: 'Poor Story', cursive;
+            color: white;
+            font-size: 4vh;
+        }
+        a {     
+            color: white;
+            float: left;
+            position: relative;
+            z-index: 5;
+            margin-top: 18;
+            text-decoration: none;
+            cursor: none;
+            width: 120px;
+            text-align: center;
+        }
+        a:after {
+          content: '';
+          position: absolute;
+          width: 0;
+          height: 2px;
+          display: block;
+          margin-top: 0px;
+          left: 0%;
+          background: white;
+          transition: width .3s ease;
+        }
+        a:hover:after {
+           width: 100%;
+           left: 0%;
+           background: white;
         }
         .icon {
-            width: 100px;
-            height: 100px;
-            position: fixed;
-            left: 50%;
-            top: 50%;
-            margin-left: -50px;
-            margin-top: -50px;
-            animation: appear 1s ease
+            background-position:center;
+            transform-style: preserve-3d;
         }
-        .particles {
-            width: 100px;
-            height: 50px;
-            position: fixed;
-            left: 50%;
-            top: 50%;
-            margin-left: -45px;
-            margin-top: -65px;
-            opacity: 0;
-            animation-duration: 1500ms;
+        .icon:after {
+            width:100%;
+            height:100%;
+            border-radius:100px;
+            position:absolute;
+            transform: translateZ(-1px);
+            left: 0px;
+            top: 0px;
+            background-color:white;
+            display: flex;
+            flex-direction: column;
+            content: attr(icon-content);
+            justify-content: center;
+            font-size: 15px;
+            transition: width .5s ease;
+            overflow: hidden;
         }
-        @keyframes appear {
-            0% {
-		opacity: 0;
-		-webkit-transform: translate3d(0, 100%, 0);
-		transform: translate3d(0, 100%, 0);
-	}
+        .icon:hover:after {
+            width: 360%;
+        }
+        .mouse {
+            color: black;
+            height: 20px;
+            width: 20px;
+            border-radius: 100%;
+            background-color: whitesmoke;
+            position: fixed;
+            left: 180px;
+            top: 180px;
+            cursor: none;
+            z-index: 10;
+            mix-blend-mode:difference;
+            pointer-events: none;
+        }
+        ::-webkit-scrollbar {
+            width: 15px;
+            cursor: none;
+            z-index: 7
+        }
 
-	to {
-		opacity: 1;
-		-webkit-transform: translateZ(0);
-		transform: translateZ(0);
-	}    
-}
-@keyframes pop-left {
-    0%{
-        margin-top: -85px;
-        margin-left: -75px;
-        transform: rotate(0deg);
-        opacity: 0
-    }
-    60% {
-        margin-top: -85px;
-        margin-left: -75px;
-        transform: rotate(0deg);
-        opacity: 0
-    }
-    61% {
-        opacity: 1
-    }
-    100% {
-        margin-top: -150px;
-        margin-left: -110px;
-        transform: rotate(-45deg);
-    }
-}
-@keyframes pop-right {
-    0%{
-        margin-top: -85px;
-        margin-left: -15px;
-        transform: rotate(0deg);
-        opacity: 0
-    }
-    60% {
-        margin-top: -85px;
-        margin-left: -15px;
-        transform: rotate(0deg);
-        opacity: 0
-    }
-    61% {
-        opacity: 1
-    }
-    100% {
-        margin-top: -150px;
-        margin-left: 30px;
-        transform: rotate(45deg);
-    }
-}
-@keyframes pop-straight {
-    0%{
-        margin-top: -85px;
-        margin-left: -45px;
-        transform: rotate(0deg);
-        opacity: 0
-    }
-    60% {
-        margin-top: -85px;
-        margin-left: -45px;
-        transform: rotate(0deg);
-        opacity: 0
-    }
-    61% {
-        opacity: 1
-    }
-    100% {
-        margin-top: -150px;
-        margin-left: -45px;
-        transform: rotate(45deg);
-    }
-}
+        ::-webkit-scrollbar-track {
+            box-shadow: inset 0 0 10px crimson;
+            border-radius: 10px;
+            cursor: none;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background:crimson;
+            border-radius: 15px;
+            cursor: none;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: darkred;
+        }
     </style>
 </head>
 <body>
-    <img class = "icon" src = "/images/logo.png" alt = "Logo">
-    <img class = "particles" id = "particles"src = "/images/star.png" alt = "Star">
+    <div class="mouse" id="mouse"></div>
+    <div class ="interactable arrow" id = "arrow"></div>
+    <div class = "gamesmenu" id = "gamemenu"><header style="font-size:8vh;color:white;">Games</header><a href = "games/blob_fight" class = "interactable">Blob Fight</a><a href = "games/snake_game" class = "interactable">Snake Game</a><a href = "games/flappy_bird" class = "interactable">Flappy Bird</a><a href = "games/hangman" class = "interactable">Hangman</a></div>
+    <div class ="spewer"id="spewbox"></div>
+    <div class = "line" id = "one"></div>   
+    <div class = "line" id = "two"></div> 
+    <div class = "line" id = "three"></div>
+    <div class = "square side1" id = "one"></div>
+    <div class = "square side1" id = "two"></div>
+    <div class = "square side1" id = "three"></div>
+    <div class = "square side1" id = "four"></div>
+    <div class = "square side1" id = "five"></div>
+    <div class = "square side2" id = "one"></div>
+    <div class = "square side2" id = "two"></div>
+    <div class = "square side2" id = "three"></div>
+    <div class = "square side2" id = "four"></div>
+    <div class = "square side2" id = "five"></div>
+    <div class = "square side3" id = "one"></div>
+    <div class = "square side3" id = "two"></div>
+    <div class = "square side3" id = "three"></div>
+    <div class = "square side3" id = "four"></div>
+    <div class = "square side3" id = "five"></div>
+    <div class = "squarediv" id = "one">I am <span class = "typing-prof"></span></div>
+    <div class = "squarediv" id = "two"><header style="font-size:10vh;color:white;">HEY!</header>My name is Aakash, and i study in 8th standard. I am 13 years old and i love games, anime, coding, maths and physics.</div>
+    <div class = "squarediv" id = "three">I know <span class = "typing-lan"></span></div>
+    <div class = "interactable icon" style="background-image:url(/images/discord.png);width: 50px;height:50px;position:fixed;left:20;top:20;background-position:center 7px;border-radius:100%;background-size:35px;background-color:rgb(18, 98, 227);background-repeat:no-repeat;" icon-content = "Discord" username = "theconsoleguy#1971"onclick = "window.open('//discord.com/invite/G7w4WTTKmE')"></div>
+    <div class = "interactable icon" style="background-image:url(/images/youtube.png);width: 50px;height:50px;position:fixed;left:20;top:90;background-position:center;border-radius:100%;background-size:200px;background-color:red" icon-content = "Youtube" onclick = "window.open('//www.youtube.com/channel/UCtrpyOBy-gKGe5M25aDl53Q')"></div>
+    <div class = "interactable icon" style="background-image:url(/images/playstation.png);width: 50px;height:50px;position:fixed;left:20;top:160;background-position:center;border-radius:100%;background-size:45px;background-repeat:no-repeat;background-color:white;" icon-content = "Playstation" username = "theconsoleguy_yt"  onclick = "window.open('//psnprofiles.com/theconsoleguy_yt')"></div>
+    <div class = "interactable icon" style="background-image:url(/images/github.png);width: 50px;height:50px;position:fixed;left:20;top:230;background-position:bottom;border-radius:100%;background-size:51px;background-repeat:no-repeat;background-color:white;" icon-content = "Github" username = "tcgconsolee" onclick = "window.open('//github.com/tcgconsolee')"></div>
+    <div class = "interactable icon" style="background-image:url(/images/gmail.png);width: 50px;height:50px;position:fixed;left:20;top:300;background-position:center;border-radius:100%;background-size:80px;background-repeat:no-repeat;background-color:white;" icon-content = "Gmail" username = "theconsoleguyyt@gmail.com" onclick = "window.open('//mail.google.com/mail/u/0/#inbox?compose=CrpPbDzHMmCsQRfpDSBgNkwRNkHnlVbGRDhVcflRJKZXXSQdFRBmTWKZgrxKhRTCgDNxQrHnlBJjMLCZxdQV')"></div>
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
     <script type = "text/javascript">
-        const pleft = document.getElementById('particles')
-        const pright = pleft.cloneNode()
-        const pstraight = pleft.cloneNode()
-        document.body.appendChild(pright)
-        document.body.appendChild(pstraight)
-        pleft.style.animationName = 'pop-left'
-        pright.style.animationName = 'pop-right'
-        pstraight.style.animationName = 'pop-straight'
-        setTimeout(() => {
-            window.location.href="/home"
-        }, 1700)
+        const typing_prof = {
+            strings: [
+                "a Webdev",
+                "a Gamedev",
+                "a Designer",
+                "a Youtuber", 
+                "an Epic Gamer",
+                "a Middle Schooler"
+            ],
+            typeSpeed: 150,
+            backSpeed: 150,
+            smartBackspace: true,
+            loop: true
+        }
+        const typing_lan = {
+            strings: [
+                "HTML",
+                "Javascript",
+                "CSS",
+                "Python",
+                "Typescript",
+                "Java"
+            ],
+            typeSpeed: 150,
+            backSpeed: 150,
+            loop: true
+        }
+        var typed_lan = new Typed(".typing-lan", typing_lan)
+        var typed_prof = new Typed(".typing-prof", typing_prof)
+    </script>
+    <script>
+        let gamemenu = document.getElementById("gamemenu")
+        let arrow = document.getElementById("arrow")
+        let games = 0;
+        const slidein = [
+            {
+                marginTop: "-30px"
+            },
+            {
+                marginTop: "457px"
+            }
+        ]
+        const slideingames = [
+            {
+                marginTop: "-530px"
+            },
+            {
+                marginTop: "-30px"
+            }
+        ]
+        const slideout = [
+            {
+                marginTop: "457px"
+            },
+            {
+                marginTop: "-30px"
+            }
+        ]
+        const slideoutgames = [
+            {
+                marginTop: "-30px"
+            },
+            {
+                marginTop: "-530px"
+            }
+        ]
+        const slideduration = {
+            duration: 1000,
+            iterations: 1,
+            fill: "forwards"
+        }
+        arrow.addEventListener("click", () => {
+            if(games === 0) {
+                gamemenu.animate(slideingames, slideduration)
+                games = 1
+                arrow.animate(slidein, slideduration)
+                arrow.style.transform = "scaleY(-1)"
+            } else {
+                gamemenu.animate(slideoutgames, slideduration)
+                games = 0
+                arrow.animate(slideout, slideduration)
+                arrow.style.transform = "scaleY(1)"
+            }
+        })
+    </script>
+    <script type = "text/javascript">
+        const mouse = document.getElementById('mouse')
+        const interactables = document.getElementsByClassName('interactable')
+        const mouse_duration = {
+            duration: 150,
+            iterations: 1
+        }
+        const mousedown = [
+            {
+                transform: "scale(1) rotate(0deg)"
+            },
+            {
+                transform: "scale(2) rotate(45deg)"
+            }
+        ]
+        const mouseup = [
+            {
+                transform: "scale(2) rotate(45deg)"
+            },
+            {
+                transform: "scale(1) rotate(0deg)"
+            }
+        ]
+        window.addEventListener('mousedown', (e) => {
+            mouse.animate(mousedown, mouse_duration)
+            mouse.style.transform = "scale(2) rotate(45deg)"
+            mouse.style.borderRadius = "30%"
+        })
+        window.addEventListener('mouseup', (e) => {
+            mouse.animate(mouseup, mouse_duration)
+            mouse.style.transform = "scale(1) rotate(0deg)"
+            mouse.style.borderRadius = "100%"
+        })
+        window.addEventListener('mousemove', (e) => {
+            mouse.style.left = ((e.clientX) - 10) + "px"; 
+            mouse.style.top = ((e.clientY) - 10) + "px";
+        })
+        const mouseenter = [
+            {
+                transform: "scale(1)"
+            },
+            {
+                transform: "scale(2)"
+            }
+        ]
+        const mouseleave = [
+            {
+                transform: "scale(2)"
+            },
+            {
+                transform: "scale(1)"
+            }
+        ]
+        for(let i = 0; i< interactables.length; i++) {
+        interactables[i].addEventListener('mouseenter', (e) => {
+            mouse.style.borderRadius = "30%"
+            mouse.animate(mouseenter, mouse_duration)
+            mouse.style.transform = "scale(2)"
+        })
+        interactables[i].addEventListener('mouseleave', (e) => {
+            mouse.style.borderRadius = "100%"
+            mouse.animate(mouseleave, mouse_duration)
+            mouse.style.transform = "scale(1)"
+        })
+    }
     </script>
 </body>
 </html>
