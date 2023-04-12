@@ -112,29 +112,10 @@
             width: 48px;
             height: 48px;
             margin-top: 200px;
-            background-color: black;
+            background-image: url(/images/blob.png);
             display: inline-flex;
-            z-index: 55;
+            z-index: 55
         }
-        .eye-left {
-            width: 10px;
-            height: 10px;
-            margin-bottom: 30px;
-            margin-left: -45px;
-            background-color: orangered;
-            display: inline-flex;
-            z-index: 60;
-        }
-        .eye-right {
-            width: 10px;
-            height: 10px;
-            margin-bottom: 30px;
-            margin-left: 10px;
-            background-color: orangered;
-            display: inline-flex;
-            z-index: 60;
-        }
-
         .enemy {
             width: 100px;
             height: 100px;
@@ -150,7 +131,7 @@
             background-color: teal;
             border-radius: 50px;
             display: inline-block;
-            z-index: -10;
+            z-index: -999;
         }
         .platform {
             width: 1000px;
@@ -194,27 +175,35 @@
 }, false);
     </script>
     <div class = "screen" id = "screen">
-    <div class="player"id="player" health = "100"><img id = "sword" style = "display:none;-webkit-transform:rotate(var(--deg));-moz-transform: rotate(var(--deg));-ms-transform: rotate(var(--deg));-o-transform: rotate(var(--deg));transform: rotate(var(--deg));">
-    </div>
-    <div class = "eye-left"></div><div class = "eye-right"></div></div> 
+    <div class="player"id="player" health = "100"><img id = "sword" style = "display:none;z-index:0;-webkit-transform:rotate(var(--deg));-moz-transform: rotate(var(--deg));-ms-transform: rotate(var(--deg));-o-transform: rotate(var(--deg));transform: rotate(var(--deg));">
+    </div></div> 
     <div class = "platform" id = "platform"></div>
     <canvas id = "enemyPlane" width ="1000" height="500" style="margin-top:-500px;"></canvas>
     <img src = "/images/zombie.png" id = "zombie" style="display:none;">
     <img src = "/images/goblin.png" id = "goblin" style="display:none;">
     <img src = "/images/big_goblin.png" id = "big_goblin" style="display:none;">
     <script type = "text/javascript">
-        alert('F Key to Use Sword')
+const barHeight = (window.outerHeight - window.innerHeight)
+        let combo = false
+        let key = (prompt('Enter Below The Key To Use Sword || Default Key Is F').toUpperCase()).charAt(0)
+        if(!key) {
+            key = 'F'
+        }
+        if(Number(key)) {
+            alert('Key is F as number keys are not allowed!')
+            key = 'F'
+        }
         let canvas = document.getElementById('enemyPlane')
         let ctx = canvas.getContext('2d')
-        class HealthBar {
-                    constructor(x,y,w,h,maxHealth,color) {
+        class Bar {
+                    constructor(x,y,w,h,maxCounter,color) {
                         this.x = x;
                         this.y = y;
                         this.w = w;
                         this.h = h;
-                        this.maxHealth = maxHealth;
+                        this.maxCounter = maxCounter;
                         this.maxWidth = w;
-                        this.health = maxHealth;
+                        this.counter = maxCounter;
                         this.color = color;
                         ctx.lineWidth=4;
                         ctx.strokeStyle='#333';
@@ -223,10 +212,10 @@
                         ctx.strokeRect(this.x,this.y,this.maxWidth,this.h)
                     }
 
-                    dmg(val) {
-                        this.health = val;
+                    setBarMeasure(val) {
+                        this.counter = val;
                         ctx.clearRect(this.x,this.y,this.maxWidth+10,this.h+10)
-                        this.w = (this.health/this.maxHealth) * this.maxWidth
+                        this.w = (this.counter/this.maxCounter) * this.maxWidth
                         ctx.fillStyle=this.color
                         ctx.fillRect(this.x,this.y,this.w,this.h)
                         ctx.strokeRect(this.x,this.y,this.maxWidth,this.h)
@@ -244,7 +233,11 @@
                         ctx.clearRect(this.x-12,this.y-12,this.maxWidth+30,this.h+30)
                     }                    
                 }
-        var playerHealth = new HealthBar(24,24,120,20,100,'red')
+        var playerHealth = new Bar(24,24,120,20,100,'red')
+        function playerDeath () {
+            alert("You died! Press OK to return back to /games!")
+                        window.location.href = "/games"
+        }
         const vision = document.getElementById('screen')
         const plane = document.getElementById('platform')
         const spritePlayer = document.getElementById('player')
@@ -261,6 +254,10 @@
             sx: 0,
             sy: 0
         }
+        function launchPlayer(increase) {
+            player.sx += increase
+            player.sy-= 10
+        }
         class Sword {
             constructor(x,y,style) {
                 this.x = x;
@@ -270,6 +267,7 @@
                 this.sword.src = `/images/${this.style}.png`
                 this.sword.style.display = ''
                 this.sword.style.setProperty('--deg', '180deg')
+                this.mode = 'idle'
                 this.manage()
             }
 
@@ -277,26 +275,93 @@
                 var deg = 180
                 deg += this.tilt
                 this.sword.style.setProperty('--deg', `${deg}deg`)
+                this.playerX = Math.round((player.x+860)/2-23)
+                this.playerY = Math.round(player.y + 3)
                 setTimeout(()=>{this.manage()},1)
             }
             tilt = 1;
             styleset() {
                 this.sword.src = `/images/${this.style}.png`
             }
+
+            duration = {//duration
+                sheath: {
+                    duration: 300,
+                    iterations:1
+                },
+                slide: {
+                    duration: 1000,
+                    iterations: 1
+                },
+                swordUsage: {
+                    duration: 600,
+                    iterations: 1
+                }
+            }
+            slash = [//slash
+                {
+                    transform: 'rotate(45deg)',
+                    marginLeft: '30px'
+                },
+                {
+                    transform: 'rotate(-90deg)',
+                    marginLeft: '40px'
+                },
+                {
+                    transform: 'rotate(-135deg)',
+                    marginLeft: '30px'
+                }
+            ]
+            slide = [//slide
+            {   
+                                marginLeft: '30px',
+                                transform: 'rotate(-135deg)'
+                            },
+                            {
+                                marginLeft: '0px',
+                                transform: 'rotate(-180deg)'
+                            }
+            ]
+            sheath = [//sheath
+            {
+                    transform: 'rotate(180deg)',
+                    marginLeft: '0px'
+                },
+                {
+                    transform: 'rotate(45deg)',
+                    marginLeft: '30px'
+                }
+        ]
+        hit() {
+            if(this.mode === 'idle') {
+            this.mode = 'slashing'
+            this.sword.animate(this.sheath, this.duration.sheath)
+            setTimeout(() => {
+            this.sword.animate(this.slash, this.duration.swordUsage)
+            setTimeout(() => {
+                this.sword.animate(this.slide, this.duration.sheath)
+                setTimeout(() => {
+            this.mode = 'idle'
+                }, this.duration.sheath.duration)
+            }, this.duration.swordUsage.duration)
+            }, this.duration.sheath.duration)
         }
+        }
+        dmg = 50
+    } 
         let sword = new Sword(100, 100, 'sword')
         document.addEventListener('keydown', function(e) {
             moving++
             if(e.keyCode === 37) {
+                console.log(37)
                 player.sx -= gridlock/3
             }
             else if(e.keyCode === 39) {
                 player.sx += gridlock/3
             }
-            else if(e.keyCode === 38 && hit === false) {
+            if(e.keyCode === 38 && hit === false && jumping < 1) {
                 jumping = 1
-                player.sy -= gridlock/3
-                jumping = 0
+                player.sy = -24
             }
             moving = 0
         })
@@ -304,9 +369,11 @@
         function loop() {
             requestAnimationFrame(loop)
 
-            if(collision(spritePlayer, plane, jumping)<1) {
+            if(collision(spritePlayer, plane)<1) {
             hit = false
             player.sy++
+            } else {
+                jumping = 0
             }
 
             if(++enemyspawn > spawntime) {
@@ -317,6 +384,7 @@
 
             player.dx = player.sx * (1/3)
             player.dy = player.sy * (1/3)
+            spritePlayer.style.transform = `scaleX(${((player.dx/gridlock))+ ((player.sx/(Math.abs(player.sx))))})`
             player.x += player.dx
             player.y += player.dy
         spritePlayer.style.marginTop=String(player.y) + 'px'
@@ -331,7 +399,6 @@
             if(player.sy > 0) {
                 jumping = 1
                 player.sy=player.sy-0.5
-                jumping = 0
             }
             else if (player.sy < 0) {
                 player.sy=player.sy+0.5
@@ -355,8 +422,8 @@
         if(player.x<-968) {
             player.x = 960
         }
-        if(player.y>306.1) {
-            player.y = 306.1
+        if(player.y>399.1) {
+            player.y = -5.1
         }
         if(player.y<-5.2) {
             player.y = -5.2
@@ -367,19 +434,19 @@
     requestAnimationFrame(loop)
         </script>
         <script type = "text/javascript">
-            function collision(p, b, j) {
-                let standing = 0;
+            function collision(p, b) {
+                let standing = 1;
                 let al = false;
 
                 let pw = Number((getComputedStyle(p).width).split("px")[0])/2;
                 let ph = Number((getComputedStyle(p).height).split("px")[0])/2;
-                let bw = Number((getComputedStyle(b).width).split("px")[0])/2;
+                let bw = Number((getComputedStyle(b).width).split("px")[0])+50;
                 let bh = Number((getComputedStyle(b).height).split("px")[0])/2;
 
                 let px = Number((getComputedStyle(p).marginLeft).split("px")[0]);
-                let py = Number((getComputedStyle(p).marginTop).split("px")[0]) -60;
+                let py = (((Number((getComputedStyle(p).marginTop).split("px")[0])+barHeight)-163)-((barHeight - 103)/2));
                 let bx = Number((getComputedStyle(b).marginLeft).split("px")[0]);
-                let by = Number((getComputedStyle(b).marginTop).split("px")[0]) + 5;
+                let by = Number((getComputedStyle(b).marginTop).split("px")[0])+5;
 
                 let lcol = px + pw > bx - bw
                 let rcol = px - pw < bx + bw
@@ -387,27 +454,52 @@
                 let bcol = py - ph < by + bh
 
                 if(lcol && rcol && tcol && bcol) {
-                    colliding = 1
-                } else {
-                    if(j < 1) {
-                    colliding = 0
+                    standing = 1
+                if(player.y < by + (ph*(3.5+((barHeight - 103)/-51.333333333333333)))) {
+                        player.y++
+                    } else if (player.y>by+(ph*(3.5+((barHeight - 103)/-51.333333333333333)))) {
+                        player.y--
                     }
+                    
+                } else {
+                    standing = 0
                 }
-                return colliding;
+                return standing;
             }
         </script>
         <script type = "text/javascript">
+            let charged = false;
+            let currentSword;
                         let count = 0;
+                        const sqreturn = [
+                            {
+                                marginLeft: spritePlayer.style.marginLeft
+                            },
+                            {
+                                marginLeft: '-668px'
+                            }
+                        ]
+                        const durreturn = {
+                            duration: 500,
+                            iterations: 1
+                        }
                         function full_charge() {
-                            
-                            ctx.fillStyle = '#555'
-                            ctx.fillRect(this.playerX,this.playerY,10,10)
-                            ctx.fillRect(0,0,canvas.width,100)
-                            ctx.fillRect(0,canvas.height-100,canvas.width,100)
-                            player.sx = 100 
+                                spritePlayer.animate(sqreturn, durreturn)
+                            setTimeout(() => {
+                                player.x = -668
+                                ctx.moveTo(10, 320)
+                                setTimeout(() => {
+                            player.x += 1500
+                            ctx.lineTo(900, 320)
+                            ctx.fillStyle = 'teal'
+                            ctx.stroke()
+                            sword.sword.animate(sword.slide, sword.duration.slide)
                             setTimeout(() => {
                             ctx.clearRect(0,0,canvas.width,canvas.height)
-                            }, 2000)                            
+                            vision.style.backgroundColor = 'teal'
+                            }, 1500)
+                        }, 1000)
+                        }, 500)
                         }
 
             class Enemy {
@@ -457,9 +549,12 @@
                         }
                         ctx.drawImage(enemies[this.type], x, 200, 150, 150)
                         this.x = x;
-                        this.enemy = enemies[this.type]                         
+                        this.enemy = enemies[this.type]  
+                        let hitting = 0                       
                     }
                     move() {
+                        if(charged === false) {
+                            
                         ctx.clearRect(this.x,200+this.stats[this.type].y_level-10,this.stats[this.type].width,this.stats[this.type].height+10)
                         ctx.drawImage(this.enemy,this.x,200+this.stats[this.type].y_level,this.stats[this.type].width,this.stats[this.type].height)
                         this.y = 200+this.stats[this.type].y_level
@@ -469,16 +564,18 @@
                         } else if (this.playerX<this.x - 24) {
                             this.stats[this.type].sx = Math.abs(this.stats[this.type].sx)
                         } else {
-                            if(this.slashing === true) {
-                            this.stats[this.type].health -= (50/this.stats[this.type].resistance) * this.stancePower
-                            this.slashing = false
-                            } else {
-                                playerHealth.dmg(playerHealth.health - this.stats[this.type].dmg)
-                                if(playerHealth.health<1) {
-                                    alert('You failed! Will return to /games  when you click OK')
-                                    window.location.href='../games'
-                                }
+                            if(this.playerY<this.y - 100 || this.playerY>this.y + 100) {
+                                playerHealth.setBarMeasure(playerHealth.counter - this.stats[this.type].dmg)
+                            if(playerHealth.counter < 1) {
+                                playerDeath()
                             }
+                            } else {                                
+                            if(this.slashing === true) {
+                            this.stats[this.type].health -= (sword.dmg/this.stats[this.type].resistance) * this.stancePower
+                            sword.hit()
+                            this.slashing = false
+                            }
+                        }
                         }
                         this.playerX = Math.round((player.x+860)/2-23)
                         this.playerY = Math.round(player.y + 3)
@@ -490,18 +587,16 @@
                             this.healthbar.dead()
                             return;
                         }
-                        document.onkeydown = (e) => {
-                            if(e.code === 'KeyF') {
-                                this.slash()
-                            }
-                        }
                         this.manageHealth()
+                    } else {
+                        this.stats[this.type].health = 0
+                    }
                 setTimeout(() => {this.move()},1)
                     }
 
                     manageHealth() {
                         this.healthbar.pos(this.x-(this.stats[this.type].y_level-40),this.y-30)
-                        this.healthbar.dmg(this.stats[this.type].health)
+                        this.healthbar.setBarMeasure(this.stats[this.type].health)
                     }
 
                     slash() {
@@ -509,16 +604,29 @@
                         if(this.playerX>(this.x + this.stats[this.type].sx) + 24 || this.playerX<this.x - 24) {
                             this.stancePower+= 0.25
                             if(this.stancePower>35) {
+                                vision.style.backgroundColor = '#555'
                                 ctx.fillStyle='#555'
                                 this.stancePower=35
                                 sword.style='sword_full'
                                 sword.styleset()
+                                if(charged === false) {
                                 full_charge()
+                                charged = true;
+                                setTimeout(() => {
+                                    charged=false
+                                }, 3500)
+                                } else {
+                                    return;
+                                }
                             } else {
                                 sword.style='sword'
                                 sword.styleset()
                             }
                             sword.tilt = this.stancePower
+                            if(this.stancePower<2 && charged === false) {
+                                sword.hit()
+                                this.stancePower=3
+                             }
                     }
                 }
             }
@@ -527,10 +635,29 @@
                 var typelist = ['zombie','zombie','zombie','zombie','zombie', 'goblin','goblin','goblin', 'big_goblin','big_goblin']
                 var ranint = Math.floor(Math.random() * (typelist.length - 1))
                 var type = typelist [ranint]
-                var enemyHealth = new HealthBar(875, 300, 60, 10, 100, 'green')
+                var enemyHealth = new Bar(875, 300, 60, 10, 100, 'green')
                 var enemy = new Enemy(type, enemyHealth)
                 enemy.create(875)
-                enemy.move()                
+                enemy.move()
+                document.addEventListener('keydown', (e) => {
+                    if(charged) {
+                        sword.tilt = 0;
+                        enemy.stancePower=1;
+                        return;
+                    }
+                            if(e.code === `Key${key}`) {
+                                enemy.slash()
+                                if(enemy.playerX>(enemy.x + enemy.stats[enemy.type].sx) + 24) {} else if (enemy.playerX<enemy.x - 24) {} else {
+                            enemy.stats[enemy.type].health-=sword.dmg
+                        }
+                            }
+                        })
+                document.addEventListener('keyup', (e) => {
+                    if(e.code === `Key${key}`) {
+                        enemy.stancePower = 0
+                        sword.tilt = 0
+                    }
+                })
             }
         </script>         
     <script type = "text/javascript">
