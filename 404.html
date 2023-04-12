@@ -15,6 +15,10 @@
             cursor: none;
             font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
         }
+        ::selection {
+            background: none;
+            text-decoration: underline;
+        }
         .mouse {
             color: black;
             height: 20px;
@@ -99,6 +103,26 @@
             border-radius: 25px;
             display: inline-block
         }
+        .blur-box {
+            width: 50px;
+            height: 50px;
+            background: rgba(47, 47, 47, 0.04);
+            backdrop-filter: blur(3px);
+            margin-top: -40px;
+            animation: blur 6s forwards infinite
+        }
+
+        @keyframes blur {
+            0% {
+                margin-left: 25%;
+            }
+            50% {
+                margin-left: 70%;
+            }
+            100% {
+                margin-left: 25%;
+            }
+        }
     </style>
 </head>
 <body>
@@ -173,7 +197,11 @@
         })
     }
     </script>
-    <h1><br>This Page Was Not Found!</h1>
+    <h1 class = "title">
+        <br>
+        This Page Was Not Found!
+        <div class ="blur-box"></div>
+    </h1>
     <div class="box" id="box">
         <h3 style = "color:whitesmoke">This page is invalid and thus not found. <br>If you believe the path is valid, try waiting for some time and refreshing the page.</h3><h3 style="font-size:medium;float:right;color:whitesmoke;margin-top:0px;margin-right:10px;">Return to home?<br>Click the link in the menu!</h3>
 
