@@ -3,9 +3,6 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="author" content="Consolee || Aakash">
-    <meta name="description" content="Just a rando who decided to make a website and learn coding for fun :)">
-    <meta name="keywords" content="Console, consolee, tkconsolee, consolee.tk, portfolio">
     <title>Consolee - Portfolio</title>
     <link rel="icon" type="image/x-icon" href="/images/logo.png">
     <style>
@@ -15,26 +12,60 @@
             font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
         }
         body {
-            margin: 0px;
+            margin: 0em;
             padding: 27px;
             background-image: url(/images/webpage.png);
             font-size: 21px;
             text-align: center;
         }
-
-        @media (min-width: 576px) {
-            body {width: 20%}
-            .box {margin: 10%}
+        @media screen and (min-width: 100px) {
+            .animation {
+                margin-left: -7.5em
+            }
+            .arrow {
+                display: none;
+                pointer-events: none;
+            }
         }
-        @media (min-width: 768px) {
-            body {width: 40%}
-            .box {margin: 30%}
+        @media screen and (min-width: 300px) {
+            .animation {
+                margin-left: -6.8em
+            }
         }
-        @media (min-width: 992px) {
-            body {width: 90%}
-            .box {margin: 100%}
+        @media screen and (min-width: 600px) {
+            .animation {
+                margin-left: -3em
+            }
         }
-
+        @media screen and (min-width: 1000px) {
+            .animation {
+                margin-left: 0em
+            }
+            .arrow {
+                display: block;
+                pointer-events: all;
+            }
+        }
+        @media screen and (min-width: 1300px) {
+            .containfull {
+                margin-left: 5em;
+            }
+        }
+        @media screen and (min-width: 1500px) {
+            .containfull {
+                margin-left: 8em;
+            }
+        }
+        @media screen and (min-width: 1750px) {
+            .containfull {
+                margin-left: 13em;
+            }
+        }
+        @media screen and (min-width: 2000px) {
+            .containfull {
+                margin-left: 18em;
+            }
+        }
         ::selection {
             background: none;
             -webkit-text-stroke-color: goldenrod;
@@ -44,8 +75,8 @@
         .spewer {
             background-image: url(/images/box.png);
             position: absolute;
-            margin-left: 351px;
-            margin-top: -27px;
+            margin-left: 16.8em;
+            margin-top: -1.5em;
             z-index: 9;
             height: 500px;
             width: 500px;
@@ -54,14 +85,14 @@
             animation: popup 2s linear 1;
         }
         @keyframes popup {
-            0% { margin-top: -100px;}
-            60% { margin-top: -40px;}
-            100% {margin-top: -27px;}
+            0% { margin-top: -50em;}
+            60% { margin-top: -3em;}
+            100% {margin-top: -1.5em;}
         }
         .line {
-            height: 0px;
-            width:  0px;
-            border-bottom: 1px solid white;
+            height: 0em;
+            width:  0em;
+            border-bottom: 0.05em solid white;
             position: absolute;
             background: white;
             animation: linein 3s forwards 1;
@@ -70,30 +101,30 @@
         .line#one {
             transform: rotate(135deg);
             transform-origin: 0;
-            margin-top: 28px;
-            margin-left: 463px;
+            margin-top: 1.2em;
+            margin-left: 22.2em;
         }
         .line#two {
             transform: rotate(90deg);
             transform-origin: 0;
-            margin-top: 28px;
-            margin-left: 600px;
+            margin-top: 1.2em;
+            margin-left: 28.6em;
         }
         .line#three {
             transform: rotate(45deg);
             transform-origin: 0;
-            margin-top: 28px;
-            margin-left: 739px;
+            margin-top: 1.2em;
+            margin-left: 35em;
         }
         @keyframes linein {
-            0% {width: 1px};
-            99.9% {width: 180px;}
-            100% {width: 180px;}
+            0% {width: 0.05em};
+            99.9% {width: 8.77em;}
+            100% {width: 8.77em;}
         }
         .square {
-            height: 0px;
-            width: 0px;
-            border-bottom: white 1px solid;
+            height: 0em;
+            width: 0em;
+            border-bottom: white 0.05em solid;
             position: absolute;
             background: white;
         }
@@ -251,7 +282,7 @@
             height: 75px;
             width: 302px;
             margin-top: 156.5px;
-            font-size: 6vh
+            font-size: 1.7em
         }
         .squarediv#two {
             height: 301px;
@@ -266,7 +297,7 @@
             opacity: 0;
             font-family: 'Poor Story', cursive;
             color: white;
-            font-size: 5vh;
+            font-size: 1.5em;
         }
         .squarediv#one {
             
@@ -278,6 +309,17 @@
         }
         .squarediv#three {
             margin-left: 715px;
+        }
+        @keyframes goaway {
+            0%{
+                opacity: 1;
+            }
+            99.9% {
+                opacity: 0;
+            }
+            100% {
+                opacity : 0;
+            }
         }
         @keyframes fadein {
             0% {
@@ -294,7 +336,7 @@
             background-size: contain;
             margin-left: 950px;
             margin-top: -30px;
-            height: 50px;
+            height:2.3em;
             width: 100px;
             border-radius: 25%;
             opacity: 0;
@@ -311,7 +353,7 @@
             z-index:4;
             font-family: 'Poor Story', cursive;
             color: white;
-            font-size: 4vh;
+            font-size: 1em;
         }
         a {     
             color: white;
@@ -321,16 +363,16 @@
             margin-top: 18;
             text-decoration: none;
             cursor: none;
-            width: 120px;
+            width: 6.5em;
             text-align: center;
         }
         a:after {
           content: '';
           position: absolute;
           width: 0;
-          height: 2px;
+          height: 0.1em;
           display: block;
-          margin-top: 0px;
+          margin-top: 0em;
           left: 0%;
           background: white;
           transition: width .3s ease;
@@ -347,17 +389,17 @@
         .icon:after {
             width:100%;
             height:100%;
-            border-radius:100px;
+            border-radius:4em;
             position:absolute;
-            transform: translateZ(-1px);
-            left: 0px;
-            top: 0px;
+            transform: translateZ(-0.05em);
+            left: 0em;
+            top: 0em;
             background-color:white;
             display: flex;
             flex-direction: column;
             content: attr(icon-content);
             justify-content: center;
-            font-size: 15px;
+            font-size: 0.75em;
             transition: width .5s ease;
             overflow: hidden;
         }
@@ -366,33 +408,33 @@
         }
         .mouse {
             color: black;
-            height: 20px;
-            width: 20px;
+            height: 1em;
+            width: 1em;
             border-radius: 100%;
             background-color: whitesmoke;
             position: fixed;
-            left: 180px;
-            top: 180px;
+            left: 10em;
+            top: 10em;
             cursor: none;
             z-index: 10;
             mix-blend-mode:difference;
             pointer-events: none;
         }
         ::-webkit-scrollbar {
-            width: 15px;
+            width: 0.75em;
             cursor: none;
             z-index: 7
         }
 
         ::-webkit-scrollbar-track {
-            box-shadow: inset 0 0 10px crimson;
-            border-radius: 10px;
+            box-shadow: inset 0 0 0.4em crimson;
+            border-radius: 0.4em;
             cursor: none;
         }
 
         ::-webkit-scrollbar-thumb {
             background:crimson;
-            border-radius: 15px;
+            border-radius: 0.75em;
             cursor: none;
         }
         ::-webkit-scrollbar-thumb:hover {
@@ -402,8 +444,10 @@
 </head>
 <body>
     <div class="mouse" id="mouse"></div>
+    <div class = "containfull" id = "container">
     <div class ="interactable arrow" id = "arrow"></div>
-    <div class = "gamesmenu" id = "gamemenu"><header style="font-size:8vh;color:white;">Games</header><a href = "games/blob_fight" class = "interactable">Blob Fight</a><a href = "games/snake_game" class = "interactable">Snake Game</a><a href = "games/flappy_bird" class = "interactable">Flappy Bird</a><a href = "games/hangman" class = "interactable">Hangman</a></div>
+    <div class = "gamesmenu" id = "gamemenu"><header style="font-size:2em;color:white;">Games</header><a href = "games/blob_fight" class = "interactable">Blob Fight</a><a href = "games/snake_game" class = "interactable">Snake Game</a><a href = "games/flappy_bird" class = "interactable">Flappy Bird</a><a href = "games/hangman" class = "interactable">Hangman</a></div>
+    <div class = "animation" id = "container">
     <div class ="spewer"id="spewbox"></div>
     <div class = "line" id = "one"></div>   
     <div class = "line" id = "two"></div> 
@@ -424,13 +468,15 @@
     <div class = "square side3" id = "four"></div>
     <div class = "square side3" id = "five"></div>
     <div class = "squarediv" id = "one">I am <span class = "typing-prof"></span></div>
-    <div class = "squarediv" id = "two"><header style="font-size:10vh;color:white;">HEY!</header>My name is Aakash, and i study in 8th standard. I am 13 years old and i love games, anime, coding, maths and physics.</div>
+    <div class = "squarediv" id = "two"><header style="font-size:2.5em;color:white;">HEY!</header>My name is Aakash, and i study in 8th standard. I am 13 years old and i love games, anime, coding, maths and physics.</div>
     <div class = "squarediv" id = "three">I know <span class = "typing-lan"></span></div>
-    <div class = "interactable icon" style="background-image:url(/images/discord.png);width: 50px;height:50px;position:fixed;left:20;top:20;background-position:center 7px;border-radius:100%;background-size:35px;background-color:rgb(18, 98, 227);background-repeat:no-repeat;" icon-content = "Discord" username = "theconsoleguy#1971"onclick = "window.open('//discord.com/users/835432207735848970')"></div>
-    <div class = "interactable icon" style="background-image:url(/images/youtube.png);width: 50px;height:50px;position:fixed;left:20;top:90;background-position:center;border-radius:100%;background-size:200px;background-color:red" icon-content = "Youtube" onclick = "window.open('//www.youtube.com/channel/UCtrpyOBy-gKGe5M25aDl53Q')"></div>
-    <div class = "interactable icon" style="background-image:url(/images/playstation.png);width: 50px;height:50px;position:fixed;left:20;top:160;background-position:center;border-radius:100%;background-size:45px;background-repeat:no-repeat;background-color:white;" icon-content = "Playstation" username = "theconsoleguy_yt"  onclick = "window.open('//psnprofiles.com/theconsoleguy_yt')"></div>
-    <div class = "interactable icon" style="background-image:url(/images/github.png);width: 50px;height:50px;position:fixed;left:20;top:230;background-position:bottom;border-radius:100%;background-size:51px;background-repeat:no-repeat;background-color:white;" icon-content = "Github" username = "tcgconsolee" onclick = "window.open('//github.com/tcgconsolee')"></div>
-    <div class = "interactable icon" style="background-image:url(/images/gmail.png);width: 50px;height:50px;position:fixed;left:20;top:300;background-position:center;border-radius:100%;background-size:80px;background-repeat:no-repeat;background-color:white;" icon-content = "Gmail" username = "theconsoleguyyt@gmail.com" onclick = "window.open('//mail.google.com/mail/u/0/#inbox?compose=CrpPbDzHMmCsQRfpDSBgNkwRNkHnlVbGRDhVcflRJKZXXSQdFRBmTWKZgrxKhRTCgDNxQrHnlBJjMLCZxdQV')"></div>
+    </div>
+    </div>
+    <div class = "interactable icon" style="background-image:url(/images/discord.png);width:2.3em;height:2.3em;position:fixed;left:20;top:20;background-position:center 7px;border-radius:100%;background-size:35px;background-color:rgb(18, 98, 227);background-repeat:no-repeat;" icon-content = "Discord" username = "theconsoleguy#1971"onclick = "window.open('//discord.com/invite/G7w4WTTKmE')"></div>
+    <div class = "interactable icon" style="background-image:url(/images/youtube.png);width:2.3em;height:2.3em;position:fixed;left:20;top:90;background-position:center;border-radius:100%;background-size:200px;background-color:red" icon-content = "Youtube" onclick = "window.open('//www.youtube.com/channel/UCtrpyOBy-gKGe5M25aDl53Q')"></div>
+    <div class = "interactable icon" style="background-image:url(/images/playstation.png);width:2.3em;height:2.3em;position:fixed;left:20;top:160;background-position:center;border-radius:100%;background-size:45px;background-repeat:no-repeat;background-color:white;" icon-content = "Playstation" username = "theconsoleguy_yt"  onclick = "window.open('//psnprofiles.com/theconsoleguy_yt')"></div>
+    <div class = "interactable icon" style="background-image:url(/images/github.png);width:2.3em;height:2.3em;position:fixed;left:20;top:230;background-position:bottom;border-radius:100%;background-size:51px;background-repeat:no-repeat;background-color:white;" icon-content = "Github" username = "tcgconsolee" onclick = "window.open('//github.com/tcgconsolee')"></div>
+    <div class = "interactable icon" style="background-image:url(/images/gmail.png);width:2.3em;height:2.3em;position:fixed;left:20;top:300;background-position:center;border-radius:100%;background-size:80px;background-repeat:no-repeat;background-color:white;" icon-content = "Gmail" username = "theconsoleguyyt@gmail.com" onclick = "window.open('//mail.google.com/mail/u/0/#inbox?compose=CrpPbDzHMmCsQRfpDSBgNkwRNkHnlVbGRDhVcflRJKZXXSQdFRBmTWKZgrxKhRTCgDNxQrHnlBJjMLCZxdQV')"></div>
     <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
     <script type = "text/javascript">
         const typing_prof = {
@@ -469,34 +515,34 @@
         let games = 0;
         const slidein = [
             {
-                marginTop: "-30px"
+                marginTop: "-1.5em"
             },
             {
-                marginTop: "457px"
+                marginTop: "21.6em"
             }
         ]
         const slideingames = [
             {
-                marginTop: "-530px"
+                marginTop: "-25.3em"
             },
             {
-                marginTop: "-30px"
+                marginTop: "-1.5em"
             }
         ]
         const slideout = [
             {
-                marginTop: "457px"
+                marginTop: "21.6em"
             },
             {
-                marginTop: "-30px"
+                marginTop: "-1.5em"
             }
         ]
         const slideoutgames = [
             {
-                marginTop: "-30px"
+                marginTop: "-1.5em"
             },
             {
-                marginTop: "-530px"
+                marginTop: "-25.3em"
             }
         ]
         const slideduration = {
@@ -517,6 +563,12 @@
                 arrow.style.transform = "scaleY(1)"
             }
         })
+        let squaresides = document.getElementsByClassName("square")
+        setTimeout(() => {
+        for (let i = 0; i<squaresides.length; i++) {
+        squaresides[i].style.display = "none"
+        }
+    }, 8500)
     </script>
     <script type = "text/javascript">
         const mouse = document.getElementById('mouse')
