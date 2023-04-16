@@ -9,16 +9,15 @@
     <title>Consolee - Portfolio</title>
     <link rel="icon" type="image/x-icon" href="/images/logo.png">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Leckerli+One&family=Poor+Story&family=Teko:wght@500&display=swap');
-        
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@500&family=Outfit:wght@500&display=swap');
+        @import "compass/css3";
         html, body {
             cursor: none;
-            font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
         }
         body {
             margin: 0em;
             padding: 27px;
-            background-image: url(/images/webpage.png);
+            background-color: #1c052c;
             background-size: cover;
             font-size: 21px;
             text-align: center;
@@ -77,60 +76,7 @@
             -webkit-text-stroke-width: 1.647px;
             text-shadow: #FC0 1px 0px 15px;
         }
-        .spewer {
-            background-image: url(/images/box.png);
-            position: absolute;
-            margin-left: 16.8em;
-            margin-top: -1.5em;
-            z-index: 9;
-            height: 500px;
-            width: 500px;
-            background-size: 500px;
-            background-repeat: no-repeat;
-            animation: popup 2s linear 1;
-        }
-        .spewer-text {
-            font-size: 2em;
-            color: white;
-            font-family: 'Leckerli One', cursive;
-        }
-        @keyframes popup {
-            0% { margin-top: -50em;}
-            60% { margin-top: -3em;}
-            100% {margin-top: -1.5em;}
-        }
-        .line {
-            height: 0em;
-            width:  0em;
-            border-bottom: 0.05em solid white;
-            position: absolute;
-            background: white;
-            animation: linein 3s forwards 1;
-            animation-delay: 2.5s;
-        }
-        .line#one {
-            transform: rotate(135deg);
-            transform-origin: 0;
-            margin-top: 1.2em;
-            margin-left: 22.2em;
-        }
-        .line#two {
-            transform: rotate(90deg);
-            transform-origin: 0;
-            margin-top: 1.2em;
-            margin-left: 28.6em;
-        }
-        .line#three {
-            transform: rotate(45deg);
-            transform-origin: 0;
-            margin-top: 1.2em;
-            margin-left: 35em;
-        }
-        @keyframes linein {
-            0% {width: 0.05em};
-            99.9% {width: 8.77em;}
-            100% {width: 8.77em;}
-        }
+        
         .square {
             height: 0em;
             width: 0em;
@@ -140,31 +86,30 @@
         }
         .square#one {
             animation: outlinein 500ms forwards 1;
-            animation-delay: 5s;
         }
         .square.side1#two, .square.side3#two {
             animation: outlineinv 500ms forwards 1;
-            animation-delay: 5.5s;
+            animation-delay: 0.5s;
         }
         .square.side2#two {
             animation: outlineinvmax 500ms forwards 1;
-            animation-delay: 5.5s;
+            animation-delay: 0.5s;
         }
         .square#three {
             animation: outlineinh 500ms forwards 1;
-            animation-delay: 6s;
+            animation-delay: 1s;
         }
         .square.side1#four, .square.side3#four {
             animation: outlineinv 500ms forwards 1;
-            animation-delay: 6.5s;
+            animation-delay: 1.5s;
         }
         .square.side2#four {
             animation: outlineinvmax 500ms forwards 1;
-            animation-delay: 6.5s;
+            animation-delay: 1.5s;
         }
         .square#five {
             animation: outlinein 500ms forwards 1;
-            animation-delay: 7s;
+            animation-delay: 2s;
         }
         .square.side1#one {
             margin-left: 337px;
@@ -292,7 +237,7 @@
             height: 75px;
             width: 302px;
             margin-top: 156.5px;
-            font-size: 1.7em
+            font-size: 1.3em
         }
         .squarediv#two {
             height: 301px;
@@ -302,12 +247,13 @@
         .squarediv {
             position: absolute;
             animation: fadein 1s forwards 1;
-            animation-delay: 7.5s;
+            animation-delay: 2.5s;
             background-image:linear-gradient(black, #444);
             opacity: 0;
-            font-family: 'Poor Story', cursive;
+            font-family: 'Outfit', sans-serif;
             color: white;
-            font-size: 1.5em;
+            font-size: 1.4em;
+            
         }
         .squarediv#one {
             
@@ -361,9 +307,22 @@
             margin-left: 895px;
             margin-top: -530px;
             z-index:4;
-            font-family: 'Poor Story', cursive;
+            font-family: 'DynaPuff', cursive;
             color: white;
             font-size: 1em;
+        }
+        .name {
+             font-family: 'Fredoka', sans-serif;
+             font-size: 4em;
+             color: white;
+        }
+        #aakash {
+            position: absolute;
+            left: 1em
+        }
+        #ashok {
+            position: absolute;
+            right: 1em
         }
         a {     
             color: white;
@@ -450,6 +409,278 @@
         ::-webkit-scrollbar-thumb:hover {
             background: darkred;
         }
+ [class^="circle"] {
+	 padding: 15px;
+	 margin: 0 auto;
+	 position: absolute;
+	 top: 50%;
+	 left: 50%;
+	 transform: translate(-50%, -50%);
+     margin-top: -1em;
+	 border-radius: 50%;
+	 box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.1);
+}
+ .circle-1 {
+	 width: 500px;
+	 height: 500px;
+}
+ .circle-1 {
+    background-color: #2f1038;
+	 width: 460px;
+	 height: 460px;
+}
+ .circle-2 {
+    background-color: #411b44;
+	 width: 420px;
+	 height: 420px;
+}
+ .circle-3 {
+    background-color: #582c55;
+	 width: 380px;
+	 height: 380px;
+}
+ .circle-4 {
+    background-color: #743560;
+	 width: 340px;
+	 height: 340px;
+}
+ .circle-5 {
+    background-color: #994a77;
+	 width: 300px;
+	 height: 300px;
+}
+ .circle-6 {
+    background-color: #ba6090;
+	 width: 260px;
+	 height: 260px;
+}
+ .circle-7 {
+    background-color: #d07da9;
+	 width: 220px;
+	 height: 220px;
+}
+ .circle-8 {
+    background-color: #e4a1bd;
+	 width: 180px;
+	 height: 180px;
+}
+ .circle-9 {
+    background-color: #f4c3d1;
+	 width: 140px;
+	 height: 140px;
+}
+ .circle-10 {
+    background-color: #fbf5f7;
+	 width: 100px;
+	 height: 100px;
+}
+ .circle-10, .circle-11 {
+	 box-shadow: none;
+	 width: 80px;
+	 height: 80px;
+	 overflow: hidden;
+}
+ .circle-11 {
+    background-color: #f4c3d1;
+	 position: absolute;
+	 top: 45px;
+     left: 75px;
+	 transition: all 0.5s;
+ 	 }
+ @keyframes suncolorChange-1 {
+    0% {
+        background-color: #2f1038;
+    }
+	 100% {
+		 background-color: #3e0048;
+	}
+}
+ @keyframes suncolorChange-2 {
+    0% {
+        background-color: #411b44;
+    }
+	 100% {
+		 background-color: #5f0056;
+	}
+}
+ @keyframes suncolorChange-3 {
+    0% {
+        background-color: #582c55;
+    }
+	 100% {
+		 background-color: #84005a;
+	}
+}
+ @keyframes suncolorChange-4 {
+    0% {
+        background-color: #743560;
+    }
+	 100% {
+		 background-color: #a9003b;
+	}
+}
+ @keyframes suncolorChange-5 {
+    0% {
+        background-color: #994a77;
+    }
+	 100% {
+		 background-color: #e30023;
+	}
+}
+ @keyframes suncolorChange-6 {
+    0% {
+        background-color: #ba6090;
+    }
+	 100% {
+		 background-color: #ff1b23;
+	}
+}
+ @keyframes suncolorChange-7 {
+    0% {
+        background-color: #d07da9;
+    }
+	 100% {
+		 background-color: #ff574e;
+	}
+}
+ @keyframes suncolorChange-8 {
+    0% {
+        background-color: #e4a1bd;
+    }
+	 100% {
+		 background-color: #ffa486;
+	}
+}
+ @keyframes suncolorChange-9 {
+    0% {
+        background-color: #f4c3d1;
+    }
+	 100% {
+		 background-color: #ffd9b8;
+	}
+}
+ @keyframes suncolorChange-10 {
+    0% {
+        background-color: #fbf5f7;
+    }
+	 100% {
+		 background-color: #fff8f1;
+	}
+}
+ @keyframes suncolorChange-11 {
+    0% {
+        background-color: #f4c3d1;
+    }
+	 100% {
+		 background-color: #ffe5b8;
+	}
+}
+@keyframes mooncolorChange-1 {
+	 0% {
+		 background-color: #3e0048;
+	}
+    100% {
+        background-color: #2f1038;
+    }
+}
+ @keyframes mooncolorChange-2 {
+	 0% {
+		 background-color: #5f0056;
+	}
+    100% {
+        background-color: #411b44;
+    }
+}
+ @keyframes mooncolorChange-3 {
+	 0% {
+		 background-color: #84005a;
+	}
+    100% {
+        background-color: #582c55;
+    }
+}
+ @keyframes mooncolorChange-4 {
+	 0% {
+		 background-color: #a9003b;
+	}
+    100% {
+        background-color: #743560;
+    }
+}
+ @keyframes mooncolorChange-5 {
+	 0% {
+		 background-color: #e30023;
+	}
+    100% {
+        background-color: #994a77;
+    }
+}
+ @keyframes mooncolorChange-6 {
+	 0% {
+		 background-color: #ff1b23;
+	}
+    100% {
+        background-color: #ba6090;
+    }
+}
+ @keyframes mooncolorChange-7 {
+	 0% {
+		 background-color: #ff574e;
+	}
+    100% {
+        background-color: #d07da9;
+    }
+}
+ @keyframes mooncolorChange-8 {
+	 0% {
+		 background-color: #ffa486;
+	}
+    100% {
+        background-color: #e4a1bd;
+    }
+}
+ @keyframes mooncolorChange-9 {
+	 0% {
+		 background-color: #ffd9b8;
+	}
+    100% {
+        background-color: #f4c3d1;
+    }
+}
+ @keyframes mooncolorChange-10 {
+	 0% {
+		 background-color: #fff8f1;
+	}
+    100% {
+        background-color: #fbf5f7;
+    }
+}
+ @keyframes mooncolorChange-11 {
+	 0% {
+		 background-color: #ffe5b8;
+	}
+    100% {
+	 background-color: #f4c3d1;
+    }
+}
+
+ @keyframes sun {
+	 100% {
+		 top: -20px;
+		 left: 140px;
+	}
+}
+@keyframes moon {
+    0% {
+        top: -20px;
+		 left: 140px;
+    }
+	 100% {
+		 top: 45px;
+		 left: 75px;
+	}
+}
+ 
     </style>
 </head>
 <body>
@@ -458,10 +689,31 @@
     <div class ="interactable arrow" id = "arrow"></div>
     <div class = "gamesmenu" id = "gamemenu"><header style="font-size:2em;color:white;">Games</header><a href = "games/blob_fight" class = "interactable">Blob Fight</a><a href = "games/snake_game" class = "interactable">Snake Game</a><a href = "games/flappy_bird" class = "interactable">Flappy Bird</a><a href = "games/hangman" class = "interactable">Hangman</a></div>
     <div class = "animation" id = "container">
-    <div class ="spewer"id="spewbox"><div class = "spewer-text">Aakash Ashok</div></div>
-    <div class = "line" id = "one"></div>   
-    <div class = "line" id = "two"></div> 
-    <div class = "line" id = "three"></div>
+        <div class="circle-1" id = "circle1">
+            <div class="circle-2" id = "circle2">
+              <div class="circle-3" id = "circle3">
+                <div class="circle-4" id = "circle4">
+                  <div class="circle-5" id = "circle5">
+                    <div class="circle-6" id = "circle6">
+                      <div class="circle-7" id = "circle7">
+                        <div class="circle-8" id = "circle8">
+                          <div class="circle-9" id = "circle9">
+                            <div class="circle-10 interactable" id = "circle10">
+                              <div class="circle-11" id = "circle11">
+                                
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+    <div class = name id = "aakash">AAKASH</div>
+    <div class = name id = "ashok">ASHOK</div>
     <div class = "square side1" id = "one"></div>
     <div class = "square side1" id = "two"></div>
     <div class = "square side1" id = "three"></div>
@@ -482,11 +734,54 @@
     <div class = "squarediv" id = "three">I know <span class = "typing-lan"></span></div>
     </div>
     </div>
-    <div class = "interactable icon" style="background-image:url(/images/discord.png);width:2.3em;height:2.3em;position:fixed;left:20;top:20;background-position:center 7px;border-radius:100%;background-size:35px;background-color:rgb(18, 98, 227);background-repeat:no-repeat;" icon-content = "Discord" username = "theconsoleguy#1971"onclick = "window.open('//discord.com/invite/G7w4WTTKmE')"></div>
+    <div class = "interactable icon" style="background-image:url(/images/discord.png);width:2.3em;height:2.3em;position:fixed;left:20;top:20;background-position:center 7px;border-radius:100%;background-size:35px;background-color:rgb(18, 98, 227);background-repeat:no-repeat;" icon-content = "Discord" username = "theconsoleguy#1971"onclick = "window.open('//discord.com/users/835432207735848970')"></div>
     <div class = "interactable icon" style="background-image:url(/images/youtube.png);width:2.3em;height:2.3em;position:fixed;left:20;top:90;background-position:center;border-radius:100%;background-size:200px;background-color:red" icon-content = "Youtube" onclick = "window.open('//www.youtube.com/channel/UCtrpyOBy-gKGe5M25aDl53Q')"></div>
     <div class = "interactable icon" style="background-image:url(/images/playstation.png);width:2.3em;height:2.3em;position:fixed;left:20;top:160;background-position:center;border-radius:100%;background-size:45px;background-repeat:no-repeat;background-color:white;" icon-content = "Playstation" username = "theconsoleguy_yt"  onclick = "window.open('//psnprofiles.com/theconsoleguy_yt')"></div>
     <div class = "interactable icon" style="background-image:url(/images/github.png);width:2.3em;height:2.3em;position:fixed;left:20;top:230;background-position:bottom;border-radius:100%;background-size:51px;background-repeat:no-repeat;background-color:white;" icon-content = "Github" username = "tcgconsolee" onclick = "window.open('//github.com/tcgconsolee')"></div>
     <div class = "interactable icon" style="background-image:url(/images/gmail.png);width:2.3em;height:2.3em;position:fixed;left:20;top:300;background-position:center;border-radius:100%;background-size:80px;background-repeat:no-repeat;background-color:white;" icon-content = "Gmail" username = "theconsoleguyyt@gmail.com" onclick = "window.open('//mail.google.com/mail/u/0/#inbox?compose=CrpPbDzHMmCsQRfpDSBgNkwRNkHnlVbGRDhVcflRJKZXXSQdFRBmTWKZgrxKhRTCgDNxQrHnlBJjMLCZxdQV')"></div>
+    <script> 
+        let circle11 = document.getElementById("circle11")
+        let circle10 = document.getElementById("circle10")
+        let circle9 = document.getElementById("circle9")
+        let circle8 = document.getElementById("circle8")
+        let circle7 = document.getElementById("circle7")
+        let circle6 = document.getElementById("circle6")
+        let circle5 = document.getElementById("circle5")
+        let circle4 = document.getElementById("circle4")
+        let circle3 = document.getElementById("circle3")
+        let circle2 = document.getElementById("circle2")
+        let circle1 = document.getElementById("circle1")
+        let stage = 0
+        circle10.addEventListener("click", () => {
+            if(stage === 0) {
+                circle11.style.animation = "suncolorChange-11 3s 1 forwards, sun 3s 1 forwards"
+                stage = 1;
+                circle10.style.animation = "suncolorChange-10 3s 1 forwards"
+                circle9.style.animation = "suncolorChange-9 3s 1 forwards"
+                circle8.style.animation = "suncolorChange-8 3s 1 forwards"
+                circle7.style.animation = "suncolorChange-7 3s 1 forwards"
+                circle6.style.animation = "suncolorChange-6 3s 1 forwards"
+                circle5.style.animation = "suncolorChange-5 3s 1 forwards"
+                circle4.style.animation = "suncolorChange-4 3s 1 forwards"
+                circle3.style.animation = "suncolorChange-3 3s 1 forwards"
+                circle2.style.animation = "suncolorChange-2 3s 1 forwards"
+                circle1.style.animation = "suncolorChange-1 3s 1 forwards"
+            } else {
+                circle11.style.animation = "mooncolorChange-11 3s 1 forwards, moon 3s 1 forwards"
+                stage = 0;
+                circle10.style.animation = "mooncolorChange-10 3s 1 forwards"
+                circle9.style.animation = "mooncolorChange-9 3s 1 forwards"
+                circle8.style.animation = "mooncolorChange-8 3s 1 forwards"
+                circle7.style.animation = "mooncolorChange-7 3s 1 forwards"
+                circle6.style.animation = "mooncolorChange-6 3s 1 forwards"
+                circle5.style.animation = "mooncolorChange-5 3s 1 forwards"
+                circle4.style.animation = "mooncolorChange-4 3s 1 forwards"
+                circle3.style.animation = "mooncolorChange-3 3s 1 forwards"
+                circle2.style.animation = "mooncolorChange-2 3s 1 forwards"
+                circle1.style.animation = "mooncolorChange-1 3s 1 forwards"
+            }
+        })
+        </script>
     <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
     <script type = "text/javascript">
         const typing_prof = {
