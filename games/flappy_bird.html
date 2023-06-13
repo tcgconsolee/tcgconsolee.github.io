@@ -1,0 +1,437 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consolee Games - Flappy Bird</title>
+    <link rel="icon" type="image/x-icon" href="/images/logo.png">
+    <style>
+        body {
+            margin: 0px;
+            padding: 27px;
+            background-color: black;
+            font-size: 21px;
+            text-align: center;
+            font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            color:whitesmoke;
+            cursor: none;
+
+        }
+        .mouse {
+            color: black;
+            height: 20px;
+            width: 20px;
+            border-radius: 100%;
+            background-color: whitesmoke;
+            position: fixed;
+            left: 180px;
+            top: 180px;
+            cursor: none;
+            z-index: 10;
+            mix-blend-mode:difference;
+            pointer-events: none;
+        }
+        .screen {
+            background-color: #555;
+            font-size: 25px;
+            text-align: center;
+            font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            color:whitesmoke;
+            height:500px;
+            width:1000px;
+            border-radius: 25px;
+            margin: 20px;
+            display: inline-block;
+            z-index:-5;
+            overflow: hidden;
+        }
+        .bg {
+            height: 500px;
+            width: 15904.1283px;
+            background: url(/images/background.png) repeat-x;
+            animation: slide 100s linear infinite;
+            animation-play-state: paused;
+        }
+        @keyframes slide {
+            0%{
+                transform: translate3d(0,0,0)
+            }
+            100% {
+                transform: translate3d(-15904.1283px,0,0)
+            }
+        }
+        ::selection {
+            background: none;
+            text-decoration: underline;
+        }
+        .menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 1275px;
+            height: 75px;
+            background: white;
+            border-bottom: solid crimson 5px;
+            border-bottom-left-radius: 25%;
+            border-bottom-right-radius: 25%;
+            z-index: 8;
+    }
+        a {
+            position: relative;
+            z-index: 5;
+            margin-top: 18;
+            font-size: 23px;
+            text-decoration: none;
+            cursor: none;
+            font-style: italic;
+            font-family:'Times New Roman', Times, serif;
+        }
+        .menu a {
+            width: 200px;
+            margin-top: 18;
+            color: black;
+            float: left;
+            font-size: 27px;
+        }
+        a:after {
+          content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  display: block;
+  margin-top: 0px;
+  left: 0%;
+  background: whitesmoke;
+  transition: width .3s ease;
+        }
+        .menu a:after {
+            background: black;
+        }
+        a:hover:after {
+            width: 100%;
+  left: 0%;
+  background: whitesmoke;
+        }
+        .menu a:hover:after {
+            background: black
+        }
+        .menu .author {
+            font-family:'Brush Script MT', Brush, cursive;
+            font-size: 39px;
+            color: black;
+            margin-top: 10;
+            float: right;
+            margin-right: 20;
+        }
+        h1, h2 {
+            font-family:'Courier New', Courier, monospace;
+            font-variant:small-caps;
+        }
+        img {
+            height: 90px;
+            width: 100px;
+            z-index:5;
+            position:absolute;
+            left:50%;
+            top:50%;
+            bottom: 50%;
+            margin-left:-300px;
+        }
+        .rotation {
+           -webkit-transform:rotate(var(--deg));
+           -moz-transform: rotate(var(--deg));
+           -ms-transform: rotate(var(--deg));
+           -o-transform: rotate(var(--deg));
+           transform: rotate(var(--deg));
+}
+.mouse {
+            color: black;
+            height: 20px;
+            width: 20px;
+            border-radius: 100%;
+            background-color: whitesmoke;
+            position: fixed;
+            left: 180px;
+            top: 180px;
+            cursor: none;
+            z-index: 10;
+            mix-blend-mode:difference;
+            pointer-events: none;
+        }
+::-webkit-scrollbar {
+            width: 15px;
+        }
+
+        ::-webkit-scrollbar-track {
+            box-shadow: inset 0 0 10px crimson;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background:crimson;
+            border-radius: 15px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: darkred;
+        }
+    </style>
+</head>
+<body>
+    <div class="mouse" id="mouse"></div>
+    <div class = "menu">
+        <a href = "/home" class = "interactable">Home</a>
+        <a href="../games" class = "interactable">Games</a>
+        <div class = "author">Consolee</div>
+        </div>
+    <h1><br>Flappy Bird</h1>
+    <script type = "text/javascript">
+        window.addEventListener("keydown", function(e) {
+    if(["ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].indexOf(e.code) > -1) {
+        e.preventDefault();
+    }
+}, false);
+    </script><br><br>
+    <div class = 'screen' id = 'div'>
+       <div class="bg" id="bg"></div> 
+    <img src = "/images/flappy_bird.png" alt = "flappy bird" class = "rotation" style = "--deg: 0deg;margin-top:0px;width:90px;height:63px;" id = "bird">
+    <img src = "/images/flappy_pillar.png" alt = "flappy bird pillar" class = "rotation" style =    "--deg: 0deg;margin-top:0px;margin-left:0px;width: 143px;height:300px;display:none;"id = "pillar">
+    <h2 style="left:50%;top:50%;margin-left:925px;margin-top:0px;" id="timer">0</h2>
+           <script type = "text/javascript">//pSpawn
+     function pSpawn() {
+        var pClone = pillar.cloneNode()
+        let randimen = Math.floor(Math.random() * 100) + 200
+            pClone.style.width = `${randimen * 0.30530973451}px`
+            pClone.style.height = `${randimen}px`
+            pClone.style.marginTop=`${233 - (randimen - 200)}px`
+            pClone.style.marginLeft=`${470 - (randimen - 200)}px`
+        let i = 470 - (randimen - 200)
+        var pDir = [180,0][Math.round(Math.random())]
+        pClone.style.setProperty('--deg', `${pDir}deg`)
+        if(pDir === 180) {
+        pClone.style.marginTop=`-68px`
+    }
+            pClone.style.display = bird.style.display
+            div.appendChild(pClone)
+            const pcheck = function() {
+            if(i>-450) {
+                i = i - 1.5
+                pClone.style.marginLeft=`${i}px`
+                div.replaceChild(div.children['pillar'], pClone)
+                collision(pClone, bird)
+                setTimeout(() => {
+                    pcheck()
+                }, 5)
+            } else {
+                pClone.style.display = "none"
+                i = 430 - (randimen - 200)
+                pClone.style.marginLeft=`${i}px`
+                div.replaceChild(div.children['pillar'], pClone)
+                div.removeChild(pClone)
+            }
+        }
+        pcheck()
+        }
+           </script>
+           <script type = "text/javascript">//gravity
+           const bg = document.getElementById('bg')
+function gravity(pr) {
+            if(pr===true) {
+            div.removeChild(bird)
+            margin = margin + 2
+            if(margin<-40 || margin>400) {
+                bg.style.animationPlayState="paused"
+                setTimeout(() => {
+                if(al===false) {
+                    alert('You failed! Will return to /games when you click OK.')
+                }
+                al = true
+                }, 50)
+                window.location.href='../games'
+        }
+            bird.style.marginTop=`${margin}px`
+            div.appendChild(bird)         
+        }}
+           </script>
+           <script type = "text/javascript">//jump
+           function jump() {
+                    jumping = true
+                    tKEYcode++;
+                    if(tKEYcode<2) {jumping = false} else {
+                        var torun = 0
+                    var interval =  setInterval(function() {
+                    torun++
+                    if(torun === 100) {
+                        clearInterval(interval)
+                    }
+                    margin = margin - 1
+                    bird.style=`--deg: 330deg;margin-top:${margin- 1.5}px;width:90px;height:63px;`
+                    div.replaceChild(div.children['bird'], bird)
+                    }, 0)
+                    setTimeout(() => {
+                    bird.style = `--deg: 30deg; margin-top: ${margin}px;width:90px;height:63px;`
+                    div.replaceChild(div.children['bird'], bird)
+                    jumping = false
+                    }, 650)
+        }
+        }
+           </script>
+           <script type = "text/javascript">//collision
+            function collision(p, b) {
+                let al = false;
+
+                let pw = Number((getComputedStyle(p).width).split("px")[0])/2;
+                let ph = Number((getComputedStyle(p).height).split("px")[0])/2;
+                let bw = Number((getComputedStyle(b).width).split("px")[0])/2;
+                let bh = Number((getComputedStyle(b).height).split("px")[0])/2;
+
+                let px = Number((getComputedStyle(p).marginLeft).split("px")[0]) + 10;
+                let py = Number((getComputedStyle(p).marginTop).split("px")[0]) + 110;
+                let bx = Number((getComputedStyle(b).marginLeft).split("px")[0]);
+                let by = Number((getComputedStyle(b).marginTop).split("px")[0]);
+
+                let lcol = px + pw > bx - bw
+                let rcol = px - pw < bx + bw
+                let tcol = py + ph > by - bh
+                let bcol = py - ph < by + bh
+
+                if(lcol && rcol && tcol && bcol) {
+                    bg.style.animationPlayState="paused"
+                    setTimeout(() => {
+                    if(al === false) {
+                        al = true
+                        alert('You failed! Will return to /games when you click OK')
+                    }
+                }, 50)
+                        window.location.href="../games"
+                }
+            }
+           </script>
+<script type = "text/javascript">//main
+let timed = false
+        let time = 0
+        let margin = 0
+        let al = false
+        const div = document.getElementById('div')
+        const bird = document.getElementById('bird')
+        const timer = document.getElementById('timer')
+        div.appendChild(bird)
+        let jumping = false
+        let start = 0
+        let tKEYcode = 0
+        const pillar = document.getElementById('pillar')
+        div.removeChild(pillar)
+        document.body.addEventListener("keydown", function(p) {
+            if(p.keyCode === 32 || p.keyCode === 38) {
+                jump()
+                start++;
+                if(start<2) {
+                bg.style.animationPlayState="running"
+                }
+            }
+        })
+        setInterval(() => {
+            if(start> 0) {
+            pSpawn()
+            }
+        }, Math.floor(Math.random() * 1000) + 6000)
+
+        setInterval(() => {
+            if(start>0) {
+                if(Number(timer.innerText) >= 100) {
+                    setTimeout(() => {
+                    if(timed === false) {
+                            timed = true
+                            alert('You won! You reached the end! Will return to /games when you click OK.')
+                    }
+                }, 50)
+                window.location.href='../games'
+                }
+            div.removeChild(timer)
+            timer.innerText=`${Number(timer.innerText) + 1}`
+            div.appendChild(timer)
+            }
+        }, 1000)
+
+        function checkG() {
+        if(start>0 && jumping === false) {
+            gravity(true)
+            setTimeout(() => {
+            checkG()
+            }, 10)
+            } else {
+            gravity(false)
+            setTimeout(() => {
+            checkG()
+            }, 10)
+        }
+    }
+    checkG()
+</script>
+        <script type = "text/javascript">
+        const mouse = document.getElementById('mouse')
+        const interactables = document.getElementsByClassName('interactable')
+        const mouse_duration = {
+            duration: 150,
+            iterations: 1
+        }
+        const mousedown = [
+            {
+                transform: "scale(1) rotate(0deg)"
+            },
+            {
+                transform: "scale(2) rotate(45deg)"
+            }
+        ]
+        const mouseup = [
+            {
+                transform: "scale(2) rotate(45deg)"
+            },
+            {
+                transform: "scale(1) rotate(0deg)"
+            }
+        ]
+        window.addEventListener('mousedown', (e) => {
+            mouse.animate(mousedown, mouse_duration)
+            mouse.style.transform = "scale(2) rotate(45deg)"
+            mouse.style.borderRadius = "30%"
+        })
+        window.addEventListener('mouseup', (e) => {
+            mouse.animate(mouseup, mouse_duration)
+            mouse.style.transform = "scale(1) rotate(0deg)"
+            mouse.style.borderRadius = "100%"
+        })
+        window.addEventListener('mousemove', (e) => {
+            mouse.style.left = ((e.clientX) - 10) + "px"; 
+            mouse.style.top = ((e.clientY) - 10) + "px";
+        })
+        const mouseenter = [
+            {
+                transform: "scale(1)"
+            },
+            {
+                transform: "scale(2)"
+            }
+        ]
+        const mouseleave = [
+            {
+                transform: "scale(2)"
+            },
+            {
+                transform: "scale(1)"
+            }
+        ]
+        for(let i = 0; i< interactables.length; i++) {
+        interactables[i].addEventListener('mouseenter', (e) => {
+            mouse.style.borderRadius = "30%"
+            mouse.animate(mouseenter, mouse_duration)
+            mouse.style.transform = "scale(2)"
+        })
+        interactables[i].addEventListener('mouseleave', (e) => {
+            mouse.style.borderRadius = "100%"
+            mouse.animate(mouseleave, mouse_duration)
+            mouse.style.transform = "scale(1)"
+        })
+    }
+    </script>
+</body>
+</html>

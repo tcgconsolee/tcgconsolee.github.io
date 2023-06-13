@@ -1,0 +1,498 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consolee Games - Escape The Room</title>
+    <link rel="icon" type="image/x-icon" href="/images/logo.png">
+    <style>
+        body {
+            margin: 0px;
+            border-top-left-radius: 150px;
+            padding: 27px;
+            background-color: black;
+            font-size: 21px;
+            text-align: center;
+            font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            color:whitesmoke;
+            cursor: none;
+        }
+        ::-webkit-scrollbar {
+            border: 1px black solid;
+        }
+        ::-webkit-scrollbar-track {
+            box-shadow: inset 0 0 10px crimson;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background:crimson;
+            border-radius: 15px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: darkred;
+        }
+        h1, h2 {
+            font-family:'Courier New', Courier, monospace;
+            font-variant:small-caps;
+        }
+        .menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 75px;
+            background: white;
+            border-bottom: solid crimson 5px;
+            border-bottom-left-radius: 25%;
+            border-bottom-right-radius: 25%;
+    }
+        a {
+            position: relative;
+            z-index: 5;
+            margin-top: 18;
+            font-size: 23px;
+            text-decoration: none;
+            cursor: none;
+            font-style: italic;
+            font-family:'Times New Roman', Times, serif;
+        }
+        .menu a {
+            width: 200px;
+            margin-top: 18;
+            color: black;
+            float: left;
+            font-size: 27px;
+        }
+        a:after {
+          content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  display: block;
+  margin-top: 0px;
+  left: 0%;
+  background: whitesmoke;
+  transition: width .3s ease;
+        }
+        .menu a:after {
+            background: black;
+        }
+        a:hover:after {
+            width: 100%;
+  left: 0%;
+  background: whitesmoke;
+        }
+        .menu a:hover:after {
+            background: black
+        }
+        .menu .author {
+            font-family:'Brush Script MT', Brush, cursive;
+            font-size: 39px;
+            color: black;
+            margin-top: 10;
+            float: right;
+            margin-right: 20;
+        }
+        
+  ::selection {
+            background: none;
+            text-decoration: underline;
+        }
+  canvas {
+    width: 1000px;
+    height: 500px;
+    position: absolute;
+    top: 8em;
+    left: 6em;
+    border-radius: 50px;
+    background: url(/images/escape_room.png);
+    background-color: #949594;
+    background-size: cover;
+    z-index: 1;
+  }
+  .mouse {
+            color: black;
+            height: 20px;
+            width: 20px;
+            border-radius: 100%;
+            background-color: whitesmoke;
+            position: fixed;
+            left: 180px;
+            top: 180px;
+            cursor: none;
+            z-index: 10;
+            mix-blend-mode:difference;
+            pointer-events: none;
+        }
+        .screen {
+            position: absolute;
+            top: 8em;
+            left: 6em;
+            width:1000px;
+            height:500px;
+            background-color: #a4a5a5;
+            border-radius: 50px;    
+            z-index: -999;
+        }
+        .hint {
+            position: absolute;
+            background: url(/images/hint_indicator.png);
+            background-size: cover;
+            width: 120px;
+            height: 120px;
+            transform: scale(0.1);
+            transition: ease-in-out transform 300ms;
+            z-index: 2; 
+        }
+        .hint:hover {
+            transform: scale(0.3);
+            transition: ease-in-out transform 300ms
+        }
+        .microwave {
+            width: 150px;
+            height: 150px;
+            position: absolute;
+            top: 350px;
+            left: 946px;
+            z-index: 2;
+        }
+        .keyslots {
+            width: 100px;
+            height: 90px;
+            position: absolute;
+            top: 250px;
+            left: 400px;
+            z-index: 2;
+        }
+    </style>
+</head>
+<body>
+    <div class="mouse" id="mouse"></div>
+    <div class = "menu">
+        <a href = "/home" class = "interactable">Home</a>
+        <a href="../games" class = "interactable">Games</a>
+        <div class = "author">Consolee</div>
+        </div>
+    <h1><br>Escape The Room</h1>
+    <div class = "screen"></div> 
+    <canvas id = "canvas"></canvas>
+    <img src="/images/microwave.png" alt="Microwave" class="microwave">
+    <img src="/images/keyslot.png" alt="Keyslots" class="keyslots">
+    <div class="interactable hint"></div>
+    <div class="interactable hint" style = "display: none"></div>
+      <div class="interactable hint" style = "display: none"></div>
+      <div class="interactable hint" style = "display: none"></div>
+      <div class="interactable hint"></div>
+      <div class="interactable hint" style = "display: none"></div>
+    <script type = "text/javascript">
+        let moving = 0
+        window.addEventListener("keydown", function(e) {
+    if(["Space","ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].indexOf(e.code) > -1 && moving < 1) {
+        e.preventDefault();
+    }
+}, false);
+    </script>
+    <script type = "text/javascript">
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d')
+        let microenter = false;
+        let keyslotenter = false;
+        class Room {
+            constructor(objectsPositions, objectsImages, objectInteractions) {
+                this.positions = objectsPositions;
+                this.images = objectsImages;
+            }
+            setup() {
+            ctx.fillStyle = "#352210"
+            ctx.fillRect(230, 8, 33, 41)
+            let hints = {}
+                for(let i = 0;i<this.positions.length; i++) {
+                    if(i !== 1 && i !== 2 && i!== 3 && i!==5) {
+                    ctx.drawImage(this.images[i], this.positions[i].x, this.positions[i].y);
+                    }
+                    hints[i] = document.getElementsByClassName('hint')[i]
+                    hints[i].style.left = (this.positions[i].x * 3.25) + 96
+                    hints[i].style.top = (this.positions[i].y * 3.25) + 128
+                    hints[i].addEventListener("click", () => {objectInteractions[i](); hints[i].style.display = "none"})
+                }
+                document.getElementsByClassName('microwave')[0].addEventListener('mouseenter', () => {
+                    microenter = true;
+                })
+                document.getElementsByClassName('microwave')[0].addEventListener('mouseleave', () => {
+                    microenter = false;
+                })
+                document.getElementsByClassName('keyslots')[0].addEventListener('mouseenter', () => {
+                    keyslotenter = true;
+                })
+                document.getElementsByClassName('keyslots')[0].addEventListener('mouseleave', () => {
+                    keyslotenter = false;
+                })
+            }
+         }
+         let crekey;
+         let twokeys;
+         class Inventory {
+            constructor() {
+                this.objects = []
+                this.create()
+                this.dragging = {}
+                this.inside = {}
+            }
+            create() {
+                ctx.fillStyle = "white"
+                ctx.fillRect(0, 20, 30, canvas.height - 40)
+                ctx.strokeStyle = "#0b0b0b"
+                ctx.lineWidth = 3
+                ctx.strokeRect(0, 20, 30, 22)
+                ctx.strokeRect(0, 42, 30, 22)
+                ctx.strokeRect(0, 64, 30, 22)
+                ctx.strokeRect(0, 86, 30, 22)
+                ctx.strokeRect(0, 108, 30, 22)               
+            }
+            add(object) {
+                object.style.position = "absolute"
+                object.style.left = "150px"
+                object.style.top = `${240 + (this.objects.length * 75)}px`
+                object.prevX = "150px"
+                object.prevY = `${240 + (this.objects.length * 75)}px`
+                object.style.zIndex = 2
+                object.draggable = false
+                document.body.appendChild(object)
+                object.addEventListener('mouseenter', (e) => {
+                    this.inside[object.name] = true
+                    mouseelement.style.borderRadius = "30%"
+                    mouseelement.animate(mouseenter, mouse_duration)
+                    mouseelement.style.transform = "scale(2)"
+                })
+                object.addEventListener('mouseleave', (e) => {
+                    this.inside[object.name] = false
+                    mouseelement.style.borderRadius = "100%"
+                    mouseelement.animate(mouseleave, mouse_duration)
+                    mouseelement.style.transform = "scale(1)"
+                })
+                object.addEventListener('mousedown', (e) => {
+                    this.dragging[object.name] = true;
+                    object.style.pointerEvents = "none"
+                    object.style.zIndex = 3
+                    window.onmousemove = (e) => {
+                        object.style.left = ((e.clientX) - 20) + "px";
+                        object.style.top = ((e.clientY) - 20) + "px";
+                    }
+                    window.addEventListener('mouseup', (e) => {
+                        window.onmousemove = null
+                        object.style.pointerEvents = "all"
+                        object.style.zIndex = 2
+                        if(this.dragging["key"] && this.inside["creditcard"] || this.dragging["creditcard"] && this.inside["key"]) {
+                            if(this.inside["creditcard"]) {
+                                creditcard.src = "/images/creditcardandkey.png"
+                                creditcard.name = "creditcardandkey"
+                                crekey = creditcard;
+                            } else {
+                                key.src = "/images/creditcardandkey.png"
+                                key.name = "creditcardandkey"
+                                crekey = key;
+                            }
+                            document.body.removeChild(object)
+                        } else
+                        if(this.dragging["knife"] && microenter) {
+                            document.body.removeChild(knife)
+                            document.getElementsByClassName('hint')[5].style.display = "block"
+                        } else
+                        if(this.dragging["hotknife"] && this.inside["creditcardandkey"] || this.inside["hotknife"] && this.dragging["creditcardandkey"]) {
+                            crekey.src = "/images/twokeys.png"
+                            crekey.name = "twokeys"
+                            twokeys = crekey;
+                            object.style.left = object.prevX
+                            object.style.top = object.prevY
+                        } else
+                        if(this.dragging["twokeys"] && keyslotenter) {
+                            this.win()
+                            document.body.removeChild(twokeys)
+                            setTimeout(() => {
+                                alert("You won! Returning to /games!")
+                                window.location.href = "/games"
+                            }, 3000)
+                        } else
+                        {
+                        object.style.left = object.prevX
+                        object.style.top = object.prevY
+                        }
+                        this.dragging[object.name] = false;
+                    })
+                })
+                this.objects.push(object)
+            }
+            win() {
+                ctx.moveTo(184, 0)
+                ctx.lineTo(111, 0)
+                ctx.lineWidth = 3;
+                ctx.strokeStyle = "white"
+                ctx.stroke()
+                let strokeY= 0;
+                let intervalStroke = setInterval(() => {
+                    strokeY++
+                    ctx.moveTo(184, strokeY)
+                    ctx.lineTo(111, strokeY)
+                    ctx.stroke()
+                    if(strokeY>=58) {
+                        clearInterval(intervalStroke)
+                    }
+                }, 40)
+                let strokeX = 158
+                setTimeout(() => {
+                let intervalStroke2 = setInterval(() => {
+                    strokeY++
+                    ctx.moveTo(111, strokeY)
+                    ctx.lineTo(strokeX, strokeY)
+                    ctx.stroke()
+                    strokeX-= 0.9
+                    if(strokeY >= 73) {
+                        clearInterval(intervalStroke2)
+                    }
+                }, 40)
+            }, 2320)
+            }
+         }
+         const inventory = new Inventory()
+         const objectsPositions =[{x: 252, y: 22}, {x: 237, y: 10}, {x: 237, y: 37}, {x: 140.5, y: 82}, {x: 190, y: 70}, {x: 250, y: 70}]
+         let knifepicked = false;
+         let keypicked = false;
+         let wallet = new Image(60, 60);
+         wallet.name = "wallet"
+         let key = new Image(60, 60);
+         key.name = "key"
+         let creditcard = new Image(60, 60)
+         creditcard.name = "creditcard"
+         let knife = new Image(60, 60)
+         knife.name = "knife"
+         let cupboard = new Image(60, 60);
+         let microwave = new Image(60, 60)
+         wallet.src = "/images/wallet_side.png"
+         key.src = "/images/key_hanging.png"
+         creditcard.src = "/images/creditcard.png"
+         knife.src = "/images/knife.png"
+         cupboard.src = "/images/door.png";
+         microwave.src = "/images/microwave.png"
+         const objectsImages = [cupboard, key, wallet, creditcard, knife, microwave]
+         function interaction0() {
+           ctx.clearRect(230,8,33,41)
+           ctx.drawImage(key, objectsPositions[1].x, objectsPositions[1].y)
+           ctx.drawImage(wallet, objectsPositions[2].x, objectsPositions[2].y)
+           document.getElementsByClassName('hint')[1].style.display = "block"
+           document.getElementsByClassName('hint')[2].style.display = "block"
+        }
+        function interaction1() {
+            ctx.clearRect(230, 8, 33, 20)
+            inventory.add(key)
+            keypicked = true
+        }
+        function interaction2 (){
+            ctx.clearRect(230, 28, 33, 21)
+            let wallet_open = new Image(200, 200)
+            wallet_open.src = "/images/wallet_open.png"
+            wallet_open.onload = (() => {
+                ctx.drawImage(wallet_open, 56, -30, 200, 200)
+                document.getElementsByClassName('hint')[3].style.display = "block"
+                document.getElementsByClassName('keyslots')[0].style.display = "none"
+                if(!knifepicked) {
+                document.getElementsByClassName('hint')[4].style.display = "none"
+                }
+            })
+        }
+        function interaction3() {
+            ctx.clearRect(56, -60, 600, 200)
+            ctx.drawImage(wallet, 237, 37)
+            inventory.add(creditcard)
+            if(!keypicked) {
+            ctx.drawImage(key, objectsPositions[1].x, objectsPositions[1].y)
+            }
+            document.getElementsByClassName('keyslots')[0].style.display = "block"
+            if(!knifepicked) {
+            ctx.drawImage(knife, 190, 70)
+            document.getElementsByClassName('hint')[4].style.display = "block"
+            }
+        }
+        function interaction4() {
+            ctx.clearRect(190, 70, 30, 30)
+            knifepicked = true;
+            inventory.add(knife)
+        }
+        function interaction5() {
+            knife.src = "/images/knife_hot.png"
+            knife.name = "hotknife"
+            inventory.add(knife)
+        }
+          const objectInteractions = [interaction0, interaction1, interaction2, interaction3, interaction4, interaction5]
+         const room = new Room(objectsPositions, objectsImages, objectInteractions)
+         cupboard.onload = (() => {
+            room.setup()
+         })
+    </script>
+    <script type = "text/javascript">
+        const mouseelement = document.getElementById('mouse')
+        const interactables = document.getElementsByClassName('interactable')
+        const mouse_duration = {
+            duration: 150,
+            iterations: 1
+        }
+        const mousedown = [
+            {
+                transform: "scale(1) rotate(0deg)"
+            },
+            {
+                transform: "scale(2) rotate(45deg)"
+            }
+        ]
+        const mouseup = [
+            {
+                transform: "scale(2) rotate(45deg)"
+            },
+            {
+                transform: "scale(1) rotate(0deg)"
+            }
+        ]
+        window.addEventListener('mousedown', (e) => {
+            mouseelement.animate(mousedown, mouse_duration)
+            mouseelement.style.transform = "scale(2) rotate(45deg)"
+            mouseelement.style.borderRadius = "30%"
+        })
+        window.addEventListener('mouseup', (e) => {
+            mouseelement.animate(mouseup, mouse_duration)
+            mouseelement.style.transform = "scale(1) rotate(0deg)"
+            mouseelement.style.borderRadius = "100%"
+        })
+        window.addEventListener('mousemove', (e) => {
+            mouseelement.style.left = ((e.clientX) - 10) + "px"; 
+            mouseelement.style.top = ((e.clientY) - 10) + "px";
+        })
+        const mouseenter = [
+            {
+                transform: "scale(1)"
+            },
+            {
+                transform: "scale(2)"
+            }
+        ]
+        const mouseleave = [
+            {
+                transform: "scale(2)"
+            },
+            {
+                transform: "scale(1)"
+            }
+        ]
+        for(let i = 0; i< interactables.length; i++) {
+        interactables[i].addEventListener('mouseenter', (e) => {
+            mouseelement.style.borderRadius = "30%"
+            mouseelement.animate(mouseenter, mouse_duration)
+            mouseelement.style.transform = "scale(2)"
+        })
+        interactables[i].addEventListener('mouseleave', (e) => {
+            mouseelement.style.borderRadius = "100%"
+            mouseelement.animate(mouseleave, mouse_duration)
+            mouseelement.style.transform = "scale(1)"
+        })
+    }
+    </script>
+</body>
+</html>
