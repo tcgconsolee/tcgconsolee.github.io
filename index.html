@@ -8,8 +8,17 @@
     <meta name="keywords" content="portfolio, consolee.tk, consolee, theconsoleguy, aakash, aakash ashok">
     <title>Consolee - Portfolio</title>
     <link rel="icon" type="image/x-icon" href="/images/logo.png">
+    <script async src="https://unpkg.com/es-module-shims@1.6.3/dist/es-module-shims.js"></script>
+    <script type="importmap">
+        {
+            "imports": {
+            "three": "https://unpkg.com/three@0.154.0/build/three.module.js",
+            "three/addons/": "https://unpkg.com/three@0.154.0/examples/jsm/"
+            }
+        }
+    </script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@1,700&family=Noto+Sans+JP&family=Playfair+Display&family=Red+Hat+Display&family=Red+Hat+Text&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@1,700&family=Noto+Sans+JP&family=Playfair+Display&family=Red+Hat+Display&family=Red+Hat+Text&display=swap');
         @import "compass/css3";
         html, body {
             cursor: none;
@@ -25,9 +34,9 @@
         }
         ::selection {
             background: none;
-            -webkit-text-stroke-color: #c92b12;
+            -webkit-text-stroke-color: #a09f9f;
             -webkit-text-stroke-width: 1.647px;
-            text-shadow: #c92b12 1px 0px 15px;
+            text-shadow: #a09f9f 1px 0px 15px;
         }
         .text {
              font-family: 'Noto Sans', sans-serif;
@@ -69,418 +78,411 @@
         ::-webkit-scrollbar-thumb:hover {
             background: darkred;
         }
-        [class^="section"] {
-            background: rgb(182, 30, 30);
-            width: 50vw;
-            height: 50vh;
+        .consolee {
+            font-family: 'Red Hat Display', serif;
+            font-size: 6vw;
+            color: #f5f5f5;
             position: absolute;
-            animation: slideset forwards 3s;
-            animation-delay: 60ms;
-            box-shadow: 0 0 1vw #0b0b0b;
-            z-index: 4;
+            top: 35vh;
+            left: -1vw;
+            width: 100vw;
+            height: 80vh;
+            overflow: hidden;
+            z-index: 1;
         }
-        [class$="sq1"] {
-            top: 0;
-            right: 0;
-            transform-origin: top right;
+        .line {
+            position: absolute;
+            top: -85vh;
+            height: 100vh;
+            width: 0.1vw;
+            background: #f5f5f5;
+            z-index: 1;
         }
-        [class$="sq2"] {
-            top: 0;
+        #line1 {
+            left: 10vw;
+        }
+        #line2 {
+            left: 30vw;
+        }
+        #line3 {
+            left: 70vw;
+        }
+        #line4 {
+            left: 90vw
+        }
+        @keyframes movedown {
+            0% {
+                top: -45vh;
+            }
+            99.9% {
+                top: 15vh;
+            }
+            100% {
+                top: 15vh;
+            }
+        }
+        .name {
+            position: absolute;
+            font-family: 'Red Hat Display', serif;
+            font-size: 14vw;
+            top: 0vh;
+            left: 0vw;
+            width: 100vw;
+            height: 30vh;
+            color: #f5f5f5;
+            z-index: 1;
+        }
+        canvas {
+            display: block;
+            position: absolute;
             left: 0;
-            transform-origin: top left;
+            top: 0;
+            z-index: 0;
         }
-        [class$="sq3"] {
-            bottom: 0;
-            left: 0;
-            transform-origin: bottom left;
-        }
-        [class$="sq4"] {
-            bottom: 0;
-            right: 0;
-            transform-origin: bottom right;
-        }
-        @keyframes slideset {
-            0% {
-                transform: rotate(0deg)
-            }
-            99.9% {
-                transform: rotate(-180deg)
-            }
-            100% {
-                transform: rotate(-180deg)
-            }
-        }
-        .title {
-            color:#c92b12;
-            font-family: "Red Hat Display", serif;
-            font-size: 10vw;
+        .box {
+            width: 38vw;
+            height: 40vh;
             position: absolute;
+            bottom: 1vh;
+            left: 30vw;
+            border-radius: 1vw;
+            opacity: 0.7;
+            z-index: 1;
+            color: white;
         }
-        .title#aakash{
-            left: -34vw;
-            top: 14vh;
-            animation: slideleft 700ms forwards;
-            animation-delay: 1s;
+        .box .header {
+            font-family: 'Red Hat Display', serif;
+            font-size: 4.75vw;
         }
-        .title#ashok {
-            right: -34vw;
-            top: 34vh;
-            animation: slideright 700ms forwards;   
-            animation-delay: 1s;
+        .box #typing {
+            font-family: 'Red Hat Display', serif;
+            font-size: 4.75vw;
         }
-        .title#abouttext {
-            left: -38vw;
-            top: 14vh;
-            animation: slideleft2 700ms forwards;
-            animation-delay: 1s;
+        .typed-cursor {
+            font-size: 4.75vw;
         }
-        .title#me {
-            right: -34vw;
-            top: 34vh;
-            animation: slideright2 700ms forwards;
-            animation-delay: 1s;
+        .box .info {
+            font-family: 'Red Hat Text', serif;
+            font-size: 2vw; 
+            opacity: 0;
         }
-        .title#my {
-            left: -34vw;
-            top: 14vh;
-            animation: slideleft3 700ms forwards;
-            animation-delay: 1s;
-        }
-        .title#works {
-            right: -34vw;
-            top: 34vh;
-            animation: slideright 700ms forwards;
-            animation-delay: 1s;
-        }
-        .title#contact {
-            left: -40vw;
-            top: 14vh;
-            animation: slideleft4 700ms forwards;
-            animation-delay: 1s;
-        }
-        #line {
+        .arrow {
+            width: 3vw;
+            height: 3vh;
             position: absolute;
-            left: 50vw;
-            height: 50vh;
-            width: 1vw;
-            background:#7e1c0d;
-            top: 16vh;
-            z-index: 3;
+            bottom: 46vh;
+            left: 47vw;
+            z-index: 2;
         }
-        @keyframes slideleft {
+        @keyframes slideleft1 {
             0% {
-                left: -34vw;
+                top: 15vh;
+                left: 10vw;
             }
             99.9% {
-                left: 16vw;
+                top: 15vh;
+                left: 1vw;
             }
             100% {
-                left: 16vw;
-            }
-        }
-        @keyframes slideright {
-            0% {
-                right: -34vw;
-            }
-            99.9% {
-                right: 20vw;
-            }
-            100% {
-                right: 20vw;
+                top: 15vh;
+                left: 1vw;
             }
         }
         @keyframes slideleft2 {
             0% {
-                left: -34vw;
+                top: 15vh;
+                left: 30vw;
             }
             99.9% {
-                left: 20vw;
+                top: 15vh;
+                left: 11vw;
             }
             100% {
-                left: 20vw;
+                top: 15vh;
+                left: 11vw;
+            }
+        }
+         @keyframes slideright1 {
+            0% {
+                top: 15vh;
+                left: 70vw;
+            }
+            99.9% {
+                top: 15vh;
+                left: 89vw;
+            }
+            100% {
+                top: 15vh;
+                left: 89vw;
             }
         }
         @keyframes slideright2 {
             0% {
-                right: -34vw;
+                top: 15vh;
+                left: 90vw;
             }
             99.9% {
-                right: 33vw;
+                top: 15vh;
+                left: 99vw;
             }
             100% {
-                right: 33vw;
+                top: 15vh;
+                left: 99vw
             }
         }
-        @keyframes slideleft3 {
+        @keyframes unslideleft1 {
             0% {
-                left: -34vw;
+                top: 15vh;
+                left: 1vw;
             }
             99.9% {
-                left: 34vw;
+                top: 15vh;
+                left: 10vw;
             }
             100% {
-                left: 34vw;
+                top: 15vh;
+                left: 10vw;
             }
         }
-        @keyframes slideleft4 {
+        @keyframes unslideleft2 {
             0% {
-                left: -40vw;
+                top: 15vh;
+                left: 11vw;
             }
             99.9% {
-                left: 12vw;
+                top: 15vh;
+                left: 30vw;
             }
             100% {
-                left: 12vw;
+                top: 15vh;
+                left: 30vw;
             }
         }
-        .pages {
-            position: absolute;
-            top: -31vh;
-            right: 1vw;
-            width: 5vw;
-            height: 5vw;
-            border:rgb(182, 30, 30) solid 0.5vh;
-            border-radius: 100%;
-            animation: slidetop 1s forwards;
-            animation-delay: 1s;
-            z-index: 3;
-        }
-        @keyframes slidetop {
+         @keyframes unslideright1 {
             0% {
-                top: -31vh;
+                top: 15vh;
+                left: 89vw;
             }
             99.9% {
-                top: 3vh;
+                top: 15vh;
+                left: 70vw
             }
             100% {
-                top: 3vh;
+                top: 15vh;
+                left: 70vw;
             }
         }
-        .pages [class^="line"] {
-            width: 3vw;
-            height: 0.25vw;
-            background:rgb(210, 26, 26);
-            position: absolute;
-            right: 1vw;
-        }
-        .pages .line1 {
-            top: 1.25vw;
-        }
-        .pages .line2 {
-            top: 2.25vw;
-        }
-        .pages .line3 {
-            top: 3.25vw;
-        }
-        .footer {
-            width: 60vw;
-            height: 30vh;
-            position: absolute;
-            bottom: -31vh;
-            left: 20vw;
-            border-top:rgb(182, 30, 30) solid 0.5vh;
-            border-left:rgb(210, 26, 26) solid 0.5vh;
-            border-right:rgb(210, 26, 26) solid 0.5vh;
-            display: flex;
-            justify-content: center;
-            align-content: center;
-            flex-direction: column;
-            background: transparent;
-            animation: slidebottom 1300ms forwards;
-            animation-delay: 1s;
-        }
-        .footer span.c {
-            font-size: 8vw;
-            font-family: 'Red Hat Display', sans-serif;
-            color:rgb(210, 26, 26);
-            margin-top: -1.75vw
-        }
-        .footer span.p {
-            font-size: 4vw;
-            font-family: 'Red Hat Text', sans-serif;
-            color:rgb(210, 26, 26);
-            margin-top: 1.75vw
-        }
-        .footer span.q {
-            font-size: 4vw;
-            font-family: 'Red Hat Display', sans-serif;
-            color:rgb(210, 26, 26);
-            margin-top: -0.75vw
-        }
-        .footer span.s {
-            font-size: 1.8vw;
-            font-family: 'Red Hat Text', sans-serif;
-            color:rgb(210, 26, 26);
-            margin-top: -0.25vw
-        }
-        .footer span.f {
-            font-size: 6vw;
-            font-family: 'Red Hat Text', sans-serif;
-            color:rgb(210, 26, 26);
-        }
-        @keyframes slidebottom {
+        @keyframes unslideright2 {
             0% {
-                bottom: -31vh;
+                top: 15vh;
+                left: 99vw;
             }
             99.9% {
-                bottom: 0vh;
+                top: 15vh;
+                left: 90vw;
             }
             100% {
-                bottom: 0vh;
+                top: 15vh;
+                left: 90vw;
             }
         }
-        #transition {
-            background: #0b0b0b;
-            width: 0vw;
-            height: 100vh;
+        @keyframes maximize {
+            0% {
+                width: 38vw;
+                left: 30vw;
+                height: 40vh;
+                bottom: 1vh;
+            }
+            99.9% {
+                width: 70vw;
+                left: 15vw;
+                height: 90vh;
+                bottom: 3vh;
+            }
+            100% {
+                width: 70vw;
+                left: 15vw;
+                height: 90vh;
+                bottom: 3vh;
+            }
+        }
+        @keyframes minimize {
+            0% {
+                width: 70vw;
+                left: 15vw;
+                height: 90vh;
+                bottom: 3vh;
+            }
+            99.9% {
+                width: 38vw;
+                left: 30vw;
+                height: 40vh;
+                bottom: 1vh;
+            }
+            100% {
+                width: 38vw;
+                left: 30vw;
+                height: 40vh;
+                bottom: 1vh;
+            }
+        }
+        @keyframes moveupconsolee {
+            0% {
+                top: 35vh;
+            }
+            99.9% {
+                top: -15vh;
+            }
+            100% {
+                top: -15vh;
+            }
+        }
+        @keyframes movedownconsolee {
+            0% {
+                top: -15vh;
+            }
+            99.9% {
+                top: 35vh;
+            }
+            100% {
+                top: 35vh;
+            }
+        }
+        @keyframes moveupname {
+            0% {
+                top: 0vh;
+            }
+            99.9% {
+                top: -50vh;
+            }
+            100% {
+                top: -50vh;
+            }
+        }
+        @keyframes movedownname {
+            0% {
+                top: -50vh;
+            }
+            99.9% {
+                top: 0vh;
+            }
+            100% {
+                top: 0vh;
+            }
+        }
+        @keyframes moveuparrow {
+            0% {
+                bottom: 46vh;
+            }
+            99.9% {
+                bottom: 93vh;
+            }
+            100% {
+                bottom: 93vh;
+            }
+        }
+        @keyframes movedownarrow {
+            0% {
+                bottom: 94vh;
+            }
+            99.9% {
+                bottom: 46vh;
+            }
+            100% {
+                bottom: 46vh;
+            }
+        }
+        @keyframes fadein {
+            0% {
+                opacity: 0;
+            }
+            99.9% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+        @keyframes fadeout {
+            0% {
+                opacity: 1;
+            }
+            99.9% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+        .contactbtns {
             position: absolute;
-            left: 50vw;
+            width: 10vw;
+            height: 45vh;
             top: 0vh;
-            z-index: 2;
+            right: 2vw;
+            z-index: 1;
+            opacity: 0;
         }
-        .textsections {
+        .contactbtns #discord, .contactbtns #github, .contactbtns #gmail {
+            position: absolute;
+            width: 8vw;
+            height: 15vh;
+            border-radius: 1vw;
+            border:#e5e5e4 solid 0.5vh;
+            box-shadow: 0 0.5vw 0.5vw rgb(76, 76, 76);
+            background: #f5f5f5;
+            margin-left: 0.8vw;
+            margin-top: 2.5vh;
+            transition: box-shadow 0.4s ease;
             overflow: hidden;
-            width: 30vw;
-            height: 100vh;
-            position: absolute;
-            left: 20vw;
-            top: 15vh;
-            z-index: 4;
-            font-size: 5vw;
-            font-family: 'Red Hat Display', sans-serif;
-            color:#ee2000;
         }
-        .textsections .home {
+        .contactbtns #gmail {
+            top: 20vh;
+        }
+        .contactbtns #github {
+            top: 40vh;
+        }
+        .contactbtns #discord:hover, .contactbtns #github:hover , .contactbtns #gmail:hover {
+            box-shadow: 0 0 0 rgb(76, 76, 76);
+        }
+        .contactbtns #discord:after, .contactbtns #github:after , .contactbtns #gmail:after {
+            content: 'Discord';
+            font-size: 2vw;
+            font-family: "Red Hat Display", sans-serif;
+            text-align:center;
+            display: flex;
+            flex-direction: column;
+            align-content: center;
+            justify-content: center;
             position: absolute;
-            left: 50vw;
-            z-index: inherit;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 15vh;
+            background:rgb(76, 76, 76);
+            transition: top 0.6s ease;
+        }
+        .contactbtns #github:after {
+            content: 'Github'
+        }
+        .contactbtns #gmail:after {
+            content: 'Gmail'
+        }
+        .contactbtns #discord:hover:after, .contactbtns #github:hover:after , .contactbtns #gmail:hover:after {
             top: 0;
-        }
-        .textsections .about {
-            position: absolute;
-            left: 50vw;
-            z-index: inherit;
-            top: 15vh;
-        }
-        .textsections .work {
-            position: absolute;
-            left: 50vw;
-            z-index: inherit;
-            top: 30vh;  
-        }
-        .textsections .socials {
-            position: absolute;
-            left: 50vw;
-            z-index: inherit;
-            top: 45vh;
-        }   
-        .textsections .home:after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 0.25vw;
-            display: block;
-            margin-top: -1vh;
-            left: 0%;
-            background: #ee2000;
-            transition: width .3s ease;
-        }
-        .textsections .home:hover:after {
-            width: 100%;
-            left: 0%;
-            background: #ee2000;
-        }
-        .textsections .about:after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 0.25vw;
-            display: block;
-            margin-top: -1vh;
-            left: 0%;
-            background: #ee2000;
-            transition: width .3s ease;
-        }
-        .textsections .about:hover:after {
-            width: 100%;
-            left: 0%;
-            background: #ee2000;
-        }
-        .textsections .work:after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 0.25vw;
-            display: block;
-            margin-top: -1vh;
-            left: 0%;
-            background: #ee2000;
-            transition: width .3s ease;
-        }
-        .textsections .work:hover:after {
-            width: 100%;
-            left: 0%;
-            background: #ee2000;
-        }
-        .textsections .socials:after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 0.25vw;
-            display: block;
-            margin-top: -1vh;
-            left: 0%;
-            background: #ee2000;
-            transition: width .3s ease;
-        }
-        .textsections .socials:hover:after {
-            width: 100%;
-            left: 0%;
-            background: #ee2000;
-        }
-        @keyframes fromleft {
-            0% {
-                left: 50vw
-            }
-            99.9% {
-                left: 10vw
-            } 
-            100% {
-                left: 10vw
-            }           
-        }
-        @keyframes fromright {
-            0% {
-                left: 10vw
-            }
-            99.9% {
-                left: 50vw
-            } 
-            100% {
-                left: 50vw
-            }           
-        }
-        #about {
-            display: none;
-        }
-        #work {
-            display: none;
-        }
-        #socials {
-            display: none;
+            background:rgb(76, 76, 76);
         }
         .languages {
             position: absolute;
             width: 10vw;
             height: 30vh;
-            top: 50vh;
-            right: -20vw;
+            top: 0vh;
+            left: 0vw;
             overflow: hidden;
-            border-top:#c92b12 solid 0.5vh;
-            border-left:#c92b12 solid 0.5vh;
-            border-bottom:#c92b12 solid 0.5vh;
-            animation: slideleftlan 300ms forwards;
-            animation-delay: 1.5s;
+            z-index: 1;
+            border-top:rgb(76, 76, 76) solid 0.5vh;
+            border-bottom:rgb(76, 76, 76) solid 0.5vh;
+            opacity: 0;
         }
         #html {
             position: absolute;
@@ -517,211 +519,81 @@
             top: 66vh;
             right: 0;
         }
-        @keyframes slideleftlan {
-            0% {
-                right: -20vw;
-            }
-            99.9% {
-                right: 0vw;
-            }
-            100% {
-                right: 0vw;
-            }
-        }
         .games {
             position: absolute;
-            top: -46vh;
-            left: 0;
-            width: 20vw;
-            height: 45vh;
-            border-right:#c92b12 solid 0.5vh;
-            border-bottom:#c92b12 solid 0.5vh;
-            animation: slidebottomgames 500ms forwards;
-            animation-delay: 1.5s;
-            text-align: center;
+            width: 30vw;
+            height: 30vh;
+            background: #0b0b0b;
+            border-radius: 1vw;
+            bottom: 5vh;
+            left: 35vw;
+            z-index: 1;
+            opacity: 0;
+            
         }
+
         .games span.g {
-            font-size: 5vw;
-            font-family: 'Red Hat Display', sans-serif;
-            color:rgb(210, 26, 26);
+            color: #f5f5f5;
+            font-family: 'Red Hat Display', serif;
+            font-size: 4vw;
         }
+
         .games span.l {
-            font-size: 1.9vw;
-            font-family: 'Red Hat Text', sans-serif;
-            color:rgb(210, 26, 26);
+            color: #f5f5f5;
+            font-family: 'Red Hat Text', serif;
+            font-size: 1vw;
         }
         a {
-            color:rgb(210, 26, 26);
-            position: relative;
-            font-size: 1.9vw;
-            z-index: 1;
             text-decoration: none;
             font-family:'Red Hat Display', serif;
             font-style: normal;
-	    cursor: none;
+            color: #f5f5f5;
+            font-size: 1.3vw;
         }
-        a:after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 0.25vw;
-            display: block;
-            margin-top: 0;
-            left: 0%;
-            background: rgb(210, 26, 26);
-            transition: width .3s ease;
-        }
-        a:hover:after {
-            width: 100%;
-            left: 0%;
-            background: rgb(210, 26, 26);
-        }
-        @keyframes slidebottomgames {
-            0% {
-                top: -46vh;
-            }
-            99.9% {
-                top: 0vh;
-            }
-            100% {
-                top: 0vh;
-            }
-        }
-        .contactbtns {
-            position: absolute;
-            width: 10vw;
-            height: 45vh;
-            bottom: -46vh;
-            right: 5vw;
-            border-top:#c92b12 solid 0.5vh;
-            border-left:#c92b12 solid 0.5vh;
-            border-right:#c92b12 solid 0.5vh;
-            animation: slidetopcontact 500ms forwards;
-            animation-delay: 1.5s;
-        }
-        .contactbtns #discord {
-            position: absolute;
-            width: 8vw;
-            height: 15vh;
-            border-radius: 1vw;
-            border:rgb(182, 30, 30) solid 0.5vh;
-            box-shadow: 0 0.5vw 0.5vw rgb(76, 76, 76);
-            background: rgb(210, 26, 26);
-            margin-left: 0.8vw;
-            margin-top: 2.5vh;
-            transition: box-shadow 0.4s ease;
-            overflow: hidden
-        }
-        .contactbtns #discord:hover {
-            box-shadow: 0 0 0 rgb(76, 76, 76);
-        }
-        .contactbtns #discord:after {
-            content: 'Discord';
-            font-size: 2vw;
-            font-family: "Red Hat Display", sans-serif;
-            text-align:center;
-            display: flex;
-            flex-direction: column;
-            align-content: center;
-            justify-content: center;
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            left: 0;
-            top: 15vh;
-            background:rgb(76, 76, 76);
-            transition: top 0.6s ease;
-        }
-        .contactbtns #discord:hover:after {
-            top: 0;
-            background:rgb(76, 76, 76);
-        }
-        .contactbtns #gmail {
-            position: absolute;
-            width: 8vw;
-            height: 15vh;
-            border-radius: 1vw;
-            border:rgb(182, 30, 30) solid 0.5vh;
-            box-shadow: 0 0.5vw 0.5vw rgb(76, 76, 76);
-            background: rgb(210, 26, 26);
-            margin-left: 0.8vw;
-            margin-top: 22.5vh;
-	    transition: box-shadow 0.4s ease;
-            overflow: hidden
-        }
-        .contactbtns #gmail:hover {
-            box-shadow: 0 0 0 rgb(76, 76, 76);
-        }
-        .contactbtns #gmail:after {
-            content: 'Gmail';
-            font-size: 2vw;
-            font-family: "Red Hat Display", sans-serif;
-            text-align:center;
-            display: flex;
-            flex-direction: column;
-            align-content: center;
-            justify-content: center;
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            left: 0;
-            top: 15vh;
-            background:rgb(76, 76, 76);
-            transition: top 0.6s ease;
-        }
-        .contactbtns #gmail:hover:after {
-            top: 0;
-            background:rgb(76, 76, 76);
-        }
-        @keyframes slidetopcontact {
-            0% {
-                bottom: -46vh;
-            }
-            99.9% {
-                bottom: 0vh;
-            }
-            100% {
-                bottom: 0vh
-            }
-        }    </style>
+        </style>
 </head>
 <body>
+    <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
     <div class="mouse" id="mouse"></div>
-    <div class = "sectionsq1"></div> 
-    <div class = "sectionsq2"></div> 
-    <div class = "sectionsq3"></div> 
-    <div class = "sectionsq4"></div>
-    <div id="line"></div>
-    <div id="transition"></div>
-    <div class = textsections>
-        <div class="interactable home">Home</a></div>
-        <div class="interactable about">About</div>
-        <div class="interactable work">Work</div>
-        <div class="interactable socials">Socials</div>
+    <script type = "module" src = "/three.js"></script>
+    <div class = "consolee">
+        CONSOLEE
+        <div class="line" id = "line1"></div>
+        <div class="line" id = "line2"></div>
+        <div class="line" id = "line3"></div>
+        <div class="line" id = "line4"></div>
     </div>
-    <div class = "interactable pages" id = "menu">
-        <div class="line1"></div>
-        <div class="line2"></div>
-        <div class="line3"></div>
+    <div class="name">Aakash Ashok</div>
+    <div class="interactable arrow">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" ><g data-name="Arrow"><path fill = "#ffffff"d="M25 0H7a7 7 0 0 0-7 7v18a7 7 0 0 0 7 7h18a7 7 0 0 0 7-7V7a7 7 0 0 0-7-7zm5 25a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5h18a5 5 0 0 1 5 5z"/><path fill = "#ffffff" d="m15.29 5.29-7 7L9.7 13.7 15 8.41V27h2V8.41l5.29 5.29 1.41-1.41-7-7a1 1 0 0 0-1.41 0z"/></g></svg>
     </div>
-    <div id = "home">    
-    <div class = "title" id = "aakash">Aakash</div>
-    <div class="title" id="ashok">Ashok</div>
-    <div class="footer"><span class = "p">a self-taught programmer</span><span class = "c">CONSOLEE</span></div>
+    <div class="box">
+        <span class="header">Self-Taught </span>
+        <span id = "typing"></span><br>
+        <span class="info">I am Aakash, and I often call myself by the alias "Consolee". I have been learning the art of programming since the age of 8. Presently, I'm 13 years old and I like to believe I have enough skill to call myself a proud programmer. </span>
+        
     </div>
-    <div id = "about">
-        <div class = "title" id = "abouttext">About</div>
-    <div class="title" id="me">Me</div>
-    <div class="footer"><span class = "q">I am Aakash, a programmer.</span><span class = "s">I often call myself by the alias "Consolee". I have been learning the art of programming since the age of 8. Presently, I'm 13 years old and I like to believe I have enough skill to call myself a proud programmer. </span></div>
-    <div class = "languages">
-        <svg id = "css" xmlns="http://www.w3.org/2000/svg" width="10vw" height="10vh" viewBox="0 0 512 512"><path fill = "#28a1f7"d="M64,32,99,435.22,255.77,480,413,435.15,448,32ZM354.68,366.9,256.07,395l-98.46-28.24L150.86,289h48.26l3.43,39.56,53.59,15.16.13.28h0l53.47-14.85L315.38,265H203l-4-50H319.65L324,164H140l-4-49H376.58Z"/></svg>
-        <svg id = "html" xmlns="http://www.w3.org/2000/svg" width="10vw" height="10vh" viewBox="0 0 512 512"><path fill = "#FF0000" d="M64,32,98.94,435.21,255.77,480,413,435.15,448,32ZM372,164H188l4,51H368L354.49,366.39,256,394.48l-98.68-28L150.54,289H198.8l3.42,39.29L256,343.07l53.42-14.92L315,264H148L135.41,114.41l240.79,0Z"/></svg>
-        <svg id = "js" xmlns="http://www.w3.org/2000/svg" width="10vw" height="10vh" viewBox="0 0 512 512"><path fill = "#FFFF00"d="M32,32V480H480V32ZM272,380c0,43.61-25.76,64.87-63.05,64.87-33.68,0-53.23-17.44-63.15-38.49h0l34.28-20.75c6.61,11.73,11.63,21.65,26.06,21.65,12,0,21.86-5.41,21.86-26.46V240h44Zm99.35,63.87c-39.09,0-64.35-17.64-76.68-42h0L329,382c9,14.74,20.75,24.56,41.5,24.56,17.44,0,27.57-7.72,27.57-19.75,0-14.43-10.43-19.54-29.68-28l-10.52-4.52c-30.38-12.92-50.52-29.16-50.52-63.45,0-31.57,24.05-54.63,61.64-54.63,26.77,0,46,8.32,59.85,32.68L396,290c-7.22-12.93-15-18-27.06-18-12.33,0-20.15,7.82-20.15,18,0,12.63,7.82,17.74,25.86,25.56l10.52,4.51c35.79,15.34,55.94,31,55.94,66.16C441.12,424.13,411.35,443.87,371.35,443.87Z"/></svg>
-        <svg id = "py" xmlns="http://www.w3.org/2000/svg" width="10vw" height="10vh" viewBox="0 0 512 512"><path fill = "#0295b3" d="M314,36.38c-18.59-3.06-45.8-4.47-64.27-4.38a311.09,311.09,0,0,0-51.66,4.38c-45.74,8-54.07,24.7-54.07,55.54V128H256v16H107.62C66.06,144,32.33,193.67,32,255.12c0,.29,0,.58,0,.88a162.91,162.91,0,0,0,3.13,32c9.29,46.28,38.23,80,72.49,80H128V314c0-31.3,20.84-59.95,55-66.1l9.87-1.23H314a56.05,56.05,0,0,0,15.06-2A52.48,52.48,0,0,0,368,193.68V91.92C368,63,343.32,41.19,314,36.38ZM194.93,105.5a20.37,20.37,0,1,1,20.3-20.3A20.29,20.29,0,0,1,194.93,105.5Z"/><path fill = "#FFFF00" d="M475.28,217c-10.7-42.61-38.41-73-70.9-73H386.67v47.45c0,39.57-26,68.22-57.74,73.13a63.54,63.54,0,0,1-9.69.75H198.08a60,60,0,0,0-15.23,1.95C160.54,273.14,144,291.7,144,315.77V417.54c0,29,29.14,46,57.73,54.31,34.21,9.95,71.48,11.75,112.42,0,27.19-7.77,53.85-23.48,53.85-54.31V384H256V368H404.38c29.44,0,54.95-24.93,67.45-61.31A156.83,156.83,0,0,0,480,256,160.64,160.64,0,0,0,475.28,217ZM316.51,404a20.37,20.37,0,1,1-20.3,20.3A20.29,20.29,0,0,1,316.51,404Z"/></svg>
-        <svg id = "java" xmlns="http://www.w3.org/2000/svg" width="10vw" height="10vh" viewBox="0 0 32 32"><path d="M11.622 24.74s-1.23.748.855.962c2.51.32 3.847.267 6.625-.267a10.02 10.02 0 0 0 1.763.855c-6.25 2.672-14.16-.16-9.244-1.55zm-.8-3.473s-1.336 1.015.748 1.23c2.725.267 4.862.32 8.55-.427a3.26 3.26 0 0 0 1.282.801c-7.534 2.244-15.976.214-10.58-1.603zm14.747 6.09s.908.748-1.015 1.336c-3.58 1.07-15.014 1.39-18.22 0-1.122-.48 1.015-1.175 1.7-1.282.695-.16 1.07-.16 1.07-.16-1.23-.855-8.175 1.763-3.526 2.51 12.77 2.084 23.296-.908 19.983-2.404zM12.2 17.633s-5.824 1.39-2.084 1.87c1.603.214 4.755.16 7.694-.053 2.404-.214 4.81-.64 4.81-.64s-.855.374-1.443.748c-5.93 1.55-17.312.855-14.052-.748 2.778-1.336 5.076-1.175 5.076-1.175zm10.42 5.824c5.984-3.1 3.206-6.09 1.282-5.717-.48.107-.695.214-.695.214s.16-.32.534-.427c3.794-1.336 6.786 4.007-1.23 6.09 0 0 .053-.053.107-.16zm-9.83 8.442c5.77.374 14.587-.214 14.8-2.94 0 0-.427 1.07-4.755 1.87-4.916.908-11.007.8-14.587.214 0 0 .748.64 4.542.855z" fill="#4e7896"/><path d="M18.996.001s3.313 3.366-3.152 8.442c-5.183 4.114-1.175 6.465 0 9.137-3.046-2.725-5.236-5.13-3.74-7.373C14.294 6.893 20.332 5.3 18.996.001zm-1.7 15.335c1.55 1.763-.427 3.366-.427 3.366s3.954-2.03 2.137-4.542c-1.656-2.404-2.94-3.58 4.007-7.587 0 0-10.953 2.725-5.717 8.763z" fill="#f58219"/></svg>
-        <svg id = "ts" xmlns="http://www.w3.org/2000/svg" width="10vw" height="10vh" viewBox="0 0 24 24"><path fill = "#00849e" d="M1.125 0C.502 0 0 .502 0 1.125v21.75C0 23.498.502 24 1.125 24h21.75c.623 0 1.125-.502 1.125-1.125V1.125C24 .502 23.498 0 22.875 0zm17.363 9.75c.612 0 1.154.037 1.627.111a6.38 6.38 0 0 1 1.306.34v2.458a3.95 3.95 0 0 0-.643-.361 5.093 5.093 0 0 0-.717-.26 5.453 5.453 0 0 0-1.426-.2c-.3 0-.573.028-.819.086a2.1 2.1 0 0 0-.623.242c-.17.104-.3.229-.393.374a.888.888 0 0 0-.14.49c0 .196.053.373.156.529.104.156.252.304.443.444s.423.276.696.41c.273.135.582.274.926.416.47.197.892.407 1.266.628.374.222.695.473.963.753.268.279.472.598.614.957.142.359.214.776.214 1.253 0 .657-.125 1.21-.373 1.656a3.033 3.033 0 0 1-1.012 1.085 4.38 4.38 0 0 1-1.487.596c-.566.12-1.163.18-1.79.18a9.916 9.916 0 0 1-1.84-.164 5.544 5.544 0 0 1-1.512-.493v-2.63a5.033 5.033 0 0 0 3.237 1.2c.333 0 .624-.03.872-.09.249-.06.456-.144.623-.25.166-.108.29-.234.373-.38a1.023 1.023 0 0 0-.074-1.089 2.12 2.12 0 0 0-.537-.5 5.597 5.597 0 0 0-.807-.444 27.72 27.72 0 0 0-1.007-.436c-.918-.383-1.602-.852-2.053-1.405-.45-.553-.676-1.222-.676-2.005 0-.614.123-1.141.369-1.582.246-.441.58-.804 1.004-1.089a4.494 4.494 0 0 1 1.47-.629 7.536 7.536 0 0 1 1.77-.201zm-15.113.188h9.563v2.166H9.506v9.646H6.789v-9.646H3.375z"/></svg>
-        <svg id = "php" xmlns="http://www.w3.org/2000/svg" width="10vw" height="10vh" viewBox="0 0 640 512"><path fill = "#907ede"d="M320 104.5c171.4 0 303.2 72.2 303.2 151.5S491.3 407.5 320 407.5c-171.4 0-303.2-72.2-303.2-151.5S148.7 104.5 320 104.5m0-16.8C143.3 87.7 0 163 0 256s143.3 168.3 320 168.3S640 349 640 256 496.7 87.7 320 87.7zM218.2 242.5c-7.9 40.5-35.8 36.3-70.1 36.3l13.7-70.6c38 0 63.8-4.1 56.4 34.3zM97.4 350.3h36.7l8.7-44.8c41.1 0 66.6 3 90.2-19.1 26.1-24 32.9-66.7 14.3-88.1-9.7-11.2-25.3-16.7-46.5-16.7h-70.7L97.4 350.3zm185.7-213.6h36.5l-8.7 44.8c31.5 0 60.7-2.3 74.8 10.7 14.8 13.6 7.7 31-8.3 113.1h-37c15.4-79.4 18.3-86 12.7-92-5.4-5.8-17.7-4.6-47.4-4.6l-18.8 96.6h-36.5l32.7-168.6zM505 242.5c-8 41.1-36.7 36.3-70.1 36.3l13.7-70.6c38.2 0 63.8-4.1 56.4 34.3zM384.2 350.3H421l8.7-44.8c43.2 0 67.1 2.5 90.2-19.1 26.1-24 32.9-66.7 14.3-88.1-9.7-11.2-25.3-16.7-46.5-16.7H417l-32.8 168.7z"/></svg>
+    <div class="contactbtns">
+        <div class="interactable" id="discord">
+            <svg xmlns="http://www.w3.org/2000/svg" width="6.25vw" height="13.311148086522463vh" viewBox="0 0 16 16"> <path d="M13.545 2.907a13.227 13.227 0 0 0-3.257-1.011.05.05 0 0 0-.052.025c-.141.25-.297.577-.406.833a12.19 12.19 0 0 0-3.658 0 8.258 8.258 0 0 0-.412-.833.051.051 0 0 0-.052-.025c-1.125.194-2.22.534-3.257 1.011a.041.041 0 0 0-.021.018C.356 6.024-.213 9.047.066 12.032c.001.014.01.028.021.037a13.276 13.276 0 0 0 3.995 2.02.05.05 0 0 0 .056-.019c.308-.42.582-.863.818-1.329a.05.05 0 0 0-.01-.059.051.051 0 0 0-.018-.011 8.875 8.875 0 0 1-1.248-.595.05.05 0 0 1-.02-.066.051.051 0 0 1 .015-.019c.084-.063.168-.129.248-.195a.05.05 0 0 1 .051-.007c2.619 1.196 5.454 1.196 8.041 0a.052.052 0 0 1 .053.007c.08.066.164.132.248.195a.051.051 0 0 1-.004.085 8.254 8.254 0 0 1-1.249.594.05.05 0 0 0-.03.03.052.052 0 0 0 .003.041c.24.465.515.909.817 1.329a.05.05 0 0 0 .056.019 13.235 13.235 0 0 0 4.001-2.02.049.049 0 0 0 .021-.037c.334-3.451-.559-6.449-2.366-9.106a.034.034 0 0 0-.02-.019Zm-8.198 7.307c-.789 0-1.438-.724-1.438-1.612 0-.889.637-1.613 1.438-1.613.807 0 1.45.73 1.438 1.613 0 .888-.637 1.612-1.438 1.612Zm5.316 0c-.788 0-1.438-.724-1.438-1.612 0-.889.637-1.613 1.438-1.613.807 0 1.451.73 1.438 1.613 0 .888-.631 1.612-1.438 1.612Z"></path> </svg>
+        </div>
+        <div class="interactable" id="gmail">
+            <svg xmlns="http://www.w3.org/2000/svg" width="10.9375vw" height="23.29450915141431vh" viewBox="0 0 660 378" style="position: absolute; right: -1.5vw; bottom: -4.5vh"><path d="M 179.798 22.931 C 165.102 27.630, 153.888 38.447, 148.765 52.867 C 146.801 58.396, 146.767 60.787, 146.940 182.918 C 147.044 257.053, 147.502 309.389, 148.072 312.418 C 151.011 328.041, 166.730 344.284, 181.063 346.509 C 184.392 347.026, 184.374 346.999, 180.500 345.684 C 163.716 339.984, 151.998 327.155, 149.026 311.225 C 148.417 307.960, 148.014 258.941, 147.969 182.599 C 147.896 61.595, 147.933 59.141, 149.901 53.542 C 152.854 45.140, 156.267 39.871, 162.366 34.297 C 170.800 26.588, 182.350 22, 193.321 22 C 199.042 22, 209.786 25.089, 215.123 28.268 C 217.530 29.703, 222.425 33.445, 226 36.584 C 229.575 39.724, 235.160 44.589, 238.411 47.396 C 241.662 50.203, 248.667 56.325, 253.978 61 C 266.228 71.783, 323.487 121.403, 332.278 128.854 C 333.902 130.231, 334.422 130.011, 338.278 126.322 C 340.600 124.100, 361.710 105.595, 385.190 85.200 C 408.669 64.805, 430.044 45.954, 432.690 43.309 C 438.289 37.711, 450.949 28.444, 456 26.247 C 473.448 18.655, 492.015 21.836, 505.461 34.720 C 511.241 40.259, 514.376 45.211, 516.963 52.890 C 518.969 58.846, 519 60.821, 519 184.258 C 519 319.159, 519.138 315.363, 513.890 324.609 C 510.919 329.845, 502.418 338.557, 497.500 341.408 C 493.847 343.526, 486.512 346.238, 481.500 347.324 C 480.400 347.563, 481.075 347.635, 483 347.484 C 496.286 346.447, 511.426 334.300, 517.257 320 L 519.500 314.500 519.765 186.550 C 520.029 58.946, 520.024 58.583, 517.933 52.299 C 515.434 44.789, 508.671 35.244, 502.764 30.890 C 500.419 29.162, 495.583 26.363, 492.017 24.670 C 483.825 20.782, 471.723 19.849, 462.892 22.424 C 453.462 25.174, 440.316 33.879, 430.106 44.135 C 426.472 47.784, 419.900 53.841, 415.500 57.596 C 411.100 61.350, 391.525 78.354, 372 95.381 C 352.475 112.408, 335.805 126.924, 334.956 127.638 C 333.641 128.744, 332.455 128.105, 326.956 123.328 C 318.593 116.062, 307.994 106.776, 306.597 105.492 C 305.993 104.937, 302.136 101.562, 298.024 97.992 C 293.912 94.421, 290.042 91.050, 289.423 90.500 C 288.804 89.950, 283.860 85.675, 278.436 81 C 273.013 76.325, 264.508 68.895, 259.538 64.489 C 254.567 60.083, 247.361 53.783, 243.524 50.489 C 239.688 47.195, 235.590 43.600, 234.419 42.500 C 228.333 36.784, 221.161 31.114, 215.927 27.880 C 205.231 21.272, 191.058 19.331, 179.798 22.931 M 237.243 237.750 L 237.486 308.500 237.750 238.750 C 237.895 200.387, 238.348 169.001, 238.757 169.002 C 239.324 169.004, 293.515 215.929, 312.500 232.858 C 314.150 234.330, 318.875 238.422, 323 241.953 C 327.125 245.484, 331.095 248.964, 331.821 249.686 C 333.690 251.544, 333.750 251.516, 339.428 246.250 C 342.245 243.638, 351.063 235.815, 359.025 228.867 C 366.986 221.918, 382.690 208.193, 393.921 198.367 C 405.153 188.540, 417.626 177.666, 421.640 174.202 L 428.938 167.904 429.219 241.202 L 429.500 314.500 433.235 322.322 C 438.900 334.186, 450.738 344.320, 461.500 346.517 C 463.159 346.856, 461.993 346.059, 458.892 344.734 C 455.808 343.417, 451.710 341.366, 449.786 340.177 C 445.047 337.248, 437.649 329.192, 435.088 324.173 C 430.041 314.279, 430 313.584, 430 237.790 C 430 198.855, 429.655 167, 429.233 167 C 428.356 167, 429.442 166.069, 381.500 207.921 C 361.700 225.205, 342.794 241.705, 339.488 244.587 L 333.475 249.827 329.418 246.163 C 327.186 244.149, 317.579 235.750, 308.067 227.500 C 298.556 219.250, 279.063 202.262, 264.749 189.750 C 250.435 177.238, 238.335 167, 237.862 167 C 237.385 167, 237.109 198.641, 237.243 237.750 M 235.079 315.090 C 234.904 318.617, 228.720 328.943, 223.815 333.900 C 218.637 339.133, 212.166 343.080, 204.500 345.684 C 200.901 346.906, 200.828 346.992, 203.770 346.542 C 214.257 344.938, 227.840 333.840, 233.116 322.565 C 234.799 318.969, 235.947 315.459, 235.667 314.764 C 235.330 313.926, 235.131 314.036, 235.079 315.090 M 188.776 347.733 C 191.128 347.945, 194.728 347.942, 196.776 347.727 C 198.824 347.512, 196.900 347.339, 192.500 347.343 C 188.100 347.346, 186.424 347.522, 188.776 347.733" stroke="none"></path><path d="M 182.500 23.421 C 174.787 25.351, 168.354 28.824, 162.382 34.282 C 156.267 39.870, 152.856 45.135, 149.901 53.542 C 147.933 59.141, 147.896 61.595, 147.969 182.599 C 148.014 258.941, 148.417 307.960, 149.026 311.225 C 151.562 324.815, 160.810 336.620, 173.768 342.808 C 181.231 346.372, 181.882 346.500, 192.500 346.500 C 203.069 346.500, 203.794 346.359, 211 342.906 C 219.481 338.841, 227.206 331.713, 231.320 324.154 C 237.003 313.712, 237 313.756, 237 237.290 C 237 198.626, 237.388 167, 237.862 167 C 238.335 167, 250.435 177.238, 264.749 189.750 C 279.063 202.262, 298.556 219.250, 308.067 227.500 C 317.579 235.750, 327.186 244.149, 329.418 246.163 L 333.475 249.827 339.488 244.587 C 342.794 241.705, 361.700 225.205, 381.500 207.921 C 429.442 166.069, 428.356 167, 429.233 167 C 429.655 167, 430 198.855, 430 237.790 C 430 314.834, 429.991 314.701, 435.698 325.186 C 443.363 339.270, 463.060 349.472, 478.791 347.507 C 485.626 346.653, 493.619 343.909, 498.606 340.705 C 503.546 337.531, 511.024 329.656, 513.889 324.609 C 519.138 315.365, 519 319.163, 519 184.258 C 519 60.821, 518.969 58.846, 516.963 52.890 C 514.376 45.211, 511.241 40.259, 505.461 34.720 C 492.015 21.836, 473.448 18.655, 456 26.247 C 450.949 28.444, 438.289 37.711, 432.690 43.309 C 430.044 45.954, 408.669 64.805, 385.190 85.200 C 361.710 105.595, 340.600 124.100, 338.278 126.322 C 334.422 130.011, 333.902 130.231, 332.278 128.854 C 323.487 121.403, 266.228 71.783, 253.978 61 C 248.667 56.325, 241.662 50.203, 238.411 47.396 C 235.160 44.589, 229.575 39.724, 226 36.584 C 217.567 29.178, 212.258 26.080, 204.144 23.830 C 196.617 21.743, 189.727 21.613, 182.500 23.421" stroke="none"></path></svg>
+        </div>
+        <div class = "interactable" id = "github">
+            <svg xmlns="http://www.w3.org/2000/svg" style = "position: absolute; top: -3vh;right: -0.25vw;transform: scale(1.2)"data-name="Layer 1" viewBox="0 0 24 24" id="github"><path d="M12,2.2467A10.00042,10.00042,0,0,0,8.83752,21.73419c.5.08752.6875-.21247.6875-.475,0-.23749-.01251-1.025-.01251-1.86249C7,19.85919,6.35,18.78423,6.15,18.22173A3.636,3.636,0,0,0,5.125,16.8092c-.35-.1875-.85-.65-.01251-.66248A2.00117,2.00117,0,0,1,6.65,17.17169a2.13742,2.13742,0,0,0,2.91248.825A2.10376,2.10376,0,0,1,10.2,16.65923c-2.225-.25-4.55-1.11254-4.55-4.9375a3.89187,3.89187,0,0,1,1.025-2.6875,3.59373,3.59373,0,0,1,.1-2.65s.83747-.26251,2.75,1.025a9.42747,9.42747,0,0,1,5,0c1.91248-1.3,2.75-1.025,2.75-1.025a3.59323,3.59323,0,0,1,.1,2.65,3.869,3.869,0,0,1,1.025,2.6875c0,3.83747-2.33752,4.6875-4.5625,4.9375a2.36814,2.36814,0,0,1,.675,1.85c0,1.33752-.01251,2.41248-.01251,2.75,0,.26251.1875.575.6875.475A10.0053,10.0053,0,0,0,12,2.2467Z"></path></svg>
+        </div>
     </div>
+    <div class="languages">
+        <svg id="css" xmlns="http://www.w3.org/2000/svg" width="10vw" height="10vh" viewBox="0 0 512 512" style="top: 11vh;"><path fill="#28a1f7" d="M64,32,99,435.22,255.77,480,413,435.15,448,32ZM354.68,366.9,256.07,395l-98.46-28.24L150.86,289h48.26l3.43,39.56,53.59,15.16.13.28h0l53.47-14.85L315.38,265H203l-4-50H319.65L324,164H140l-4-49H376.58Z"></path></svg>
+        <svg id="html" xmlns="http://www.w3.org/2000/svg" width="10vw" height="10vh" viewBox="0 0 512 512" style="top: 22vh;"><path fill="#FF0000" d="M64,32,98.94,435.21,255.77,480,413,435.15,448,32ZM372,164H188l4,51H368L354.49,366.39,256,394.48l-98.68-28L150.54,289H198.8l3.42,39.29L256,343.07l53.42-14.92L315,264H148L135.41,114.41l240.79,0Z"></path></svg>
+        <svg id="js" xmlns="http://www.w3.org/2000/svg" width="10vw" height="10vh" viewBox="0 0 512 512" style="top: 33vh;"><path fill="#FFFF00" d="M32,32V480H480V32ZM272,380c0,43.61-25.76,64.87-63.05,64.87-33.68,0-53.23-17.44-63.15-38.49h0l34.28-20.75c6.61,11.73,11.63,21.65,26.06,21.65,12,0,21.86-5.41,21.86-26.46V240h44Zm99.35,63.87c-39.09,0-64.35-17.64-76.68-42h0L329,382c9,14.74,20.75,24.56,41.5,24.56,17.44,0,27.57-7.72,27.57-19.75,0-14.43-10.43-19.54-29.68-28l-10.52-4.52c-30.38-12.92-50.52-29.16-50.52-63.45,0-31.57,24.05-54.63,61.64-54.63,26.77,0,46,8.32,59.85,32.68L396,290c-7.22-12.93-15-18-27.06-18-12.33,0-20.15,7.82-20.15,18,0,12.63,7.82,17.74,25.86,25.56l10.52,4.51c35.79,15.34,55.94,31,55.94,66.16C441.12,424.13,411.35,443.87,371.35,443.87Z"></path></svg>
+        <svg id="py" xmlns="http://www.w3.org/2000/svg" width="10vw" height="10vh" viewBox="0 0 512 512" style="top: 44vh;"><path fill="#0295b3" d="M314,36.38c-18.59-3.06-45.8-4.47-64.27-4.38a311.09,311.09,0,0,0-51.66,4.38c-45.74,8-54.07,24.7-54.07,55.54V128H256v16H107.62C66.06,144,32.33,193.67,32,255.12c0,.29,0,.58,0,.88a162.91,162.91,0,0,0,3.13,32c9.29,46.28,38.23,80,72.49,80H128V314c0-31.3,20.84-59.95,55-66.1l9.87-1.23H314a56.05,56.05,0,0,0,15.06-2A52.48,52.48,0,0,0,368,193.68V91.92C368,63,343.32,41.19,314,36.38ZM194.93,105.5a20.37,20.37,0,1,1,20.3-20.3A20.29,20.29,0,0,1,194.93,105.5Z"></path><path fill="#FFFF00" d="M475.28,217c-10.7-42.61-38.41-73-70.9-73H386.67v47.45c0,39.57-26,68.22-57.74,73.13a63.54,63.54,0,0,1-9.69.75H198.08a60,60,0,0,0-15.23,1.95C160.54,273.14,144,291.7,144,315.77V417.54c0,29,29.14,46,57.73,54.31,34.21,9.95,71.48,11.75,112.42,0,27.19-7.77,53.85-23.48,53.85-54.31V384H256V368H404.38c29.44,0,54.95-24.93,67.45-61.31A156.83,156.83,0,0,0,480,256,160.64,160.64,0,0,0,475.28,217ZM316.51,404a20.37,20.37,0,1,1-20.3,20.3A20.29,20.29,0,0,1,316.51,404Z"></path></svg>
+        <svg id="java" xmlns="http://www.w3.org/2000/svg" width="10vw" height="10vh" viewBox="0 0 32 32" style="top: 55vh;"><path d="M11.622 24.74s-1.23.748.855.962c2.51.32 3.847.267 6.625-.267a10.02 10.02 0 0 0 1.763.855c-6.25 2.672-14.16-.16-9.244-1.55zm-.8-3.473s-1.336 1.015.748 1.23c2.725.267 4.862.32 8.55-.427a3.26 3.26 0 0 0 1.282.801c-7.534 2.244-15.976.214-10.58-1.603zm14.747 6.09s.908.748-1.015 1.336c-3.58 1.07-15.014 1.39-18.22 0-1.122-.48 1.015-1.175 1.7-1.282.695-.16 1.07-.16 1.07-.16-1.23-.855-8.175 1.763-3.526 2.51 12.77 2.084 23.296-.908 19.983-2.404zM12.2 17.633s-5.824 1.39-2.084 1.87c1.603.214 4.755.16 7.694-.053 2.404-.214 4.81-.64 4.81-.64s-.855.374-1.443.748c-5.93 1.55-17.312.855-14.052-.748 2.778-1.336 5.076-1.175 5.076-1.175zm10.42 5.824c5.984-3.1 3.206-6.09 1.282-5.717-.48.107-.695.214-.695.214s.16-.32.534-.427c3.794-1.336 6.786 4.007-1.23 6.09 0 0 .053-.053.107-.16zm-9.83 8.442c5.77.374 14.587-.214 14.8-2.94 0 0-.427 1.07-4.755 1.87-4.916.908-11.007.8-14.587.214 0 0 .748.64 4.542.855z" fill="#4e7896"></path><path d="M18.996.001s3.313 3.366-3.152 8.442c-5.183 4.114-1.175 6.465 0 9.137-3.046-2.725-5.236-5.13-3.74-7.373C14.294 6.893 20.332 5.3 18.996.001zm-1.7 15.335c1.55 1.763-.427 3.366-.427 3.366s3.954-2.03 2.137-4.542c-1.656-2.404-2.94-3.58 4.007-7.587 0 0-10.953 2.725-5.717 8.763z" fill="#f58219"></path></svg>
+        <svg id="ts" xmlns="http://www.w3.org/2000/svg" width="10vw" height="10vh" viewBox="0 0 24 24" style="top: 66vh;"><path fill="#00849e" d="M1.125 0C.502 0 0 .502 0 1.125v21.75C0 23.498.502 24 1.125 24h21.75c.623 0 1.125-.502 1.125-1.125V1.125C24 .502 23.498 0 22.875 0zm17.363 9.75c.612 0 1.154.037 1.627.111a6.38 6.38 0 0 1 1.306.34v2.458a3.95 3.95 0 0 0-.643-.361 5.093 5.093 0 0 0-.717-.26 5.453 5.453 0 0 0-1.426-.2c-.3 0-.573.028-.819.086a2.1 2.1 0 0 0-.623.242c-.17.104-.3.229-.393.374a.888.888 0 0 0-.14.49c0 .196.053.373.156.529.104.156.252.304.443.444s.423.276.696.41c.273.135.582.274.926.416.47.197.892.407 1.266.628.374.222.695.473.963.753.268.279.472.598.614.957.142.359.214.776.214 1.253 0 .657-.125 1.21-.373 1.656a3.033 3.033 0 0 1-1.012 1.085 4.38 4.38 0 0 1-1.487.596c-.566.12-1.163.18-1.79.18a9.916 9.916 0 0 1-1.84-.164 5.544 5.544 0 0 1-1.512-.493v-2.63a5.033 5.033 0 0 0 3.237 1.2c.333 0 .624-.03.872-.09.249-.06.456-.144.623-.25.166-.108.29-.234.373-.38a1.023 1.023 0 0 0-.074-1.089 2.12 2.12 0 0 0-.537-.5 5.597 5.597 0 0 0-.807-.444 27.72 27.72 0 0 0-1.007-.436c-.918-.383-1.602-.852-2.053-1.405-.45-.553-.676-1.222-.676-2.005 0-.614.123-1.141.369-1.582.246-.441.58-.804 1.004-1.089a4.494 4.494 0 0 1 1.47-.629 7.536 7.536 0 0 1 1.77-.201zm-15.113.188h9.563v2.166H9.506v9.646H6.789v-9.646H3.375z"></path></svg>
+        <svg id="php" xmlns="http://www.w3.org/2000/svg" width="10vw" height="10vh" viewBox="0 0 640 512" style="top: 1vh;"><path fill="#907ede" d="M320 104.5c171.4 0 303.2 72.2 303.2 151.5S491.3 407.5 320 407.5c-171.4 0-303.2-72.2-303.2-151.5S148.7 104.5 320 104.5m0-16.8C143.3 87.7 0 163 0 256s143.3 168.3 320 168.3S640 349 640 256 496.7 87.7 320 87.7zM218.2 242.5c-7.9 40.5-35.8 36.3-70.1 36.3l13.7-70.6c38 0 63.8-4.1 56.4 34.3zM97.4 350.3h36.7l8.7-44.8c41.1 0 66.6 3 90.2-19.1 26.1-24 32.9-66.7 14.3-88.1-9.7-11.2-25.3-16.7-46.5-16.7h-70.7L97.4 350.3zm185.7-213.6h36.5l-8.7 44.8c31.5 0 60.7-2.3 74.8 10.7 14.8 13.6 7.7 31-8.3 113.1h-37c15.4-79.4 18.3-86 12.7-92-5.4-5.8-17.7-4.6-47.4-4.6l-18.8 96.6h-36.5l32.7-168.6zM505 242.5c-8 41.1-36.7 36.3-70.1 36.3l13.7-70.6c38.2 0 63.8-4.1 56.4 34.3zM384.2 350.3H421l8.7-44.8c43.2 0 67.1 2.5 90.2-19.1 26.1-24 32.9-66.7 14.3-88.1-9.7-11.2-25.3-16.7-46.5-16.7H417l-32.8 168.7z"></path></svg>
+    </div>
+    <div class="games"><span class="g">Games</span><br><span class="l"><a href="./games/hangman" class="interactable">Hangman</a><br><a href="./games/flappy_bird" class="interactable">Flappy Bird</a><br><a href="./games/snake_game" class="interactable">Snake Game</a><br><a href="./games/blob_fight" class="interactable">Blob Fight</a><br><a href="./games/escape_the_room" class="interactable">Escape The Room</a></span></div>
     <script>
         for(let i = 0; i<document.getElementsByClassName('languages')[0].children.length;i++) {
             document.getElementsByClassName('languages')[0].children[i].style.top = (i * 11) + "vh"
@@ -740,239 +612,24 @@
     document.getElementsByClassName('languages')[0].addEventListener('mouseleave', () => {
         interval = setInterval(moveuploop, 30)
     })
+    document.getElementById("discord").addEventListener('click', () => {
+        window.open("https://discord.com/users/835432207735848970","_blank")
+    })
+    document.getElementById("gmail").addEventListener('click', () => {
+        window.open("https://mail.google.com/mail/u/0/#inbox?compose=CrpPbDzHMmCsQRfpDSBgNkwRNkHnlVbGRDhVcflRJKZXXSQdFRBmTWKZgrxKhRTCgDNxQrHnlBJjMLCZxdQV", "_blank")
+    })
+    document.getElementById("github").addEventListener('click', () => {
+        window.open("https://github.com/tcgconsolee", "_blank")
+    })
 
     </script>
-    </div>
-    <div id="work">
-        <div class="title" id="my">My</div>
-        <div class="title" id="works">Works</div>
-        <div class = "footer"><span class = "q">Currently working on some things</span><span class = "s">I am working on a game in unity and also developing more indie games on this website!</span></div>
-        <div class="games"><span class="g">Games</span><br><span class="l"><a href = ./games/hangman class = "interactable">Hangman</a><br><a href = ./games/flappy_bird class = "interactable">Flappy Bird</a><br><a href = ./games/snake_game class = "interactable">Snake Game</a><br><a href = ./games/blob_fight class = "interactable">Blob Fight</a><br><a href = ./games/escape_the_room class = "interactable">Escape The Room</a></span></div>
-    </div>
-    <div id="socials">
-        <div class="title" id="contact">Contact</div>
-        <div class="title" id="me">Me</div>
-        <div class="footer"><span class="f">Feel like getting in touch with me?</span></div>
-        <div class="contactbtns">
-            <div class = "interactable" id="discord">
-                <svg xmlns="http://www.w3.org/2000/svg" width="6.25vw" height="13.311148086522463vh"viewBox="0 0 16 16"> <path d="M13.545 2.907a13.227 13.227 0 0 0-3.257-1.011.05.05 0 0 0-.052.025c-.141.25-.297.577-.406.833a12.19 12.19 0 0 0-3.658 0 8.258 8.258 0 0 0-.412-.833.051.051 0 0 0-.052-.025c-1.125.194-2.22.534-3.257 1.011a.041.041 0 0 0-.021.018C.356 6.024-.213 9.047.066 12.032c.001.014.01.028.021.037a13.276 13.276 0 0 0 3.995 2.02.05.05 0 0 0 .056-.019c.308-.42.582-.863.818-1.329a.05.05 0 0 0-.01-.059.051.051 0 0 0-.018-.011 8.875 8.875 0 0 1-1.248-.595.05.05 0 0 1-.02-.066.051.051 0 0 1 .015-.019c.084-.063.168-.129.248-.195a.05.05 0 0 1 .051-.007c2.619 1.196 5.454 1.196 8.041 0a.052.052 0 0 1 .053.007c.08.066.164.132.248.195a.051.051 0 0 1-.004.085 8.254 8.254 0 0 1-1.249.594.05.05 0 0 0-.03.03.052.052 0 0 0 .003.041c.24.465.515.909.817 1.329a.05.05 0 0 0 .056.019 13.235 13.235 0 0 0 4.001-2.02.049.049 0 0 0 .021-.037c.334-3.451-.559-6.449-2.366-9.106a.034.034 0 0 0-.02-.019Zm-8.198 7.307c-.789 0-1.438-.724-1.438-1.612 0-.889.637-1.613 1.438-1.613.807 0 1.45.73 1.438 1.613 0 .888-.637 1.612-1.438 1.612Zm5.316 0c-.788 0-1.438-.724-1.438-1.612 0-.889.637-1.613 1.438-1.613.807 0 1.451.73 1.438 1.613 0 .888-.631 1.612-1.438 1.612Z"/> </svg>
-            </div>
-            <div class="interactable" id="gmail">
-                <svg xmlns="http://www.w3.org/2000/svg" width="10.9375vw" height="23.29450915141431vh" viewBox="0 0 660 378" style = "position: absolute; right: -1.5vw; bottom: -4.5vh"><path d="M 179.798 22.931 C 165.102 27.630, 153.888 38.447, 148.765 52.867 C 146.801 58.396, 146.767 60.787, 146.940 182.918 C 147.044 257.053, 147.502 309.389, 148.072 312.418 C 151.011 328.041, 166.730 344.284, 181.063 346.509 C 184.392 347.026, 184.374 346.999, 180.500 345.684 C 163.716 339.984, 151.998 327.155, 149.026 311.225 C 148.417 307.960, 148.014 258.941, 147.969 182.599 C 147.896 61.595, 147.933 59.141, 149.901 53.542 C 152.854 45.140, 156.267 39.871, 162.366 34.297 C 170.800 26.588, 182.350 22, 193.321 22 C 199.042 22, 209.786 25.089, 215.123 28.268 C 217.530 29.703, 222.425 33.445, 226 36.584 C 229.575 39.724, 235.160 44.589, 238.411 47.396 C 241.662 50.203, 248.667 56.325, 253.978 61 C 266.228 71.783, 323.487 121.403, 332.278 128.854 C 333.902 130.231, 334.422 130.011, 338.278 126.322 C 340.600 124.100, 361.710 105.595, 385.190 85.200 C 408.669 64.805, 430.044 45.954, 432.690 43.309 C 438.289 37.711, 450.949 28.444, 456 26.247 C 473.448 18.655, 492.015 21.836, 505.461 34.720 C 511.241 40.259, 514.376 45.211, 516.963 52.890 C 518.969 58.846, 519 60.821, 519 184.258 C 519 319.159, 519.138 315.363, 513.890 324.609 C 510.919 329.845, 502.418 338.557, 497.500 341.408 C 493.847 343.526, 486.512 346.238, 481.500 347.324 C 480.400 347.563, 481.075 347.635, 483 347.484 C 496.286 346.447, 511.426 334.300, 517.257 320 L 519.500 314.500 519.765 186.550 C 520.029 58.946, 520.024 58.583, 517.933 52.299 C 515.434 44.789, 508.671 35.244, 502.764 30.890 C 500.419 29.162, 495.583 26.363, 492.017 24.670 C 483.825 20.782, 471.723 19.849, 462.892 22.424 C 453.462 25.174, 440.316 33.879, 430.106 44.135 C 426.472 47.784, 419.900 53.841, 415.500 57.596 C 411.100 61.350, 391.525 78.354, 372 95.381 C 352.475 112.408, 335.805 126.924, 334.956 127.638 C 333.641 128.744, 332.455 128.105, 326.956 123.328 C 318.593 116.062, 307.994 106.776, 306.597 105.492 C 305.993 104.937, 302.136 101.562, 298.024 97.992 C 293.912 94.421, 290.042 91.050, 289.423 90.500 C 288.804 89.950, 283.860 85.675, 278.436 81 C 273.013 76.325, 264.508 68.895, 259.538 64.489 C 254.567 60.083, 247.361 53.783, 243.524 50.489 C 239.688 47.195, 235.590 43.600, 234.419 42.500 C 228.333 36.784, 221.161 31.114, 215.927 27.880 C 205.231 21.272, 191.058 19.331, 179.798 22.931 M 237.243 237.750 L 237.486 308.500 237.750 238.750 C 237.895 200.387, 238.348 169.001, 238.757 169.002 C 239.324 169.004, 293.515 215.929, 312.500 232.858 C 314.150 234.330, 318.875 238.422, 323 241.953 C 327.125 245.484, 331.095 248.964, 331.821 249.686 C 333.690 251.544, 333.750 251.516, 339.428 246.250 C 342.245 243.638, 351.063 235.815, 359.025 228.867 C 366.986 221.918, 382.690 208.193, 393.921 198.367 C 405.153 188.540, 417.626 177.666, 421.640 174.202 L 428.938 167.904 429.219 241.202 L 429.500 314.500 433.235 322.322 C 438.900 334.186, 450.738 344.320, 461.500 346.517 C 463.159 346.856, 461.993 346.059, 458.892 344.734 C 455.808 343.417, 451.710 341.366, 449.786 340.177 C 445.047 337.248, 437.649 329.192, 435.088 324.173 C 430.041 314.279, 430 313.584, 430 237.790 C 430 198.855, 429.655 167, 429.233 167 C 428.356 167, 429.442 166.069, 381.500 207.921 C 361.700 225.205, 342.794 241.705, 339.488 244.587 L 333.475 249.827 329.418 246.163 C 327.186 244.149, 317.579 235.750, 308.067 227.500 C 298.556 219.250, 279.063 202.262, 264.749 189.750 C 250.435 177.238, 238.335 167, 237.862 167 C 237.385 167, 237.109 198.641, 237.243 237.750 M 235.079 315.090 C 234.904 318.617, 228.720 328.943, 223.815 333.900 C 218.637 339.133, 212.166 343.080, 204.500 345.684 C 200.901 346.906, 200.828 346.992, 203.770 346.542 C 214.257 344.938, 227.840 333.840, 233.116 322.565 C 234.799 318.969, 235.947 315.459, 235.667 314.764 C 235.330 313.926, 235.131 314.036, 235.079 315.090 M 188.776 347.733 C 191.128 347.945, 194.728 347.942, 196.776 347.727 C 198.824 347.512, 196.900 347.339, 192.500 347.343 C 188.100 347.346, 186.424 347.522, 188.776 347.733" stroke="none" /><path d="M 182.500 23.421 C 174.787 25.351, 168.354 28.824, 162.382 34.282 C 156.267 39.870, 152.856 45.135, 149.901 53.542 C 147.933 59.141, 147.896 61.595, 147.969 182.599 C 148.014 258.941, 148.417 307.960, 149.026 311.225 C 151.562 324.815, 160.810 336.620, 173.768 342.808 C 181.231 346.372, 181.882 346.500, 192.500 346.500 C 203.069 346.500, 203.794 346.359, 211 342.906 C 219.481 338.841, 227.206 331.713, 231.320 324.154 C 237.003 313.712, 237 313.756, 237 237.290 C 237 198.626, 237.388 167, 237.862 167 C 238.335 167, 250.435 177.238, 264.749 189.750 C 279.063 202.262, 298.556 219.250, 308.067 227.500 C 317.579 235.750, 327.186 244.149, 329.418 246.163 L 333.475 249.827 339.488 244.587 C 342.794 241.705, 361.700 225.205, 381.500 207.921 C 429.442 166.069, 428.356 167, 429.233 167 C 429.655 167, 430 198.855, 430 237.790 C 430 314.834, 429.991 314.701, 435.698 325.186 C 443.363 339.270, 463.060 349.472, 478.791 347.507 C 485.626 346.653, 493.619 343.909, 498.606 340.705 C 503.546 337.531, 511.024 329.656, 513.889 324.609 C 519.138 315.365, 519 319.163, 519 184.258 C 519 60.821, 518.969 58.846, 516.963 52.890 C 514.376 45.211, 511.241 40.259, 505.461 34.720 C 492.015 21.836, 473.448 18.655, 456 26.247 C 450.949 28.444, 438.289 37.711, 432.690 43.309 C 430.044 45.954, 408.669 64.805, 385.190 85.200 C 361.710 105.595, 340.600 124.100, 338.278 126.322 C 334.422 130.011, 333.902 130.231, 332.278 128.854 C 323.487 121.403, 266.228 71.783, 253.978 61 C 248.667 56.325, 241.662 50.203, 238.411 47.396 C 235.160 44.589, 229.575 39.724, 226 36.584 C 217.567 29.178, 212.258 26.080, 204.144 23.830 C 196.617 21.743, 189.727 21.613, 182.500 23.421" stroke="none" /></svg>
-            </div>
-            <script>
-                document.getElementById("discord").addEventListener('click', () => {
-                    window.open("https://discord.com/users/835432207735848970","_blank")
-                })
-                document.getElementById("gmail").addEventListener('click', () => {
-                    window.open("https://mail.google.com/mail/u/0/#inbox?compose=CrpPbDzHMmCsQRfpDSBgNkwRNkHnlVbGRDhVcflRJKZXXSQdFRBmTWKZgrxKhRTCgDNxQrHnlBJjMLCZxdQV", "_blank")
-                })
-            </script>
-        </div>
-    </div>
     <script>
-        let section = "home"
-        for(let i = 0; i < document.getElementsByClassName('textsections')[0].children.length; i++) {
-            document.getElementsByClassName('textsections')[0].children[i].addEventListener('click', () => {
-                document.getElementById(section).style.display = "none"
-                document.getElementById(document.getElementsByClassName('textsections')[0].children[i].innerHTML.toLowerCase()).style.display = "block"
-                section = document.getElementsByClassName('textsections')[0].children[i].innerHTML.toLowerCase()
-            })              
-        }
-    </script>
-    <script>
-        let line = document.getElementById('line');
-        let transition = document.getElementById('transition');
-        let menu_line1 = document.getElementsByClassName('line1')[0]
-        let menu_line2 = document.getElementsByClassName('line2')[0]
-        let menu_line3 = document.getElementsByClassName('line3')[0]
-        let menu_expansion = false;
-        const lineExpansionKeyframes = [
-                {
-                    height: line.style.height,
-                    top: line.style.top
-                },
-                {
-                    height: "100vh",
-                    top: "0vh"
-                }
-            ]
-        const lineContractionKeyframes = [
-                {
-                    height: line.style.height,
-                    top: line.style.top
-                },
-                {
-                    height: "50vh",
-                    top: "16vh"
-                }
-            ]
-            const lineOptions = {
-                duration: 400,
-                iterations: 1,
-                fill: "forwards"
-            }
-            const transitionExpansionKeyframes = [
-                {
-                    width: transition.style.width,
-                    left: transition.style.left
-                }, 
-                {
-                    width: "100vw",
-                    left: "0vw"
-                }
-            ]
-            const transitionContractionKeyframes = [
-                {
-                    width: transition.style.width,
-                    left: transition.style.left
-                },
-                {
-                    width: "0vw",
-                    left: "50vw"
-                }
-            ]
-            const transitionOptions = {
-                duration: 700,
-                iterations: 1,
-                fill: "forwards"
-            }
-            const move1 = [
-                {
-                    top: menu_line1.style.top
-                }, 
-                {
-                    top: '2.25vw'
-                }
-            ]
-            const move2 = [
-                {
-                    top: menu_line2.style.top
-                }, 
-                {
-                    top: '2.25vw'
-                }
-            ]
-            const move3 = [
-                {
-                    top: menu_line3.style.top
-                }, 
-                {
-                    top: '2.25vw'
-                }
-            ]
-            const unmove1 = [
-                {
-                    top: menu_line1.style.top
-                },
-                {
-                    top: '1.25vw'
-                } 
-            ]
-            const unmove2 = [
-                {
-                    top: menu_line1.style.top
-                },
-                {
-                    top: '2.25vw'
-                } 
-            ]
-            const unmove3 = [
-                {
-                    top: menu_line1.style.top
-                },
-                {
-                    top: '3.25vw'
-                } 
-            ]
-            const leftRotate = [
-                {
-                    transform: menu_line1.style.transform,
-                },
-                {
-                    transform: "rotate(45deg)"
-                }
-            ]
-            const rightRotate = [
-                {
-                    transform: menu_line3.style.transform
-                },
-                {
-                    transform: "rotate(-45deg)"
-                }
-            ]
-            const leftUnrotate = [
-                {
-                    transform: menu_line1.style.transform
-                },
-                {
-                    transform: "rotate(0deg)"
-                }
-            ]
-            const rightUnrotate = [
-                {
-                    transform: menu_line3.style.transform
-                },
-                {
-                    transform: "rotate(0deg)"
-                }
-            ]
-            const rotateOptions = {
-                duration: 300,
-                iterations: 1,
-                fill: "forwards"
-            }
-        document.getElementById("menu").addEventListener('click', () => {
-            if(menu_expansion) {
-                line.animate(lineContractionKeyframes, lineOptions)
-                transition.animate(transitionContractionKeyframes, transitionOptions)
-                menu_line1.animate(leftUnrotate, rotateOptions)
-                menu_line2.animate(leftUnrotate, rotateOptions)
-                menu_line3.animate(rightUnrotate, rotateOptions)
-                setTimeout(() => {
-                    menu_line1.animate(unmove1, rotateOptions)
-                    menu_line2.animate(unmove2, rotateOptions)
-                    menu_line3.animate(unmove3, rotateOptions)
-                }, rotateOptions.duration)
-                for(let i = 0; i < document.getElementsByClassName('textsections')[0].children.length; i++) {
-                    document.getElementsByClassName('textsections')[0].children[i].style.animation = "fromright 500ms forwards"                
-                }
-                menu_expansion = false
-            } else {
-                line.animate(lineExpansionKeyframes, lineOptions)
-                transition.animate(transitionExpansionKeyframes, transitionOptions)
-                menu_line1.animate(move1, rotateOptions)
-                menu_line2.animate(move2, rotateOptions)
-                menu_line3.animate(move3, rotateOptions)
-                setTimeout(() => {
-                    menu_line1.animate(leftRotate, rotateOptions)
-                    menu_line2.animate(leftRotate, rotateOptions)
-                    menu_line3.animate(rightRotate, rotateOptions)
-                }, rotateOptions.duration)
-                for(let i = 0; i < document.getElementsByClassName('textsections')[0].children.length; i++) {
-                    document.getElementsByClassName('textsections')[0].children[i].style.animation = "fromleft 500ms forwards"                
-                }
-                menu_expansion = true
-            }
-        })
-        for(let i = 0; i < document.getElementsByClassName('textsections')[0].children.length; i++) {
-            document.getElementsByClassName('textsections')[0].children[i].addEventListener('click', () => {
-                line.animate(lineContractionKeyframes, lineOptions)
-                transition.animate(transitionContractionKeyframes, transitionOptions)
-                menu_line1.animate(leftUnrotate, rotateOptions)
-                menu_line2.animate(leftUnrotate, rotateOptions)
-                menu_line3.animate(rightUnrotate, rotateOptions)
-                setTimeout(() => {
-                    menu_line1.animate(unmove1, rotateOptions)
-                    menu_line2.animate(unmove2, rotateOptions)
-                    menu_line3.animate(unmove3, rotateOptions)
-                }, rotateOptions.duration)
-                for(let i = 0; i < document.getElementsByClassName('textsections')[0].children.length; i++) {
-                    document.getElementsByClassName('textsections')[0].children[i].style.animation = "fromright 500ms forwards"                
-                }
-                menu_expansion = false
-            })              
-        }
+        var typed = new Typed('#typing', {
+      strings: ['Programmer', 'Game Developer', 'Web Developer', 'Gamer', 'Designer'],
+      typeSpeed: 100,
+      loop: true,
+      backSpeed: 100,
+    });
     </script>
     <script type = "text/javascript">
         const mouseelement = document.getElementById('mouse')
