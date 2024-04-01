@@ -1,0 +1,439 @@
+@font-face {
+    font-family: 'gilroyextrabold';
+    src: url('./fonts/gilroy-extrabold-webfont.woff2') format('woff2'),
+         url('./fonts/gilroy-extrabold-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+  
+  }
+  @font-face {
+    font-family: 'gilroylight';
+    src: url('./fonts/gilroy-light-webfont.woff2') format('woff2'),
+         url('./fonts/gilroy-light-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+  }
+  * {
+    cursor: none;
+  }
+  body {
+    background: #0b0b0b;
+    color: #f1f1f1;
+    overflow: hidden;
+  }
+  #mouse {
+    color: black;
+    height: 2vw;
+    width: 2vw;
+    border-radius: 100%;
+    background-color: white;
+    position: fixed;
+    left: 10em;
+    top: 10em;
+    cursor: none;
+    z-index: 11;
+    mix-blend-mode: difference;
+    pointer-events: none;
+    }
+  .about, .works, .socials {
+    display: none;
+  }
+  .wall {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background: #f1f1f1;
+    top: 0;
+    left: 0;
+    animation:up forwards 2s;
+    animation-delay: 1s;    
+    z-index: 10;
+}
+.power {
+    position: absolute;
+    left: 35vw;
+    top: 20vh;
+    background: #0b0b0b;
+    width: 30vw;
+    height: 60vh;
+    border-radius: 100%;
+    font-size: 4.5vw;
+    font-family: 'Raleway', sans-serif;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    flex-direction:column;
+    align-content: center;
+    z-index: 10;
+}
+@keyframes up {
+    0% {
+        top: 0;
+    }
+    99.9% {
+        top: -100vh;
+    }
+    100% {
+        top: -100vh;
+    }
+}
+@keyframes down {
+    0% {
+        top: 100vh;
+    }
+    99.9% {
+        top: 0;
+    }
+    100% {
+        top: 0;
+    }
+}
+.menu {
+    position: absolute;
+    z-index: 9; 
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 10vh;
+    border-bottom:#f1f1f1 0.5vh solid;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-content: center;
+    text-shadow: #0b0b0b 0 0 5px;
+}
+
+.menu span {
+    font-size: 1.5vw;
+    font-family: 'gilroylight';
+    position: absolute;
+}
+.menu span:after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    height: 7px;
+    width: 0%;
+    border: solid 0px #f1f1f1;
+    border-color: #f1f1f1 transparent transparent transparent;
+    border-radius: 50%;
+    transition: all 500ms ease-in-out;
+}
+.menu span:hover:after {
+    border: solid 2px #f1f1f1;
+    border-color: #f1f1f1 transparent transparent transparent;
+    width: 100%;
+    transition: all 500ms ease-in-out;
+}
+.menu span#one {
+    left: 15vw;
+}
+.menu span#two {
+    left:25vw;
+}
+.menu span#three {
+    left: 35vw;
+}
+.menu span#four {
+    left: 45vw;
+}
+
+.menu .logo {
+    width: 6.66vw;
+    height: 5vh;
+    position: absolute;
+    left: 4vw;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-content: center;
+    text-align: center;
+}
+.icon {
+    width: 10vh;
+    height: 10vh;
+    position: absolute;
+    top: 60vh;
+    border: #f1f1f1 0.5vh solid;
+    border-radius: 1vw;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-content: center;
+    text-align: center;
+    background-color: none;
+    transition: background-color 300ms ease-in-out;
+}
+.icon#disc {
+    left: 84vw;
+}
+.icon#git {
+    left: 90vw;
+}
+.icon#disc svg, .icon#git svg {
+    align-self: center;
+    mix-blend-mode: difference;
+}
+.icon:hover {
+    background-color: #f1f1f1;
+    transition: background-color 300ms ease-in-out;
+}
+.a {
+    position: absolute;
+    left: 5vw;
+    top: 30vh;
+    height: 50vh;
+    width: 10vw;
+    border: solid 1vh #f1f1f1;
+    border-color: transparent transparent transparent #f1f1f1;
+}
+.aakash {
+    position: absolute;
+    left: 7.5vw;
+    top: 30vh;
+    font-size: 5vw;
+    font-family: 'gilroyextrabold';
+}
+.ashok {
+    position: absolute;
+    left: 7.5vw;
+    top: 40vh;
+    font-size: 5vw;
+    font-family: 'gilroyextrabold';
+}
+.self {
+    position: absolute;
+    left: 7.5vw;
+    top: 60vh;
+    font-size: 2vw;
+    font-family: 'gilroylight';
+}
+.pro {
+    position: absolute;
+    left: 7.5vw;
+    top: 66vh;
+    font-size: 2vw;
+    font-family: 'gilroylight';
+}
+.consolee {
+    position: absolute;
+    left: 30vw;
+    top: 25vh;
+    font-size: 13vw;
+    font-family: 'gilroyextrabold';
+    color: #f1f1f1;
+}
+.hero {
+    position: absolute;
+    left: 25vw;
+    top: -30vh;
+    width: 80vw;
+    z-index: -1;
+}
+.name {
+    position: relative;
+    font-size: 10vw;
+    font-family: 'gilroyextrabold';
+    top: 15vh;
+    left: 5vw;
+    width: 40vw;
+}
+.name:after {
+    content: "";
+    position: absolute;
+    left: -2.5vw;
+    bottom: 0;
+    width: 100%;
+    height: 0.5vh;
+    background: #f1f1f1;
+}
+.info {
+    position: absolute;
+    left: 5vw;
+    top: 50vh;
+    font-family: 'gilroylight';
+    font-size: 2vw;
+    width: 35vw;
+    text-align: center;
+}
+.about-boxes {
+    position: absolute;
+    left: 50vw;
+    width: 45vw;
+    height: 15vh;
+    box-shadow: #f1f1f1 0 0 3px;
+    border-radius: 15px;
+    text-align: center;
+}
+.about-boxes span {
+    font-family: 'gilroylight';
+    font-size: 1.8vw;
+}
+.languages {
+    top: 20vh;
+}
+.languages svg {    
+    position: absolute;    
+    margin-left: -1.5vw;
+    margin-top: 7vh;
+    height: 7vh;
+}
+#ts {
+    height: 6vh;
+}
+.softwares {
+    top: 40vh;
+}
+.softwares svg {
+    position: absolute;
+    height: 7vh;
+    margin-top: 7vh;
+}
+.see {
+    position: absolute;
+    left: 56vw;
+    top: 20vh;
+    font-family: 'gilroyextrabold';
+    font-size: 5vw;
+}
+.creations {
+    position: absolute;
+    width: 22vw;
+    height: 8vh;
+    left: 56vw;
+    top: 32vh;
+    font-family: 'Comfortaa', sans-serif;
+    font-weight: 700;
+    font-size:3vw;
+    box-shadow: #0b0b0b 2px 2px 2px;
+}
+.bgimage {
+    position: absolute;
+    left: 0vw;
+    top: -20vh;
+    width: 100vw;
+    
+    z-index: -1;
+}
+.spotlight {
+    position: absolute;
+    width:45vw;
+    height: 40vh;
+
+    left: 5vw;
+    top: 23vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.projects {
+    position: relative;
+    font-family: 'gilroyextrabold';
+    font-size: 6vw;
+    color: #f1f1f1;
+    min-width: 154px;
+    margin-top: 0vh;
+    width: 45vw;
+    height: 20vh;
+    border: 0.5vh #0b0b0b solid;
+    border-radius: 2vw;
+    z-index: 2;
+}
+.projects:after {
+    content: "";
+    position: absolute;
+    bottom: 0vw;
+    left: 8.5vw;
+    height: 7px;
+    width: 0%;
+    border: solid 0px #f1f1f1;
+    border-color: #f1f1f1 transparent transparent transparent;
+    border-radius: 50%;
+    transition: all 500ms ease-in-out;
+}
+.projects:hover:after {
+    border: solid 5px #f1f1f1;
+    border-color: #f1f1f1 transparent transparent transparent;
+    width: 60%;
+    transition: all 500ms ease-in-out;
+}
+.games {
+    position: relative;
+    font-family: 'gilroyextrabold';
+    font-size: 6vw;
+    color: #f1f1f1;
+    min-width: 154px;
+    margin-top: 5vh;
+    width: 45vw;
+    height: 20vh;
+    border: 0.5vh #0b0b0b solid;
+    border-radius: 2vw;
+    z-index: 2;
+}
+.games:after {
+    content: "";
+    position: absolute;
+    bottom: 0vw;
+    left: 13.5vw;
+    height: 7px;
+    width: 0%;
+    border: solid 0px #f1f1f1;
+    border-color: #f1f1f1 transparent transparent transparent;
+    border-radius: 50%;
+    transition: all 500ms ease-in-out;
+}
+.games:hover:after {
+    border: solid 5px #f1f1f1;
+    border-color: #f1f1f1 transparent transparent transparent;
+    width: 40%;
+    transition: all 500ms ease-in-out;
+}
+.github {
+    width: 10vh;
+    height: 10vh;
+    position: absolute;
+    left: 56vw;
+    top: 45vh;
+    border: #f1f1f1 0.5vh solid;
+    border-radius: 1vw;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-content: center;
+    text-align: center;
+    background-color: none;
+    transition: background-color 300ms ease-in-out;
+}
+.github:hover {
+    background-color: #f1f1f1;
+    transition: background-color 300ms ease-in-out;
+}
+.github svg {
+    align-self: center;
+    mix-blend-mode: difference;
+}
+.other {
+    position: absolute;
+    left: 62vw;
+    top: 47.5vh;
+    font-size: 2vw;
+    font-family: 'gilroylight';
+}
+.hand {
+    width: 60vw;
+    position: absolute;
+    left: 0;
+    top: -20vh;
+}
+.talk {
+    position: absolute;
+    width: 35vw;
+    right: 5vw;
+    top: 25vh;
+    font-size: 10vw;
+    font-family: 'gilroyextrabold';
+    text-align: right;
+}
