@@ -1,15 +1,13 @@
 @font-face {
     font-family: 'gilroyextrabold';
-    src: url('../fonts/gilroy-extrabold-webfont.woff2') format('woff2'),
-         url('../fonts/gilroy-extrabold-webfont.woff') format('woff');
+    src: url('../fonts/gilroy-extrabold-webfont.ttf') format('truetype'),
     font-weight: normal;
     font-style: normal;
   
   }
   @font-face {
     font-family: 'gilroylight';
-    src: url('../fonts/gilroy-light-webfont.woff2') format('woff2'),
-         url('../fonts/gilroy-light-webfont.woff') format('woff');
+    src: url('../fonts/gilroy-light-webfont.ttf') format('truetype'),
     font-weight: normal;
     font-style: normal;
   }
