@@ -169,7 +169,7 @@
 .icon#git {
     left: 90vw;
 }
-.icon#disc svg, .icon#git svg {
+.icon#disc svg, .icon#git svg, .icon#mail svg {
     align-self: center;
     mix-blend-mode: difference;
 }
