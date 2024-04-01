@@ -44,6 +44,9 @@ document.getElementById("git").addEventListener("click", () => {
 document.getElementsByClassName("github")[0].addEventListener("click", () => {
     window.open("https://github.com/tcgconsolee")
 })
+document.getElementById('mail').addEventListener("click", () => {
+    window.open("mailto:theconsoleguyyt@gmail.com")
+})
 document.getElementsByClassName("projects")[0].addEventListener("click", () => {
     window.open("https://consolee.tk/projects")
 })
