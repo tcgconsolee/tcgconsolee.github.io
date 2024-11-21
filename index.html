@@ -3,100 +3,316 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Consolee - Portfolio</title>
-    <link rel = "shortcut icon" type = "x-icon" href = "/images/logo-white.png">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@800&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Protest+Revolution&display=swap" rel="stylesheet">
-    <link rel = "stylesheet" href = "style.css">
+    <title>experience</title>
+    <link rel="stylesheet" href="./style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/110/three.min.js"></script>
 </head>
 <body>
-    <div class="mouse" id="mouse"></div>
-    <div class="wall">
-        <div class="power"><span>consolee</span></div>
-    </div>
-    <div class = "menu">
-        <span class = "pages" id = "one">home</span>
-        <span class = "pages" id = "two">about</span>
-        <span class = "pages" id = "three">works</span>
-        <span class = "pages" id = "four">socials</span>
-        <div class = "logo"><img src = "/images/logo-white.png"></div>
-    </div>
-    <div class = "home">
-        <img src="/images/brian-patrick-tagalog-_8hGFBxWD0A-unsplash.jpg" alt="" class="bgimage">
-        <div class="a"></div>
-        <div class="aakash">Aakash</div><div class="ashok">Ashok</div><div class="self">self-taught</div><div class="pro">programmer</div>
-        <div class="consolee">CONSOLEE</div>
-        <div class = "icon" id = "disc">
-            <svg xmlns="http://www.w3.org/2000/svg" fill = "#f1f1f1" width="3.25vw" height="14.311148086522463vh" viewBox="0 0 16 16"> <path d="M13.545 2.907a13.227 13.227 0 0 0-3.257-1.011.05.05 0 0 0-.052.025c-.141.25-.297.577-.406.833a12.19 12.19 0 0 0-3.658 0 8.258 8.258 0 0 0-.412-.833.051.051 0 0 0-.052-.025c-1.125.194-2.22.534-3.257 1.011a.041.041 0 0 0-.021.018C.356 6.024-.213 9.047.066 12.032c.001.014.01.028.021.037a13.276 13.276 0 0 0 3.995 2.02.05.05 0 0 0 .056-.019c.308-.42.582-.863.818-1.329a.05.05 0 0 0-.01-.059.051.051 0 0 0-.018-.011 8.875 8.875 0 0 1-1.248-.595.05.05 0 0 1-.02-.066.051.051 0 0 1 .015-.019c.084-.063.168-.129.248-.195a.05.05 0 0 1 .051-.007c2.619 1.196 5.454 1.196 8.041 0a.052.052 0 0 1 .053.007c.08.066.164.132.248.195a.051.051 0 0 1-.004.085 8.254 8.254 0 0 1-1.249.594.05.05 0 0 0-.03.03.052.052 0 0 0 .003.041c.24.465.515.909.817 1.329a.05.05 0 0 0 .056.019 13.235 13.235 0 0 0 4.001-2.02.049.049 0 0 0 .021-.037c.334-3.451-.559-6.449-2.366-9.106a.034.034 0 0 0-.02-.019Zm-8.198 7.307c-.789 0-1.438-.724-1.438-1.612 0-.889.637-1.613 1.438-1.613.807 0 1.45.73 1.438 1.613 0 .888-.637 1.612-1.438 1.612Zm5.316 0c-.788 0-1.438-.724-1.438-1.612 0-.889.637-1.613 1.438-1.613.807 0 1.451.73 1.438 1.613 0 .888-.631 1.612-1.438 1.612Z"></path> </svg>
-        </div>
-        <div class = "icon" id = "git">
-            <svg xmlns="http://www.w3.org/2000/svg" fill = "#f1f1f1" width = "4.25vw"data-name="Layer 1" viewBox="0 0 24 24"><path d="M12,2.2467A10.00042,10.00042,0,0,0,8.83752,21.73419c.5.08752.6875-.21247.6875-.475,0-.23749-.01251-1.025-.01251-1.86249C7,19.85919,6.35,18.78423,6.15,18.22173A3.636,3.636,0,0,0,5.125,16.8092c-.35-.1875-.85-.65-.01251-.66248A2.00117,2.00117,0,0,1,6.65,17.17169a2.13742,2.13742,0,0,0,2.91248.825A2.10376,2.10376,0,0,1,10.2,16.65923c-2.225-.25-4.55-1.11254-4.55-4.9375a3.89187,3.89187,0,0,1,1.025-2.6875,3.59373,3.59373,0,0,1,.1-2.65s.83747-.26251,2.75,1.025a9.42747,9.42747,0,0,1,5,0c1.91248-1.3,2.75-1.025,2.75-1.025a3.59323,3.59323,0,0,1,.1,2.65,3.869,3.869,0,0,1,1.025,2.6875c0,3.83747-2.33752,4.6875-4.5625,4.9375a2.36814,2.36814,0,0,1,.675,1.85c0,1.33752-.01251,2.41248-.01251,2.75,0,.26251.1875.575.6875.475A10.0053,10.0053,0,0,0,12,2.2467Z"></path></svg>
-        </div>
-    </div>
-    <div class="about">
-        <img src="/images/abhishek-pipalva-LUiJdVz-pIQ-unsplash.jpg" alt="" class="bgimage" style = "opacity:0.7">
-        <div class="name">Aakash</div><div class="info">I am Aakash, and I often call myself by the alias "Consolee". I have been learning the art of programming since the age of 8. Presently, I'm 14 years old and I like to believe I have enough skill to call myself a proud programmer.</div>
-        <div class="languages about-boxes">
-            <svg id="css" xmlns="http://www.w3.org/2000/svg" width="10vw" height="10vh" style = "left:7vw" viewBox="0 0 512 512"><path fill="#f1f1f1" d="M64,32,99,435.22,255.77,480,413,435.15,448,32ZM354.68,366.9,256.07,395l-98.46-28.24L150.86,289h48.26l3.43,39.56,53.59,15.16.13.28h0l53.47-14.85L315.38,265H203l-4-50H319.65L324,164H140l-4-49H376.58Z"></path></svg>
-            <svg id="html" xmlns="http://www.w3.org/2000/svg" width="10vw" height="10vh" style = "left:1vw"  viewBox="0 0 512 512"><path fill="#f1f1f1" d="M64,32,98.94,435.21,255.77,480,413,435.15,448,32ZM372,164H188l4,51H368L354.49,366.39,256,394.48l-98.68-28L150.54,289H198.8l3.42,39.29L256,343.07l53.42-14.92L315,264H148L135.41,114.41l240.79,0Z"></path></svg>
-            <svg id="js" xmlns="http://www.w3.org/2000/svg" width="10vw" height="10vh" style = "left:13vw"  viewBox="0 0 512 512" ><path fill="#f1f1f1" d="M32,32V480H480V32ZM272,380c0,43.61-25.76,64.87-63.05,64.87-33.68,0-53.23-17.44-63.15-38.49h0l34.28-20.75c6.61,11.73,11.63,21.65,26.06,21.65,12,0,21.86-5.41,21.86-26.46V240h44Zm99.35,63.87c-39.09,0-64.35-17.64-76.68-42h0L329,382c9,14.74,20.75,24.56,41.5,24.56,17.44,0,27.57-7.72,27.57-19.75,0-14.43-10.43-19.54-29.68-28l-10.52-4.52c-30.38-12.92-50.52-29.16-50.52-63.45,0-31.57,24.05-54.63,61.64-54.63,26.77,0,46,8.32,59.85,32.68L396,290c-7.22-12.93-15-18-27.06-18-12.33,0-20.15,7.82-20.15,18,0,12.63,7.82,17.74,25.86,25.56l10.52,4.51c35.79,15.34,55.94,31,55.94,66.16C441.12,424.13,411.35,443.87,371.35,443.87Z"></path></svg>
-            <svg id="py" xmlns="http://www.w3.org/2000/svg" width="10vw" height="10vh" style = "left:19vw"  viewBox="0 0 512 512"><path fill="#f1f1f1" d="M314,36.38c-18.59-3.06-45.8-4.47-64.27-4.38a311.09,311.09,0,0,0-51.66,4.38c-45.74,8-54.07,24.7-54.07,55.54V128H256v16H107.62C66.06,144,32.33,193.67,32,255.12c0,.29,0,.58,0,.88a162.91,162.91,0,0,0,3.13,32c9.29,46.28,38.23,80,72.49,80H128V314c0-31.3,20.84-59.95,55-66.1l9.87-1.23H314a56.05,56.05,0,0,0,15.06-2A52.48,52.48,0,0,0,368,193.68V91.92C368,63,343.32,41.19,314,36.38ZM194.93,105.5a20.37,20.37,0,1,1,20.3-20.3A20.29,20.29,0,0,1,194.93,105.5Z"></path><path fill="#f1f1f1" d="M475.28,217c-10.7-42.61-38.41-73-70.9-73H386.67v47.45c0,39.57-26,68.22-57.74,73.13a63.54,63.54,0,0,1-9.69.75H198.08a60,60,0,0,0-15.23,1.95C160.54,273.14,144,291.7,144,315.77V417.54c0,29,29.14,46,57.73,54.31,34.21,9.95,71.48,11.75,112.42,0,27.19-7.77,53.85-23.48,53.85-54.31V384H256V368H404.38c29.44,0,54.95-24.93,67.45-61.31A156.83,156.83,0,0,0,480,256,160.64,160.64,0,0,0,475.28,217ZM316.51,404a20.37,20.37,0,1,1-20.3,20.3A20.29,20.29,0,0,1,316.51,404Z"></path></svg>
-            <svg id="java" xmlns="http://www.w3.org/2000/svg" width="10vw" height="10vh" style = "left:25vw"  viewBox="0 0 32 32"><path d="M11.622 24.74s-1.23.748.855.962c2.51.32 3.847.267 6.625-.267a10.02 10.02 0 0 0 1.763.855c-6.25 2.672-14.16-.16-9.244-1.55zm-.8-3.473s-1.336 1.015.748 1.23c2.725.267 4.862.32 8.55-.427a3.26 3.26 0 0 0 1.282.801c-7.534 2.244-15.976.214-10.58-1.603zm14.747 6.09s.908.748-1.015 1.336c-3.58 1.07-15.014 1.39-18.22 0-1.122-.48 1.015-1.175 1.7-1.282.695-.16 1.07-.16 1.07-.16-1.23-.855-8.175 1.763-3.526 2.51 12.77 2.084 23.296-.908 19.983-2.404zM12.2 17.633s-5.824 1.39-2.084 1.87c1.603.214 4.755.16 7.694-.053 2.404-.214 4.81-.64 4.81-.64s-.855.374-1.443.748c-5.93 1.55-17.312.855-14.052-.748 2.778-1.336 5.076-1.175 5.076-1.175zm10.42 5.824c5.984-3.1 3.206-6.09 1.282-5.717-.48.107-.695.214-.695.214s.16-.32.534-.427c3.794-1.336 6.786 4.007-1.23 6.09 0 0 .053-.053.107-.16zm-9.83 8.442c5.77.374 14.587-.214 14.8-2.94 0 0-.427 1.07-4.755 1.87-4.916.908-11.007.8-14.587.214 0 0 .748.64 4.542.855z" fill="#f1f1f1"></path><path d="M18.996.001s3.313 3.366-3.152 8.442c-5.183 4.114-1.175 6.465 0 9.137-3.046-2.725-5.236-5.13-3.74-7.373C14.294 6.893 20.332 5.3 18.996.001zm-1.7 15.335c1.55 1.763-.427 3.366-.427 3.366s3.954-2.03 2.137-4.542c-1.656-2.404-2.94-3.58 4.007-7.587 0 0-10.953 2.725-5.717 8.763z" fill="#f1f1f1"></path></svg>
-            <svg id="ts" xmlns="http://www.w3.org/2000/svg" width="10vw" height="6vh" style = "left:31vw; margin-top: 7.5vh;"  viewBox="0 0 24 24"><path fill="#f1f1f1" d="M1.125 0C.502 0 0 .502 0 1.125v21.75C0 23.498.502 24 1.125 24h21.75c.623 0 1.125-.502 1.125-1.125V1.125C24 .502 23.498 0 22.875 0zm17.363 9.75c.612 0 1.154.037 1.627.111a6.38 6.38 0 0 1 1.306.34v2.458a3.95 3.95 0 0 0-.643-.361 5.093 5.093 0 0 0-.717-.26 5.453 5.453 0 0 0-1.426-.2c-.3 0-.573.028-.819.086a2.1 2.1 0 0 0-.623.242c-.17.104-.3.229-.393.374a.888.888 0 0 0-.14.49c0 .196.053.373.156.529.104.156.252.304.443.444s.423.276.696.41c.273.135.582.274.926.416.47.197.892.407 1.266.628.374.222.695.473.963.753.268.279.472.598.614.957.142.359.214.776.214 1.253 0 .657-.125 1.21-.373 1.656a3.033 3.033 0 0 1-1.012 1.085 4.38 4.38 0 0 1-1.487.596c-.566.12-1.163.18-1.79.18a9.916 9.916 0 0 1-1.84-.164 5.544 5.544 0 0 1-1.512-.493v-2.63a5.033 5.033 0 0 0 3.237 1.2c.333 0 .624-.03.872-.09.249-.06.456-.144.623-.25.166-.108.29-.234.373-.38a1.023 1.023 0 0 0-.074-1.089 2.12 2.12 0 0 0-.537-.5 5.597 5.597 0 0 0-.807-.444 27.72 27.72 0 0 0-1.007-.436c-.918-.383-1.602-.852-2.053-1.405-.45-.553-.676-1.222-.676-2.005 0-.614.123-1.141.369-1.582.246-.441.58-.804 1.004-1.089a4.494 4.494 0 0 1 1.47-.629 7.536 7.536 0 0 1 1.77-.201zm-15.113.188h9.563v2.166H9.506v9.646H6.789v-9.646H3.375z"></path></svg>
-            <svg id="php" xmlns="http://www.w3.org/2000/svg" width="10vw" height="10vh" style = "left:37vw" viewBox="0 0 640 512"><path fill="#f1f1f1" d="M320 104.5c171.4 0 303.2 72.2 303.2 151.5S491.3 407.5 320 407.5c-171.4 0-303.2-72.2-303.2-151.5S148.7 104.5 320 104.5m0-16.8C143.3 87.7 0 163 0 256s143.3 168.3 320 168.3S640 349 640 256 496.7 87.7 320 87.7zM218.2 242.5c-7.9 40.5-35.8 36.3-70.1 36.3l13.7-70.6c38 0 63.8-4.1 56.4 34.3zM97.4 350.3h36.7l8.7-44.8c41.1 0 66.6 3 90.2-19.1 26.1-24 32.9-66.7 14.3-88.1-9.7-11.2-25.3-16.7-46.5-16.7h-70.7L97.4 350.3zm185.7-213.6h36.5l-8.7 44.8c31.5 0 60.7-2.3 74.8 10.7 14.8 13.6 7.7 31-8.3 113.1h-37c15.4-79.4 18.3-86 12.7-92-5.4-5.8-17.7-4.6-47.4-4.6l-18.8 96.6h-36.5l32.7-168.6zM505 242.5c-8 41.1-36.7 36.3-70.1 36.3l13.7-70.6c38.2 0 63.8-4.1 56.4 34.3zM384.2 350.3H421l8.7-44.8c43.2 0 67.1 2.5 90.2-19.1 26.1-24 32.9-66.7 14.3-88.1-9.7-11.2-25.3-16.7-46.5-16.7H417l-32.8 168.7z"></path></svg>
-            <span>languages</span>
-        </div>
-        <div class="softwares about-boxes">
-            <span>softwares</span>
-            <svg viewBox="0 0 32 32" fill="#f1f1f1" xmlns="http://www.w3.org/2000/svg" style = "left: 14.5vw;"><g stroke-width="0" style ></g><g stroke-linecap="round" stroke-linejoin="round"></g><g> <path fill-rule="evenodd" clip-rule="evenodd" d="M16 16C16 13.7909 17.7909 12 20 12C22.2091 12 24 13.7909 24 16C24 18.2091 22.2091 20 20 20C17.7909 20 16 18.2091 16 16Z" fill="#f1f1f1"></path> <path fill-rule="evenodd" clip-rule="evenodd" d="M8 24C8 21.7909 9.79086 20 12 20H16V24C16 26.2091 14.2091 28 12 28C9.79086 28 8 26.2091 8 24Z" fill="#f1f1f1"></path> <path fill-rule="evenodd" clip-rule="evenodd" d="M16 4V12H20C22.2091 12 24 10.2091 24 8C24 5.79086 22.2091 4 20 4H16Z" fill="#f1f1f1"></path> <path fill-rule="evenodd" clip-rule="evenodd" d="M8 8C8 10.2091 9.79086 12 12 12H16V4H12C9.79086 4 8 5.79086 8 8Z" fill="#f1f1f1"></path> <path fill-rule="evenodd" clip-rule="evenodd" d="M8 16C8 18.2091 9.79086 20 12 20H16V12H12C9.79086 12 8 13.7909 8 16Z" fill="#f1f1f1"></path> </g></svg>
-            <svg fill="#f1f1f1" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" style = "left: 21vw; height: 6vh; margin-top: 7.5vh;"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M26.531 25.599l-5.728-9.599 5.728-9.599 2.803 9.599zM13.864 24.667l-7.197-7.068h11.469l5.728 9.599zM13.864 7.197l10-2.531-5.728 9.599h-11.605c0 0.136 7.333-7.068 7.333-7.068zM28.531 0l-13.061 3.333-2 3.333h-3.871l-9.599 9.333 9.599 9.333h3.871l1.864 3.333 13.068 3.333 3.463-12.667-1.864-3.333 2-3.333z"></path> </g></svg>
-            <svg fill="#f1f1f1" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" style = "left: 27.5vw;height:6vh; margin-top: 7.5vh;"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M30.865 3.448l-6.583-3.167c-0.766-0.37-1.677-0.214-2.276 0.385l-12.609 11.505-5.495-4.167c-0.51-0.391-1.229-0.359-1.703 0.073l-1.76 1.604c-0.583 0.526-0.583 1.443-0.005 1.969l4.766 4.349-4.766 4.349c-0.578 0.526-0.578 1.443 0.005 1.969l1.76 1.604c0.479 0.432 1.193 0.464 1.703 0.073l5.495-4.172 12.615 11.51c0.594 0.599 1.505 0.755 2.271 0.385l6.589-3.172c0.693-0.333 1.13-1.031 1.13-1.802v-21.495c0-0.766-0.443-1.469-1.135-1.802zM24.005 23.266l-9.573-7.266 9.573-7.266z"></path> </g></svg>        </div>
-    </div>
-    <div class="works">
-        <div class="see">I PRESENT TO YOU</div>
-        <div class="creations">my creations</div>
-        <div class="spotlight">
-            <svg id="stroke" xmlns="http://www.w3.org/2000/svg" width="0" height="0">
-                <defs>
-                    <path id="line" d="M2 2c49.7 2.6 100 3.1 150 1.7-46.5 2-93 4.4-139.2 7.3 45.2-1.5 90.6-1.8 135.8-.6" fill="none" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
-                </defs>
-            </svg>
-            <div class="projects">
-                PROJECTS
+    <div class="grid">
+        <div class="menu">
+            <div class="w-e">
+                <p><span>websites</span> → experiences</p>
             </div>
-            <div class="games">
-                GAMES
+            <div class="menu-item" id = "home"><span>h</span><span>o</span><span>m</span><span>e</span></div>
+            <div class="menu-item" id = "about"><span>a</span><span>b</span><span>o</span><span>u</span><span>t</span></div>
+            <div class="menu-item" id = "works"><span>w</span><span>o</span><span>r</span><span>k</span><span>s</span></div>
+            <div class="menu-item" id = "contact"><span>c</span><span>o</span><span>n</span><span>t</span><span>a</span><span>c</span><span>t</span></div>
+        </div>
+        <div class="home">
+            <div class="hero">
+                <div class="hero-name">
+                    <p>aakash ashok</p>
+                </div>
+                <div class="hero-box">
+                    <p>fullstack webdev, gamedev, ui/ux</p>
+                </div>
+            </div>
+            <canvas id="canvas"></canvas>
+            <div class="cursor"></div>
+        </div>
+        <div class="about">
+            <div class="a-g">
+                <div class="a-p">
+                    <img src="./images/me.png" alt="">
+                    <div class="more">
+                        <p>LEARN MORE</p>
+                        <img src="./images/open.svg" alt="">
+                    </div>
+                </div>
+                <div class="a-t">
+                    <p>Aakash</p>
+                    <div class="a-d">
+                        <p>This is Aakash, and i come from India. I am currently the age of 14 and I have been learning programming from the age of 8. My webdev experience started in 7th standard, but my gamedev experience goes a long way back. I try my best to fulfill my task to best of my capabilities, and I take part in any competitions I find.</p>
+                        <p>I am also involved in many co-curricular activities like playing the piano and playing sports (mainly basketball). My plans for my career in the near future would be optimally be to develop myself in the science and computer field.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="blur"></div>
+            <div class="more-g">
+                <div class="mn">
+                    <div class="mn-btns">
+                        <div class="red"></div>
+                        <div class="yellow"></div>
+                    </div>
+                    <div class="mn-head">
+                        <p>more about aakash</p>
+                    </div>
+                </div>
+                <div class="mbar" id = "l">
+                    <div class="mbar-t">
+                        <p>languages</p>
+                    </div>
+                    <div class="mbar-g">
+                        <div class="mbar-g-i">
+                            <img src="./images/html.svg" alt="">
+                        </div>
+                        <div class="mbar-g-i">
+                            <img src="./images/css.svg" alt="">
+                        </div>
+                        <div class="mbar-g-i">
+                            <img src="./images/py.svg" alt="">
+                        </div>
+                        <div class="mbar-g-i">
+                            <img src="./images/js.svg" alt="">
+                        </div>
+                        <div class="mbar-g-i">
+                            <img src="./images/chash.svg" alt="">
+                        </div>
+                        <div class="mbar-g-i">
+                            <img src="./images/java.svg" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="mbar" id = "r">
+                    <div class="mbar-g">
+                        <div class="mbar-g-i">
+                            <img src="./images/vsc.svg" alt="">
+                        </div>
+                        <div class="mbar-g-i">
+                            <img src="./images/figma.svg" alt="">
+                        </div>
+                        <div class="mbar-g-i">
+                            <img src="./images/unity.svg" alt="">
+                        </div>
+                        <div class="mbar-g-i">
+                            <img src="./images/nplus.svg" alt="">
+                        </div>
+                    </div>
+                    <div class="mbar-t">
+                        <p>softwares</p>
+                    </div>
+                </div>
+                <div class="mbar" id = "l">
+                    <div class="mbar-t">
+                        <p>libraries</p>
+                    </div>
+                    <div class="mbar-g">
+                        <div class="mbar-g-i">
+                            <img src="./images/jquery.svg" alt="">
+                        </div>
+                        <div class="mbar-g-i">
+                            <img src="./images/flask.svg" alt="">
+                        </div>
+                        <div class="mbar-g-i">
+                            <img src="./images/djs.svg" alt="">
+                        </div>
+                        <div class="mbar-g-i">
+                            <img src="./images/three.svg" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="m">
+                    <p>fullstack webdev, gamedev, ui/ux</p>
+                </div>
             </div>
         </div>
-        <img src="/images/fabrizio-conti-m5fHSKYSflI-unsplash.jpg" alt="" class="bgimage">
-        <div class="github"><svg xmlns="http://www.w3.org/2000/svg" fill = "#f1f1f1" width = "4.25vw"data-name="Layer 1" viewBox="0 0 24 24"><path d="M12,2.2467A10.00042,10.00042,0,0,0,8.83752,21.73419c.5.08752.6875-.21247.6875-.475,0-.23749-.01251-1.025-.01251-1.86249C7,19.85919,6.35,18.78423,6.15,18.22173A3.636,3.636,0,0,0,5.125,16.8092c-.35-.1875-.85-.65-.01251-.66248A2.00117,2.00117,0,0,1,6.65,17.17169a2.13742,2.13742,0,0,0,2.91248.825A2.10376,2.10376,0,0,1,10.2,16.65923c-2.225-.25-4.55-1.11254-4.55-4.9375a3.89187,3.89187,0,0,1,1.025-2.6875,3.59373,3.59373,0,0,1,.1-2.65s.83747-.26251,2.75,1.025a9.42747,9.42747,0,0,1,5,0c1.91248-1.3,2.75-1.025,2.75-1.025a3.59323,3.59323,0,0,1,.1,2.65,3.869,3.869,0,0,1,1.025,2.6875c0,3.83747-2.33752,4.6875-4.5625,4.9375a2.36814,2.36814,0,0,1,.675,1.85c0,1.33752-.01251,2.41248-.01251,2.75,0,.26251.1875.575.6875.475A10.0053,10.0053,0,0,0,12,2.2467Z"></path></svg></div>
-        <div class="other">see my other projects!</div>
-    </div>
-    <div class="socials">
-        <img src="/images/joshua-hoehne-oTSBWW1V7dk-unsplash.jpg" alt="" class="bgimage" style = "opacity: 0.6">
-        <img src="/images/alex-wong-FIyiDmEVbnM-unsplash-removebg-preview.png" alt="" class = "hand">
-        <div class = "icon" id = "disc" style = "left: 26vw; top: 50vh;">
-            <svg xmlns="http://www.w3.org/2000/svg" fill = "#f1f1f1" width="3.25vw" height="14.311148086522463vh" viewBox="0 0 16 16"> <path d="M13.545 2.907a13.227 13.227 0 0 0-3.257-1.011.05.05 0 0 0-.052.025c-.141.25-.297.577-.406.833a12.19 12.19 0 0 0-3.658 0 8.258 8.258 0 0 0-.412-.833.051.051 0 0 0-.052-.025c-1.125.194-2.22.534-3.257 1.011a.041.041 0 0 0-.021.018C.356 6.024-.213 9.047.066 12.032c.001.014.01.028.021.037a13.276 13.276 0 0 0 3.995 2.02.05.05 0 0 0 .056-.019c.308-.42.582-.863.818-1.329a.05.05 0 0 0-.01-.059.051.051 0 0 0-.018-.011 8.875 8.875 0 0 1-1.248-.595.05.05 0 0 1-.02-.066.051.051 0 0 1 .015-.019c.084-.063.168-.129.248-.195a.05.05 0 0 1 .051-.007c2.619 1.196 5.454 1.196 8.041 0a.052.052 0 0 1 .053.007c.08.066.164.132.248.195a.051.051 0 0 1-.004.085 8.254 8.254 0 0 1-1.249.594.05.05 0 0 0-.03.03.052.052 0 0 0 .003.041c.24.465.515.909.817 1.329a.05.05 0 0 0 .056.019 13.235 13.235 0 0 0 4.001-2.02.049.049 0 0 0 .021-.037c.334-3.451-.559-6.449-2.366-9.106a.034.034 0 0 0-.02-.019Zm-8.198 7.307c-.789 0-1.438-.724-1.438-1.612 0-.889.637-1.613 1.438-1.613.807 0 1.45.73 1.438 1.613 0 .888-.637 1.612-1.438 1.612Zm5.316 0c-.788 0-1.438-.724-1.438-1.612 0-.889.637-1.613 1.438-1.613.807 0 1.451.73 1.438 1.613 0 .888-.631 1.612-1.438 1.612Z"></path> </svg>
+        <div class="works">
+            <div class="w-h">
+                <p>Imaginative Construction</p>
+            </div>
+            <div class="w-g">
+                <div class="w-gi">
+                    <div class="w-gi-g">
+                        <div class="w-n">
+                            <p>01</p>
+                        </div>
+                        <div class="w-hero-g">
+                            <div class="w-name">
+                                <p>CaseNet</p>
+                            </div>
+                            <div class="w-link">
+                                <a href="https://cw24.onrender.com/">https://cw24.onrender.com/</a>
+                            </div>
+                            <div class="w-at">
+                                <p>third place</p>
+                            </div>
+                        </div>
+                        <div class="w-r">
+                            <div class="w-s">
+                                <a href="https://github.com/tcgconsolee/cw24">
+                                    <div class="w-s-i">
+                                        <img src="./images/github.svg" alt="">
+                                    </div>
+                                </a>
+                                <a href="https://www.behance.net/gallery/211733065/CaseNet-CW24">
+                                    <div class="w-s-i">
+                                        <img src="./images/behance.svg" alt="">
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="w-d">
+                                <p>2024</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-gi">
+                    <div class="w-gi-g">
+                        <div class="w-n">
+                            <p>02</p>
+                        </div>
+                        <div class="w-hero-g">
+                            <div class="w-name">
+                                <p>Nexus - DTC</p>
+                            </div>
+                            <div class="w-link">
+                                <a href="https://dtc-nfu3.onrender.com/">https://dtc-nfu3.onrender.com/</a>
+                            </div>
+                            <div class="w-at">
+                                <p>non comp</p>
+                            </div>
+                        </div>
+                        <div class="w-r">
+                            <div class="w-s">
+                                <a href="https://github.com/tcgconsolee/dtc">
+                                    <div class="w-s-i">
+                                        <img src="./images/github.svg" alt="">
+                                    </div>
+                                </a>
+                                <a href="https://www.behance.net/gallery/210988265/Nexus-2k24-Delhi-Tech-Circuit">
+                                    <div class="w-s-i">
+                                        <img src="./images/behance.svg" alt="">
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="w-d">
+                                <p>2024</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-gi">
+                    <div class="w-gi-g">
+                        <div class="w-n">
+                            <p>03</p>
+                        </div>
+                        <div class="w-hero-g">
+                            <div class="w-name">
+                                <p>Argus</p>
+                            </div>
+                            <div class="w-link">
+                                <a href="https://argus-u9nw.onrender.com">https://argus-u9nw.onrender.com</a>
+                            </div>
+                            <div class="w-at">
+                                <p>first place</p>
+                            </div>
+                        </div>
+                        <div class="w-r">
+                            <div class="w-s">
+                                <a href="https://github.com/tcgconsolee/argus">
+                                    <div class="w-s-i">
+                                        <img src="./images/github.svg" alt="">
+                                    </div>
+                                </a>
+                                <a href="https://www.behance.net/gallery/203652461/Argus-Coffee-Branding-UIUX">
+                                    <div class="w-s-i">
+                                        <img src="./images/behance.svg" alt="">
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="w-d">
+                                <p>2024</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-gi">
+                    <div class="w-gi-g">
+                        <div class="w-n">
+                            <p>04</p>
+                        </div>
+                        <div class="w-hero-g">
+                            <div class="w-name">
+                                <p>Cybaware</p>
+                            </div>
+                            <div class="w-at">
+                                <p>cyberweek 22'</p>
+                            </div>
+                        </div>
+                        <div class="w-r">
+                            <div class="w-s">
+                                <div class = "space"></div>
+                                <a href="https://github.com/tcgconsolee/cybaware">
+                                    <div class="w-s-i">
+                                        <img src="./images/github.svg" alt="">
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="w-d">
+                                <p>2022</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-gi">
+                    <div class="w-gi-g">
+                        <div class="w-n">
+                            <p>05</p>
+                        </div>
+                        <div class="w-hero-g">
+                            <div class="w-name">
+                                <p>Ping Pong Game</p>
+                            </div>
+                            <div class="w-at">
+                                <p>just for fun</p>
+                            </div>
+                        </div>
+                        <div class="w-r">
+                            <div class="w-s">
+                                <div class = "space"></div>
+                                <a href="https://github.com/tcgconsolee/dvd-screensaver-ping-pong">
+                                    <div class="w-s-i">
+                                        <img src="./images/github.svg" alt="">
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="w-d">
+                                <p>2022</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class = "icon" id = "mail" style = "left: 32vw; top: 50vh;">
-            <?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
-            <svg fill="#f1f1f1" width="3.5vw" height="14.311148086522463vh" viewBox="0 0 24 24" role="img" xmlns="http://www.w3.org/2000/svg"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/></svg>        
+        <div class="contact">
+            <div class="c-h">
+                <div class="c-txt">
+                    <p>CONTACT ME</p>
+                </div>
+                <div class="c-d">share your other experiences</div>
+                <div class="c-s">
+                    <a href="https://discord.com/users/835432207735848970">
+                        <img src="./images/discord.svg" alt="">
+                    </a>
+                    <a href="mailto:aakashashok1205@gmail.com">
+                        <img src="./images/gmail.svg" alt="">
+                    </a>
+                </div>
+            </div>
         </div>
-        <div class = "talk">Wanna talk?</div>
     </div>
-    <script src = "index.js"></script>
+    <script src = "./index.js"></script>
+    <script src="./three.js"></script>
 </body>
-<!-- Google Tag -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-1J4FXJLWEB"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-1J4FXJLWEB');
-</script>
 </html>

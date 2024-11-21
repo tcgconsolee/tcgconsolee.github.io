@@ -1,55 +1,83 @@
-const mouseelement = document.getElementById('mouse')
-        const trail = []
-        for(let i = 2; i > 0.5; i-=0.1) {
-            trail[Math.round((2-i)*10)] = mouseelement.cloneNode();
-            trail[Math.round((2-i)*10)].style.width =  i + "vw"
-            trail[Math.round((2-i)*10)].style.height = i + "vw"
-            trail[Math.round((2-i)*10)].style.mixBlendMode = "normal"
-            mouseelement.appendChild(trail[Math.round((2-i)*10)])
+let t = ["h", "o", "m", "e", "a", "b", "o", "u", "t", "w", "o", "r", "k", "s", "c", "o", "n", "t", "a", "c", "t"];
+let time;
+$(".menu-item span").each(function (i) {
+    $(this).mouseenter(function () {
+        if (t[i]) {
+            $(this).html(t[i]);
         }
-        const interactables = document.getElementsByClassName('interactable')
-        document.addEventListener('mousemove', (e) => {
-            mouseelement.style.left = ((e.clientX) - 10) + "px"; 
-            mouseelement.style.top = ((e.clientY) - 10) + "px";
-            for(let i = 0; i < trail.length; i++) {
-                setTimeout(() => {
-                    trail[i].style.left = ((e.clientX) - (10-i)) + "px";
-                    trail[i].style.top = ((e.clientY) - (10-i)) + "px";
-                }, i*10)
-            }
-        })
-
-let currentPage = "home";
-const wall = document.getElementsByClassName('wall')[0]
-Array.from(document.getElementsByClassName("pages")).forEach(page => {
-    page.addEventListener("click", () => {
-        if(page.textContent == currentPage) return;
-        wall.style.animation = "down 500ms forwards"
-        setTimeout(() => {
-        document.getElementsByClassName(currentPage)[0].style.display = "none";
-        document.getElementsByClassName(page.textContent)[0].style.display = "block";
-        currentPage = page.textContent;
-        },500)
-        setTimeout(() => {
-        wall.style.animation = "up 500ms forwards"
-        }, 1000)
+        randomize($(this));
     })
 })
-document.getElementById("disc").addEventListener("click", () => {
-    window.open("https://discord.com/users/835432207735848970");
+
+function randomize(e) {
+    var t = e.html();
+    let arr = shuffle(["&", "*", "%", "#", "!", "@", "$", "^", "/",".", ";", ":", "?", ">", "<", "{", "}", "[", "]", "|", "-", ")", "(", "_", "+", "=", ","]);
+    arr.push(t);
+    arr.forEach(function (r, i) {
+        time = 50 * i;
+        setTimeout(() => {
+            e.html(r);
+        }, time);
+    })
+}
+function shuffle(array) {
+    let newArr = [];
+    for(let currentIndex = 0;currentIndex<5;currentIndex++) {
+        let randomIndex = Math.floor(Math.random() * array.length);
+        newArr[currentIndex]= array[randomIndex]
+    }
+    return newArr;
+}
+let currentPage = "home";
+$(".menu-item").click(function () {
+    if(currentPage == $(this).attr('id')) return;
+    else {
+        currentPage = $(this).attr('id')
+    }
+    $(".menu-item").each(function() {
+        $(this).animate({ bottom: "10%" }, 1000)
+    })
+    $(".menu").animate({height: "100vh"}, 1000)
+    $(".w-e").show(1000)
+    if(currentPage == "home") {
+        setTimeout(() => {
+            spotlight();
+            $(".menu").animate({    height: "30vmin"  }, 1000)
+        }, 1500);
+    } else {
+        setTimeout(() => {
+            spotlight()
+            $(".menu").animate({ height: "10vmin" }, 1000)
+            $(".w-e").hide(1000)
+            $(".menu-item").each(function () {
+                $(this).animate({ bottom: "50%" }, 1000)
+            })
+        }, 1500);
+    }
 })
-document.getElementById("git").addEventListener("click", () => {
-    window.open("https://github.com/tcgconsolee")
+$(".more").click(function() {
+    $(".blur").show()
+    $(".blur").animate({ opacity: "1"}, 1000)
+    $(".more-g").css("display", "grid")
+    $(".more-g").animate({top: "75%"}, 1000)
+}) 
+$(".red, .yellow").click(function() {
+    $(".blur").animate({opacity: "0"}, 1000);
+    setTimeout(() => {
+        $(".blur").hide();
+        $(".more-g").hide()
+    }, 1000);
+    $(".more-g").animate({top: "175%"}, 1000)
 })
-document.getElementsByClassName("github")[0].addEventListener("click", () => {
-    window.open("https://github.com/tcgconsolee")
-})
-document.getElementById('mail').addEventListener("click", () => {
-    window.open("mailto:theconsoleguyyt@gmail.com")
-})
-document.getElementsByClassName("projects")[0].addEventListener("click", () => {
-    window.open("https://consolee.tk/projects")
-})
-document.getElementsByClassName("games")[0].addEventListener("click", () => {
-    window.open("https://consolee.tk/games")
-})
+function spotlight() {
+    $(".home").hide()
+    $(".about").hide()
+    $(".works").hide()
+    $(".contact").hide()
+    $(".more-g").hide()
+    $(".more-g").css("top", "175%")
+    $(".blur").hide()
+    $(".blur").css("opacity", "0")
+
+    $(`.${currentPage}`).show()
+}
