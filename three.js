@@ -205,13 +205,13 @@ class WebGL {
         this.scene = new THREE.Scene();
         this.loader = new THREE.TextureLoader();
         this.clock = new THREE.Clock();
-        this.texture = this.loader.load("./images/clouds.svg")
+        this.texture = this.loader.load("./imgs/clouds.png")
 
         this.uniforms = {
             u_time: { type: "f", value: 0 },
             u_resolution: {
                 type: "v2",
-                value: new THREE.Vector2(this.width, this.height)
+                value: new THREE.Vector2(this.width/2, this.height/2)
             },
             u_mouse: { type: "v2", value: new THREE.Vector2(0, 0) },
             u_text0: {

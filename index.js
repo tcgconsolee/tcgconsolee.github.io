@@ -1,4 +1,4 @@
-let t = ["h", "o", "m", "e", "a", "b", "o", "u", "t", "w", "o", "r", "k", "s", "c", "o", "n", "t", "a", "c", "t"];
+let t = ["H","O","M", "E", "A", "B", "O", "U", "T","W", "O", "R", "K", "S", "C", "O", "N", "T", "A", "C", "T", "A","A", "K", "A", "S", "H", "A", "S", "H", "O", "K"];
 let time;
 $(".menu-item span").each(function (i) {
     $(this).mouseenter(function () {
@@ -29,7 +29,7 @@ function shuffle(array) {
     return newArr;
 }
 let currentPage = "home";
-$(".menu-item").click(function () {
+$(".clickable").click(function () {
     if(currentPage == $(this).attr('id')) return;
     else {
         currentPage = $(this).attr('id')
