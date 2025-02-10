@@ -82,10 +82,9 @@ p {
     margin: 0;
 }
 canvas {
-    max-height: 70vh;
-    display: block;
-    position: absolute;
-    bottom: 0;
+  display: block;
+  position: absolute;
+  bottom: 0;
 }
   
 .cursor{
